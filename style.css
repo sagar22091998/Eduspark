@@ -1,0 +1,290 @@
+:root{
+  --primary-color:#512E5F   ;
+  --dark-color : #707070;
+  --primary-dark-color : rgb(53, 20, 66);
+}
+
+*{
+  box-sizing: border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5rem;
+}
+
+a{ text-decoration: none;}
+
+/* Gen Classes */
+
+.current{
+  background-color:var(--primary-dark-color);
+}
+
+.l-heading{
+  font-size: 2.5rem;
+  margin-bottom: 1.75rem;
+  line-height: 4rem;
+  }
+
+.m-heading{
+  font-size: 1.5rem;
+  margin: 1.25rem;
+  line-height: 2rem;
+  }
+
+.text-primary{
+    color:var(--primary-color);
+}
+
+.text-black{
+  color:#000;
+}
+
+.btn{
+  display:inline-block; 
+  color: #fff;
+  background: var(--primary-color); 
+  padding: 0.5rem 2rem;
+  border: none;
+  transition: 0.4s;
+}
+
+
+.btn-dark{
+  display:inline-block; 
+  color: #fff;
+  background: var(--primary-dark-color); 
+  padding: 0.5rem 2rem;
+  border: none;
+  transition: 0.4s;
+}
+
+.btn:hover,
+.btn-dark:hover{
+  color : var(--primary-color);
+  background: #fff;
+}
+
+.py-1{ padding: 1.5rem 0;}
+.py-2{ padding: 2rem 0;}
+.py-3{ padding: 3rem 0;}
+.p-1{ padding: 1.5rem;}
+.p-2{ padding: 2rem;}
+.p-3{ padding: 3rem;}
+
+.form-set{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px dotted var(--primary-color);
+  padding: 1rem;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.form-set input,
+.form-set label{
+font-size: 1rem;
+max-width: 350px;
+margin: 0.25rem auto;
+padding: 0.25rem;
+}
+/* Navbar */
+
+#navbar{
+  background: var(--primary-color);
+  /* opacity:0.9 ; */
+  position: sticky;
+  top: 0;
+}
+
+#navbar .container{
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#navbar .logo img{
+  width: 100%;
+  margin-left: 1rem;
+}
+
+#navbar ul{
+  display: flex;
+  list-style: none;
+}
+#navbar ul li a {
+  color: #fff;
+  padding: 0.75rem;
+  transition: 0.4s;
+}
+
+#navbar ul li a:hover {
+  color : var(--primary-color);
+  background: #fff;
+}
+/* Login Popup */
+
+.popup-login{
+  display: none;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.popup-login .popup{
+  position: relative;
+  border-radius: 10px;
+  background: var(--primary-color);
+  width: 100%;
+  max-width: 450px;
+  margin: 2rem auto;
+}
+.popup-login .popup-close{
+  z-index: 1;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid black;
+  color: #fff;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+
+}
+.popup-login .popup .popup-content{
+ text-align: center;
+ display: flex;
+ align-content: center;
+ justify-content: center; 
+ flex-direction: column;
+ width: 100%;
+ margin: 1rem auto;
+ padding: 2rem;
+ color: #fff;
+ position: relative;  /*Kuch absolute karna hai inside*/
+}
+
+.popup-login .popup .popup-content .form-set{
+  border-bottom: 1px dotted #000;
+}
+
+.popup-login .popup .popup-content input[type="submit"]{
+  margin: 1rem;
+  width: 200px;
+}
+
+/* Main Dabba */
+
+#main {
+  height: 90vh;
+  color: #fff;
+  background: url('./img/showcase.jpg') no-repeat center center/cover;
+}
+
+#main .main-container{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center; 
+  height: 100%; 
+  padding : 0 2rem;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+#main .main-container a{
+  margin: 2rem;
+}
+
+/* Courses */
+
+#course {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+background: #eee;
+}
+
+#course  .course-container{
+  display: grid;
+  grid-template-columns: repeat(4,1fr) ;
+  grid-gap:1rem ;
+}
+
+#course  .course-container .box{
+  border: solid 2px var(--primary-color);
+  height: 300px;
+  margin: 0 1rem;
+  background: #fff;
+}
+
+/* Footer */
+
+#main-footer .footer-content{
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--dark-color);
+}
+
+#main-footer .footer-content .footer-main{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: #dfdfdf;
+}
+
+
+#main-footer .footer-content .footer-main .social{
+  margin-right: 100px;
+  color: #000;
+}
+#main-footer .footer-content .footer-main .social a{
+  margin: auto 0.5rem;
+}
+
+/* !!!!!!!!!!!!!!!!!!!!!REGISTER PAGE!!!!!!!!!!!!!!!!!!!! */
+
+#main-register{
+    background: url('../img/register.jpg') no-repeat center center/cover ;
+}
+
+#main-register .register-content{
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#main-register .register-content .form-container{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.75);
+  width: 50vw;
+}
+
+
+#main-register .register-content .form-container .register-type,
+#main-register .register-content .form-container input[type="submit"]{
+  display: inline-block;
+  margin: 1rem auto;
+}
