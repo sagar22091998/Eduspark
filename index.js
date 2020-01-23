@@ -1,21 +1,20 @@
-///////////////////POPUP////////////////////
+const path = require('path')
+const express = require('express')
+require('./src/db/mongoose')
+const profileRouter = require('./src/routers/profile')
+const courseRouter = require('./src/routers/course')
 
-let but = document.querySelector('#navbar ul li .login');
-let temp = document.querySelector('.popup-login');
+const app = express()
+const port = process.env.PORT || 3000
 
-//POPUP HUA
-but.addEventListener('click',() => {
-temp.style.display = 'block';
-});
+const publicDirectoryPath = path.join(__dirname, './public' )
 
-//POPUP CLOSE BY X
-but = document.querySelector('.popup-close');
-but.addEventListener('click',() => {
-temp.style.display = 'none';
-});
+app.use(express.static(publicDirectoryPath))
 
-//POP CLOSE by CLICKING  ONLY  OUTSIDE POPUP
-temp.addEventListener('click',e => {
-    if(e.target.className==='popup-login') //IMP Condition
-        temp.style.display = 'none';
-});
+app.use(express.json())
+app.use(profileRouter)
+app.use(courseRouter)
+
+app.listen(port, () => {
+    console.log(`Express server started at port: ${port}.` )
+})
