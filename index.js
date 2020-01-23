@@ -11,6 +11,8 @@ const publicDirectoryPath = path.join(__dirname, './public' )
 
 app.use(express.static(publicDirectoryPath))
 
+console.log('Hello world!')
+
 app.use(express.json())
 app.use(profileRouter)
 app.use(courseRouter)
