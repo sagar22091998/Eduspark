@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const Course = require('./course')
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -61,6 +62,12 @@ const userSchema = new mongoose.Schema({
     }]
 })
 
+userSchema.virtual('courses', {
+    ref: 'Course',
+    localField: '_id',
+    foreignField: 'owner'
+})
+
 userSchema.methods.generateAuthToken = async function () {
     const profile = this
     const token = jwt.sign({ _id: profile._id.toString() }, 'thisismynewcourse')
@@ -70,18 +77,18 @@ userSchema.methods.generateAuthToken = async function () {
 }
 
 userSchema.statics.findByCredentials = async (email, password) => {
-    const user = await Profile.findOne({email})
+    const profile = await Profile.findOne({email})
 
-    if(!user){
+    if(!profile){
         throw new Error('Unable to login')
     }
 
-    const isMatch = await bcrypt.compare(password, user.password)
+    const isMatch = await bcrypt.compare(password, profile.password)
 
     if(!isMatch){
         throw new Error('Unable to login')
     }
-    return user
+    return profile
 }
 
 // Hashing password
@@ -90,6 +97,12 @@ userSchema.pre('save', async function (next) {
     if(profile.isModified('password')){
         profile.password = await bcrypt.hash(profile.password, 8)
     }
+    next()
+})
+
+userSchema.pre('remove', async function (next) {
+    const profile = this 
+    await Course.deleteMany({ owner: profile._id })
     next()
 })
 
