@@ -35,36 +35,34 @@
 <section id="main-register">
   <div class="register-content p-1">
     <h1 class="l-heading">Register</h1>
-    <form class="form-container p-1" action="">
+    <form class="form-container p-1" action="http://localhost:3000/register" method = "POST">
       <div class="form-set">
         <label for="name">Name</label>
-        <input type="text" placeholder="Enter Name" id="name">
+        <input type="text" placeholder="Enter Name" name="name">
       </div>
       <div class="form-set">
         <label for="email">Email</label>
-        <input type="email" placeholder="Enter Email" id="email">
+        <input type="email" placeholder="Enter Email" name="email">
       </div>
       <div class="form-set">
         <label for="pass1">Password</label>
-        <input type="text" placeholder="Enter Password" id="pass1">
+        <input type="text" placeholder="Enter Password" name="password">
       </div>
       <div class="form-set">
         <label for="pass2">Confirm Password</label>
-        <input type="text" placeholder="Re-enter Password" id="pass2">
+        <input type="text" placeholder="Re-enter Password" name="password">
       </div>
       <div class="form-set">
         <label for="phone">Phone</label>
-        <input type="text" placeholder="Enter Phone" id="phone">
+        <input type="text" placeholder="Enter Phone" name="number">
       </div>
       <div class="form-set">
         <label for="address">Address</label>
-        <input type="address" placeholder="Enter Address" id="address">
+        <input type="text" placeholder="Enter Address" name="address">
       </div>
       <div class="form-set register-type">
         <label for="type">Register as : </label><br>
-        <input type="radio" name="rb"> Instructor 
-        <br>
-        <input type="radio" name="rb"> Student
+        <input type="text" name="profileType">
       </div>
       <input class = "btn" type="submit" value="Register">
     </form>

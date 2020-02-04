@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
     },
     number: {
         type: String,
-        required: true,
+        // required: true,
         trim: true,
         minlength: 10,
         maxlength: 10,
@@ -51,7 +51,7 @@ const userSchema = new mongoose.Schema({
     },
     profileType: {
         type: String,
-        required: true,
+        // required: true,
         trim: true
     },
     tokens: [{

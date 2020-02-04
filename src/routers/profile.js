@@ -5,7 +5,7 @@ const router = new express.Router()
 
 router.post('/profiles', async(req, res) => {
     const profile = new Profile(req.body)
-
+    console.log(req.body)
     try{
         await profile.save()
         const token = await profile.generateAuthToken()

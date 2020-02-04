@@ -3,6 +3,7 @@ const express = require('express')
 require('./src/db/mongoose')
 const profileRouter = require('./src/routers/profile')
 const courseRouter = require('./src/routers/course')
+const bodyParser = require('body-parser')
 
 const app = express()
 const port = process.env.PORT || 3000
