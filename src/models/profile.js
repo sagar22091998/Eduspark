@@ -32,26 +32,9 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
-    number: {
-        type: String,
-        // required: true,
-        trim: true,
-        minlength: 10,
-        maxlength: 10,
-        validate(value){
-            if(!validator.isNumeric(value)){
-                throw new Error('Mobile Number is invalid!')
-            }
-        }
-    },
-    address: {
-        type: String,
-        default: 'Gwalior,India',
-        trim: true
-    },
     profileType: {
         type: String,
-        // required: true,
+        required: true,
         trim: true
     },
     tokens: [{
@@ -70,7 +53,7 @@ userSchema.virtual('courses', {
 
 userSchema.methods.generateAuthToken = async function () {
     const profile = this
-    const token = jwt.sign({ _id: profile._id.toString() }, 'thisismynewcourse')
+    const token = jwt.sign({ _id: profile._id.toString() }, 'thisismynewproject', { expiresIn: '15 days' } )
     profile.tokens = profile.tokens.concat({token})
     await profile.save()
     return token

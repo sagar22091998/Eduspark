@@ -2,14 +2,17 @@ const express = require('express')
 const auth = require('../middleware/auth')
 const Profile = require('../models/profile')
 const router = new express.Router()
+const jwt = require('jsonwebtoken')
+// const cors = require('cors')
+// router.use(cors())
 
 router.post('/profiles', async(req, res) => {
     const profile = new Profile(req.body)
-    console.log(req.body)
+
     try{
         await profile.save()
         const token = await profile.generateAuthToken()
-        res.status(201).send({profile, token})
+        res.status(201).send(token)
     }catch (e){
         res.status(400).send(e)
     }
@@ -21,7 +24,7 @@ router.post('/profiles/login', async (req, res) => {
         const token = await profile.generateAuthToken()
         res.send({profile, token})
     }catch (e) {
-        res.status(400).send()
+        res.status(400).send(e)
     }
 })
 
@@ -33,7 +36,7 @@ router.post('/profiles/logout', auth, async (req, res) => {
         await req.profile.save()
         res.send()
     }catch (e){
-        res.status(500).send()
+        res.status(500).send(e)
     }
 })
 
@@ -43,12 +46,23 @@ router.post('/profiles/logoutAll', auth, async (req, res) => {
         await req.profile.save()
         res.send()
     } catch(e) {
-        res.status(500).send()
+        res.status(500).send(e)
     }
 })
 
-router.get('/profiles/me', auth, async (req, res) => {
-    res.send(req.profile)
+router.get('/profiles/me', async (req, res) => {
+    const decoded = jwt.verify(req.headers['authorization'],'thisismynewproject')
+    Profile.findOne({ _id: decoded._id })
+    .then(profile => {
+        if(profile){
+            res.json(profile)
+        }else{
+            res.send('User does not exist')
+        }
+    }).catch(err => {
+        res.send('error: '+err)
+    })
+    // res.send(req.profile)
 })
 
 router.patch('/profiles/me', auth, async (req, res) => {
@@ -73,7 +87,7 @@ router.delete('/profiles', auth, async (req, res) => {
         await req.profile.remove()
         res.send(req.profile)
     }catch(e){
-        res.status(500).send()
+        res.status(500).send(e)
     }
 })
 

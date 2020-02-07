@@ -4,17 +4,22 @@ const auth = require('../middleware/auth')
 const router = new express.Router()
 
 router.post('/courses', auth, async (req, res) => {
-    const course=new Course({
-        ...req.body,
-        owner: req.profile._id
-    })
-
-    try{
-        await course.save()
-        res.status(201).send(course)
-    }catch(e){
-        res.status(400).send(e)
+    if(req.profile.profileType === "instructor")
+    {   
+        const course=new Course({
+            ...req.body,
+            owner: req.profile._id
+        })
+        try{
+            await course.save()
+            res.status(201).send(course)
+        }catch(e){
+            res.status(400).send(e)
+        }
+    }else{
+        res.status(401).send({error: 'Student cannot create course'})
     }
+    
 })
 
 router.get('/courses', auth, async (req, res) => {
