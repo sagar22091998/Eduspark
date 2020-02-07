@@ -7,24 +7,24 @@ import { getProfile } from './userFunctions'
 
 class About extends Component{
   
-  constructor() {
-    super()
-    this.state = {
-      name: '',
-      email: '',
-      profileType: '',
-      errors: {}
-    };
-  }
+  // constructor() {
+  //   super()
+  //   this.state = {
+  //     name: '',
+  //     email: '',
+  //     profileType: '',
+  //     errors: {}
+  //   };
+  // }
   componentDidMount() {
-    const token = localStorage.authToken
-    getProfile(token).then(res => {
-      this.setState({
-        name: res.name,
-        email: res.email,
-        profileType: res.profileType
-      });
-    })
+    // const token = localStorage.authToken
+    // getProfile(token).then(res => {
+    //   this.setState({
+    //     name: res.name,
+    //     email: res.email,
+    //     profileType: res.profileType
+    //   });
+    // })
     
     window.scrollTo(0,0);
   }

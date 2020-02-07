@@ -14,7 +14,7 @@ class Creators extends Component{
             data-aos-duration="1000"
             data-aos-once="true">
             <h3>Ivan Perisic</h3>
-            <img src={img1}/>
+            <img alt="Image1" src={img1}/>
           </div>
           <div className="Images" 
             data-aos="slide-left"
@@ -22,7 +22,7 @@ class Creators extends Component{
             data-aos-duration="1000"
             data-aos-once="true">
             <h3>Britney Spears</h3>
-            <img src={img2}/>
+            <img alt="Image2" src={img2}/>
           </div>
         </div>
       </div>     

@@ -1,7 +1,8 @@
 .Profiles-Details{
   height: 95vh;
   color: #FFF;
-  background-attachment: fixed;
+  display: grid;
+   grid-template-columns: repeat(2,1fr); 
 }
 
 .Instructor{
@@ -10,10 +11,14 @@
 
 .Student{
    background: url(./student.jpg)  center center/cover;
-}
+
+  }
 
 
 .Overlay{
+  grid-row-start: 1;
+  grid-row-end: 3;
+  flex: 1;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -24,7 +29,20 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.Overlay h1{
+  transform: scaleY(-2000px);
+}
+
 .Profiles-Details p{
   font-size: 1.5rem;
   margin: 1rem auto;
+}
+
+.Profiles-Add{
+  height: 100%;
+  background: red;
+}
+.Profiles-Manage{
+  height: 100%;
+  background: blue;
 }
