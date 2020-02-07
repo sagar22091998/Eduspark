@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import {NavLink} from "react-router-dom";
 import "./Nav.css"
+import { logoutProfile } from './userFunctions'
 class Nav extends Component{
 
-  constructor(props){
-    super(props);
-    this.state = {
-      menuItems : ["HOME" , "REGISTER"],
-    };
+  logout(){
+    const token = localStorage.authToken
+    logoutProfile(token).then(res => {
+      localStorage.removeItem('authToken')
+    })
   }
 
   render(){
@@ -24,7 +25,7 @@ class Nav extends Component{
               :
               <NavLink  activeClassName="Current" className="Nav-Links" to="/profile">Profile</NavLink>}
               {localStorage.authToken !== undefined && 
-              <NavLink  activeClassName="Current" className="Nav-Links" to="/courses">Logout</NavLink>
+              <NavLink  activeClassName="Current" className="Nav-Links" to="/" onClick={this.logout}>Logout</NavLink>
               }
           </ul>
         </div>

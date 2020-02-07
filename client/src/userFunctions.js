@@ -10,3 +10,13 @@ export const getProfile = token => {
         console.log(err)
     })
 }
+
+export const logoutProfile = token => {
+    return axios.post('/profiles/logout', {headers: {Authorization: `Bearer ${token}`}})
+    .then(response =>{
+        console.log(response)
+        return response.data
+    }).catch(err => {
+        console.log(err)
+    })
+}

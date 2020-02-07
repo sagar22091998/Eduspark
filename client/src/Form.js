@@ -36,7 +36,8 @@ class Form extends Component{
       data: payload
     }).then((res)=>{
       console.log('Data has been send to server')
-      localStorage.setItem('authToken', res.data)
+      console.log(res.data.token)
+      localStorage.setItem('authToken', res.data.token)
       this.props.history.push('/')
       this.resetUserInputs()
     }).catch(()=> {

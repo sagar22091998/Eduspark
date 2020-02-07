@@ -3,14 +3,13 @@ const auth = require('../middleware/auth')
 const Profile = require('../models/profile')
 const router = new express.Router()
 const jwt = require('jsonwebtoken')
-
 router.post('/profiles', async(req, res) => {
     const profile = new Profile(req.body)
 
     try{
         await profile.save()
         const token = await profile.generateAuthToken()
-        res.status(201).send(token)
+        res.status(201).send({ profile, token })
     }catch (e){
         res.status(400).send(e)
     }
