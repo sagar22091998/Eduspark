@@ -1,0 +1,53 @@
+.Grid{
+  position: relative;
+  height: 300px;
+  width: 450px;
+}
+
+
+.Grid-Main , .Grid-Back-Content {
+  position: absolute;
+  height:  100% ;
+  width: 100% ;
+}
+
+
+.Grid-Main:hover > .Grid-Front{
+  transform: perspective(600px) rotateY(-180deg);
+}
+.Grid-Main:hover > .Grid-Back{
+  transform: perspective(600px) rotateY(0deg);
+}
+
+
+.Grid-Front {
+  position: absolute;
+  transform: perspective(600px) rotateY(0deg);
+  border: solid 2px var(--primary-color);
+  height: 100%;
+  background: #fff;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  transition: all 1s;
+  backface-visibility: hidden; /*Back of Card is visisble or not*/
+}
+
+.Grid-Back{
+  backface-visibility: hidden;
+  width: 100%;
+  position: absolute;
+  transform: perspective(600px) rotateY(180deg);
+  border: solid 2px var(--secondary-color);
+  height: 100%;
+  background: #fff;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  transition: all 1s;
+}
+
+/* For responsive */
+
+@media(max-width:1920px){ .Grid{ width: 300px; }}
+@media(max-width:1300px){.Grid{ width: 450px; }}
+@media(max-width:1000px){ .Grid{  width: 300px;}}
+
+
+

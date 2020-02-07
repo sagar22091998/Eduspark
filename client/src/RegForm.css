@@ -1,0 +1,114 @@
+
+.Tatti{
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  flex-direction: row;
+  height: 50vh;
+  background: rgba(0, 0, 0, 0.75);
+  width: 90vw;
+}
+
+.regBtn{
+  display:inline-block; 
+  max-width: 200px;
+  color: #fff;
+  margin: 0 auto;
+  background: var(--secondary-color); 
+  padding: 0.5rem 1rem;
+  border: none;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+
+.Tatti-Left,
+.Tatti-Right{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  flex : 1;
+}
+
+
+.Tatti-Left ,
+.Tatti-Right{
+  transition: flex 1s ease-out;
+}
+
+
+.Tatti-Left p,
+.Tatti-Right p,
+.Tatti-Left button,
+.Tatti-Right button{
+  align-self: center;
+  margin-bottom:2rem ;
+}
+
+.Tatti-Middle{
+  flex: 2;
+  background: var(--secondary-color);
+  height: 100%;
+}
+.none{
+  visibility: hidden;
+  flex: 0;
+}
+/* Responsive */
+
+@media(max-width:1100px){
+  .Tatti{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    flex-direction: column;
+    height: 80vh;
+    background: rgba(0, 0, 0, 0.75);
+    width: 70vw;
+  }
+
+  .regBtn,.Tatti p
+  {
+    padding: 0.75rem;
+    font-size: 1rem;
+
+  }
+}
+
+  @media(max-width:1100px){
+  
+  
+    .regBtn,.Tatti p
+    {
+      padding: 0.75rem;
+      font-size: 1rem;
+
+    }
+
+    
+}
+
+@media(max-width:750px){
+  
+  .regBtn,.Tatti p
+  {
+    padding: 0.3rem;
+    font-size: 0.5rem;
+  }
+
+}
+
+@media(min-width:2000px){
+
+  
+  .Tatti{
+    height:40vh;
+    font-size: 2rem;
+  }
+  .regBtn{
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+  }
+
+
+}
