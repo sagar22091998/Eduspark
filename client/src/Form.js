@@ -57,7 +57,7 @@ class Form extends Component{
 
   render(){
     return(
-      <form onSubmit={this.submit}>
+      <form className="Form" onSubmit={this.submit}>
         <div className="Form-Set">
           <label htmlFor="name">Name</label>
           <input 
@@ -89,7 +89,7 @@ class Form extends Component{
             id="pass1"
             onChange={this.handleChange}/>
         </div>
-        {/* <div className="Form-Set">
+         <div className="Form-Set">
           <label htmlFor="pass2">Confirm Password</label>
           <input 
             type="password" 
@@ -99,7 +99,7 @@ class Form extends Component{
             name="confirmPass"
             onChange={this.handleChange}
             />
-        </div> */}
+        </div> 
         <div className="Form-Set">
           <p> Sign In As </p>
           <input type="radio" name="profileType" value="instructor"  checked={this.state.profileType === "instructor"} onChange={ this.handleChange }/> Instructor 

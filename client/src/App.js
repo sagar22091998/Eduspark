@@ -1,22 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Route} from "react-router-dom";
 import Home from "./Home";
 import Register from "./Register"
-import Nav from "./Nav"
 import About from "./About"
+import Courses from "./Courses"
 import './App.css';
 
 
-function App() {
+class App extends Component {
 
-  return (
-    <div className="App">
-      <Nav/>
-      <Route exact path="/" component={Home} />
-      <Route  path="/register" component={Register} />
-      <Route  path="/about" component={About} />
-    </div>
-  );
+  render(){
+
+      return (
+        <div className="App">
+        <Route exact path="/" component={Home} />
+        <Route  path="/register" component={ Register}/> 
+        <Route exact path="/about" component={About} />
+        <Route  path="/courses" component={Courses} />
+      </div>
+      );
+  }
 }
 
 export default App;

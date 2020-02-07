@@ -1,0 +1,26 @@
+.Courses h1{
+  text-align: center;
+}
+
+.Courses-Content{
+  display: grid;
+  grid-template-columns: repeat(2,1fr) ;
+}
+
+
+.Courses-Text{
+  background: var(--secondary-color);
+  height: 300px;
+  border: 3px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Courses-Image1,
+.Courses-Image2,
+.Courses-Image3{
+  border: 3px solid green;
+  background: #fff;
+  height: 300px;
+}

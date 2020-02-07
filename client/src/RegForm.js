@@ -15,22 +15,18 @@ class RegForm extends Component{
   
   handleClick(e){
     this.setState( x =>{ 
-         return({login : !(x.login) }); 
+         return({login : !(x.login)}); 
       });
     }
     
 
   render(){
-    let classLeft,classRight,classLeftBtn,classRightBtn;
+    let classLeft,classRight;
     if(!this.state.login){
       classLeft = `Tatti-Left none`
       classRight = `Tatti-Right`
-      classLeftBtn = `btn-dark none`
-      classRightBtn = `btn-dark `
     }
     else{
-      classLeftBtn = `btn-dark `
-      classRightBtn = `btn-dark none`
       classLeft = `Tatti-Left`
       classRight = `Tatti-Right none`
     }
@@ -39,12 +35,12 @@ class RegForm extends Component{
       <div className="Tatti">
         <div className={classLeft}>
           <p>Already Registered?</p>
-          <Link onClick={this.handleClick} className="regBtn" to="/register/login">Login</Link>
+          <Link onClick={this.handleClick} className="regBtn" to="/register/login">Log In</Link>
         </div>
         <div className="Tatti-Middle">
-          {!this.state.login ?
-          <Route path="/register/login" component={Login} />  :
-          <Route path="/register/form" component={Form} /> }
+          
+          <Route exact path="/register/login" component={Login} />  
+          <Route exact path="/register/form" component={Form} /> 
         </div>
         <div  className={classRight}>
           <p>Don't Have Account?</p>

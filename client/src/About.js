@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Footer from "./Footer";
 import Creators from "./Creators";
 import "./About.css";
+import Nav from "./Nav";
 import { getProfile } from './userFunctions'
 
 class About extends Component{
@@ -36,6 +37,7 @@ class About extends Component{
   render(){
     return(
       <div className="About-Section">
+        <Nav/>
         <div className="About-Main ">
           <div className="About-Content p-3">
             <h1 className="l-heading py-1">About Us!!</h1>

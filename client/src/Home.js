@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Showcase from './Showcase';
 import Footer from './Footer';
 import Grids from './Grids';
+import Nav from "./Nav";
 
 class Home extends Component{
 
@@ -13,6 +14,7 @@ class Home extends Component{
   render(){
     return(
       <div className="Home">
+        <Nav/>
         <Showcase/>
         <Grids/>
         <Footer/>
