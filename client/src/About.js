@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Footer from "./Footer";
 import Creators from "./Creators";
 import "./About.css";
-// import jwt_decode from 'jwt-decode'
 import { getProfile } from './userFunctions'
 
 class About extends Component{
