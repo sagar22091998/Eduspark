@@ -19,11 +19,12 @@ class Nav extends Component{
           <ul>
               <NavLink exact activeClassName="Current" className="Nav-Links" to="/">Home</NavLink>
               <NavLink  activeClassName="Current"  className="Nav-Links" to="/about">About</NavLink>
+              {localStorage.authToken===undefined?
               <NavLink  activeClassName="Current" className="Nav-Links" to="/register/login">Register | Login</NavLink>
-              {
-                localStorage.authToken===undefined?
-              null
-              :<NavLink  activeClassName="Current" className="Nav-Links" to="/courses">Logout</NavLink>
+              :
+              <NavLink  activeClassName="Current" className="Nav-Links" to="/profile">Profile</NavLink>}
+              {localStorage.authToken !== undefined && 
+              <NavLink  activeClassName="Current" className="Nav-Links" to="/courses">Logout</NavLink>
               }
           </ul>
         </div>

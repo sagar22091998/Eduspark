@@ -10,7 +10,7 @@ class Form extends Component{
       name: '',
       email: '',
       password: '',
-      profileType: ''
+      profileType: '',
     };
   }   
   handleChange =({ target }) =>{
@@ -37,7 +37,7 @@ class Form extends Component{
     }).then((res)=>{
       console.log('Data has been send to server')
       localStorage.setItem('authToken', res.data)
-      this.props.history.push('/about')
+      this.props.history.push('/')
       this.resetUserInputs()
     }).catch(()=> {
       console.log('Internal server error')
@@ -95,7 +95,7 @@ class Form extends Component{
             type="password" 
             placeholder="Re-enter Password"
             id="pass2"
-            value={this.state.confirmPass}
+            value="asdsadsadsad"
             name="confirmPass"
             onChange={this.handleChange}
             />

@@ -1,0 +1,30 @@
+.Profiles-Details{
+  height: 95vh;
+  color: #FFF;
+  background-attachment: fixed;
+}
+
+.Instructor{
+   background: url(./instructor.jpg)  center center/cover;
+}
+
+.Student{
+   background: url(./student.jpg)  center center/cover;
+}
+
+
+.Overlay{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center; 
+  height: 100%; 
+  padding : 0 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.Profiles-Details p{
+  font-size: 1.5rem;
+  margin: 1rem auto;
+}
