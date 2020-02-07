@@ -13,7 +13,6 @@ const auth = async (req, res, next) => {
         if(!profile){
             throw new Error()
         }
-        console.log(profile)
         req.token=token
         req.profile=profile
         next()
