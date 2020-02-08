@@ -22,7 +22,8 @@ class Grid extends Component{
                 pathname:`/course/${this.props.id}`,
                 state:{
                   name : this.props.name,
-                  desc : this.props.desc
+                  desc : this.props.desc,
+                  id: this.props.id
                 }
                 
               }} >Read More!!</Link >

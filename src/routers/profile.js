@@ -1,6 +1,7 @@
 const express = require('express')
 const auth = require('../middleware/auth')
 const Profile = require('../models/profile')
+const Course = require('../models/course')
 const router = new express.Router()
 const jwt = require('jsonwebtoken')
 
@@ -45,6 +46,25 @@ router.post('/profiles/logoutAll', auth, async (req, res) => {
         res.send()
     } catch(e) {
         res.status(500).send(e)
+    }
+})
+
+router.post('/addCourses/:id', auth, async(req, res) => {
+    if(req.profile.profileType === "student"){
+        try{
+            courseID = req.params.id
+            const course = await Course.findById(courseID)
+            if(!course){
+                return res.status(404).send({error: "Course doesn't exists"});
+            }
+            req.profile.myCourses = req.profile.myCourses.concat(courseID)
+            await req.profile.save()
+            res.status(200).send('Added successfully')
+        }catch(e){
+            res.status(400).send(e)
+        }
+    }else{
+        res.status(401).send({error: 'Instructor cannot add course'})
     }
 })
 
