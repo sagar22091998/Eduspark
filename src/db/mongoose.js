@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb+srv://taskapp:ruturajkanake@cluster0-y4bgq.mongodb.net/test?retryWrites=true&w=majority' , {
+mongoose.connect('mongodb://127.0.0.1:27017/eduspark' , {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true

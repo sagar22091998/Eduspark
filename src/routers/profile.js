@@ -7,7 +7,8 @@ const jwt = require('jsonwebtoken')
 
 router.post('/profiles', async(req, res) => {
     const profile = new Profile(req.body)
-    if(Profile.findOne({ email: req.body.email })){
+    const check = await Profile.findOne({ email: req.body.email })
+    if(check){
         return res.status(409).send('Email already exists.')
     }
     try{
