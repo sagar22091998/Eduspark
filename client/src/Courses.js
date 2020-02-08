@@ -23,8 +23,8 @@ class Courses extends Component{
       method: 'POST',
       headers: {Authorization: `Bearer ${token}`}
     }).then((res) => {
-      console.log('Course added successfully')
-      console.log(res)
+      console.log(res.data)
+      this.props.history.push('/profile')
     })
   }
 

@@ -51,20 +51,24 @@ router.post('/profiles/logoutAll', auth, async (req, res) => {
 
 router.post('/addCourses/:id', auth, async(req, res) => {
     if(req.profile.profileType === "student"){
-        try{
-            courseID = req.params.id
-            const course = await Course.findById(courseID)
-            if(!course){
-                return res.status(404).send({error: "Course doesn't exists"});
+        courseID = req.params.id
+        if(!req.profile.myCourses.includes(courseID)){
+            try{
+                const course = await Course.findById(courseID)
+                if(!course){
+                    return res.status(404).send({error: "Course doesn't exists"});
+                }
+                req.profile.myCourses = req.profile.myCourses.concat(courseID)
+                await req.profile.save()
+                res.status(200).send('Course added successfully')
+            }catch(e){
+                res.status(400).send(e)
             }
-            req.profile.myCourses = req.profile.myCourses.concat(courseID)
-            await req.profile.save()
-            res.status(200).send('Added successfully')
-        }catch(e){
-            res.status(400).send(e)
+        }else{
+            res.send('Course already added.')
         }
     }else{
-        res.status(401).send({error: 'Instructor cannot add course'})
+        res.status(401).send('Instructor cannot add course')
     }
 })
 
