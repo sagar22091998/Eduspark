@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Footer from './Footer';
 import Nav from "./Nav";
-import { getProfile } from './userFunctions'
+import { getProfile, instructorCourses } from './userFunctions'
 import "./Profiles.css"
 import axios from 'axios';
 
@@ -26,14 +26,20 @@ class Profiles extends Component{
   componentDidMount() {
     window.scrollTo(0,0);
     const token = localStorage.authToken
+
     getProfile(token).then(res => {
       this.setState({
         name: res.name,
         email: res.email,
         profileType: res.profileType
       });
+      if(res.profileType === "instructor"){
+        console.log(res.profileType)
+        instructorCourses(token).then(response => {
+          console.log(response)
+        })
+      }
     })
-    
   }
 
   submit=(event)=> {
