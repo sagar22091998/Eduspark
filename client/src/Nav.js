@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import "./Nav.css"
 import { logoutProfile } from './userFunctions'
+import axios from 'axios';
 class Nav extends Component{
 
-  logout(){
-    localStorage.authToken = "hell";  
+  logout(){  
     const token = localStorage.authToken
-    logoutProfile(token).then(res => {
-      localStorage.removeItem('authToken');
+    axios({
+      url: '/logout',
+      method: 'POST',
+      headers: {Authorization: `Bearer ${token}`}
+    }).then((res) => {
+      console.log('Logout successfull')
+      localStorage.removeItem('authToken')
+      document.location.reload(true);
     })
   }
 

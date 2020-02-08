@@ -12,7 +12,7 @@ export const getProfile = token => {
 }
 
 export const logoutProfile = token => {
-    return axios.post('/profiles/logout', {headers: {Authorization: `Bearer ${token}`}})
+    return axios.post('/logout', {headers: {Authorization: `Bearer ${token}`}})
     .then(response =>{
         console.log(response)
         return response.data

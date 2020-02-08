@@ -7,7 +7,9 @@ const jwt = require('jsonwebtoken')
 
 router.post('/profiles', async(req, res) => {
     const profile = new Profile(req.body)
-
+    if(Profile.findOne({ email: req.body.email })){
+        return res.status(409).send('Email already exists.')
+    }
     try{
         await profile.save()
         const token = await profile.generateAuthToken()
@@ -27,7 +29,7 @@ router.post('/profiles/login', async (req, res) => {
     }
 })
 
-router.post('/profiles/logout', auth, async (req, res) => {
+router.post('/logout', auth, async (req, res) => {
     try{
         req.profile.tokens = req.profile.tokens.filter((token) => {
             return token.token !== req.token
@@ -78,7 +80,7 @@ router.get('/profiles/me', auth, async (req, res) => {
 
 router.patch('/profiles/me', auth, async (req, res) => {
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['name','email','password','address','number']
+    const allowedUpdates = ['name','email','password']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if(!isValidOperation){
