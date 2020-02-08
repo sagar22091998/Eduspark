@@ -7,25 +7,8 @@ import Nav from "./Nav";
 
 class About extends Component{
   
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     name: '',
-  //     email: '',
-  //     profileType: '',
-  //     errors: {}
-  //   };
-  // }
+
   componentDidMount() {
-    // const token = localStorage.authToken
-    // getProfile(token).then(res => {
-    //   this.setState({
-    //     name: res.name,
-    //     email: res.email,
-    //     profileType: res.profileType
-    //   });
-    // })
-    
     window.scrollTo(0,0);
   }
 
@@ -39,7 +22,6 @@ class About extends Component{
             <p className="m-text">LLorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, explicabo neque fugit quam, optio hic impedit, magni veritatis officiis repudiandae nihil minus facere tempore ducimus rem perspiciatis corporis quo corrupti?</p>
     
             <p className="m-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati . Sunt officia placeat maxime quas error, praesentium eos delectus. Dolorem nesciunt error nostrum iure dolore, culpa commodi! Iure nemo minus incidunt reprehenderit quam. Eum, corrupti atque. Molestiae, deserunt!</p>
-            <button className="btn-dark my-2">Register Now!!!</button>
           </div>
         </div>
         <Creators/>

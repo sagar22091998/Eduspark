@@ -14,7 +14,8 @@ class Profiles extends Component{
       email: "",
       profileType: "",
       courseName : "",
-      desc : ""
+      desc : "",
+      courses : []
     }
     this.handleChange = this.handleChange.bind(this); 
   }
@@ -37,6 +38,11 @@ class Profiles extends Component{
         console.log(res.profileType)
         instructorCourses(token).then(response => {
           console.log(response)
+          
+          this.setState({
+            courses : response
+          });
+          
         })
       }
     })
@@ -111,7 +117,7 @@ class Profiles extends Component{
           </div>
           <div className={type?"Profiles-Manage p-1":"Profiles-Your p-1"}>
             <h1 className="m-heading">{type ? "Manage Courses" :"Your Courses"}</h1>
-            <p>write something good!!</p>
+          {this.state.courses.map((x)=><p>{x.name}</p>)}
           </div>
           {type&&typeHTML}
         </div>

@@ -13,7 +13,7 @@ class Creators extends Component{
             data-aos-offset="200"
             data-aos-duration="1000"
             data-aos-once="true">
-            <h3>Ivan Perisic</h3>
+            <h3>Moussa Sissoko</h3>
             <img alt="Image1" src={img1}/>
           </div>
           <div className="Images" 
