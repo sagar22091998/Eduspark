@@ -20,3 +20,13 @@ export const logoutProfile = token => {
         console.log(err)
     })
 }
+
+export const getAllCourses = () => {
+    return axios.get('/coursesAll')
+    .then(response => {
+        // console.log(response.data)
+        return response.data
+    }).catch(err => {
+        console.log(err)
+    })
+}

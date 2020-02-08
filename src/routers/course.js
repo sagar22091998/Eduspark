@@ -31,6 +31,15 @@ router.get('/courses', auth, async (req, res) => {
     }
 })
 
+router.get('/coursesAll', async(req, res) => {
+    try{
+        const courses = await Course.find({})
+        res.send(courses)
+    }catch(e){
+        res.status(500).send(e)
+    }
+})
+
 router.get('/courses/:id', auth, async (req, res) => {
     const _id = req.params.id 
     try{

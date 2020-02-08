@@ -9,7 +9,7 @@ const auth = async (req, res, next) => {
         // const decoded = jwt.sign(req.headers['authorization'], 'thisismynewproject')
         const profile = await Profile.findOne({ _id: decoded._id, 'tokens.token': token })
         // const profile = await Profile.findOne({ _id: decoded._id })
-        console.log(token)
+        // console.log(token)
         if(!profile){
             throw new Error()
         }
