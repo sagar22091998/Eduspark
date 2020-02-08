@@ -8,7 +8,8 @@ class Login extends Component{
     super(props);
     this.state={
       email : "",
-      password : ""
+      password : "",
+      error:false
     };
   }
 
@@ -35,7 +36,8 @@ class Login extends Component{
       this.props.history.push('/')
       this.resetUserInputs()
     }).catch(()=>{
-      console.log('Internal server error')
+      console.log("Error");
+      this.setState({error:true})
     })
 
   }
@@ -51,6 +53,7 @@ class Login extends Component{
     return(
         <form className="Login" onSubmit={this.submit}>
           <h1 className="m-heading">Login</h1>
+          {this.state.error?<p className="Login-Error">Emain Or Password Incorrect</p>:null}
           <label htmlFor="email">Email</label>
           <input 
             type="email" 

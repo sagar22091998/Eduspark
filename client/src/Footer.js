@@ -16,7 +16,6 @@ class Footer extends Component{
             >
               <Link className="Footer-Link" to="/">Home</Link>
               <Link className="Footer-Link" to="/about">About Us</Link>
-              <Link className="Footer-Link" to="/register/login">Register</Link>
             </div>
             <div 
               className="Footer-Social"
