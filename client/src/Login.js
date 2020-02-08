@@ -53,7 +53,7 @@ class Login extends Component{
     return(
         <form className="Login" onSubmit={this.submit}>
           <h1 className="m-heading">Login</h1>
-          {this.state.error?<p className="Login-Error">Emain Or Password Incorrect</p>:null}
+          {this.state.error?<p className="Login-Error">Email Or Password Incorrect</p>:null}
           <label htmlFor="email">Email</label>
           <input 
             type="email" 

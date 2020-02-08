@@ -26,8 +26,8 @@ class Profiles extends Component{
 
   componentDidMount() {
     window.scrollTo(0,0);
+    
     const token = localStorage.authToken
-
     getProfile(token).then(res => {
       this.setState({
         name: res.name,
@@ -54,6 +54,8 @@ class Profiles extends Component{
   }
 
   submit=(event)=> {
+
+    event.preventDefault();
     const payload ={
       name: this.state.courseName,
       description: this.state.desc
@@ -64,11 +66,15 @@ class Profiles extends Component{
       method: 'POST',
       data: payload,
       headers: {Authorization: `Bearer ${token}`}
-    }).then((res) => {
-      console.log('Course created successfully!!')
-      this.props.history.push('/')
+    }).then(() => {
+      const token = localStorage.authToken
+      instructorCourses(token).then(response => {
+        console.log(response)
+        this.setState({
+          courses : response
+        }); 
+      });
     })
-
   }
 
   render(){
@@ -100,7 +106,7 @@ class Profiles extends Component{
           id="ta"
           value={this.state.desc}
           onChange={this.handleChange}></textarea>
-        <input className = "btn" type="submit" value="Add"/>
+        <input disabled={this.state.courseName===""} className = "btn" type="submit" value="Add"/>
       </form>
     </div> ;
 

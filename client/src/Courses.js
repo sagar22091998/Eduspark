@@ -41,7 +41,7 @@ class Courses extends Component{
   render(){
     return(
       <div className="Courses">
-        <Nav/>
+        <Nav current=""/>
         <div className="Courses-Head">
           <h1 className="m-heading py-2">{this.props.location.state.name}</h1>
           { localStorage.authToken===undefined 
