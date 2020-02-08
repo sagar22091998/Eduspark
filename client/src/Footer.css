@@ -19,7 +19,6 @@
 
 
 .Footer .Footer-Content .Footer-Main .Footer-Social{
-  margin-right: 100px;
   color: #000;
 }
 .Footer .Footer-Content .Footer-Main .Footer-Social a{
@@ -29,6 +28,22 @@
   transform: scale(1.5);
   transition: all 0.25s;
 }
+
+.Footer-Link{
+  text-align: center;
+  background: #dfdfdf;
+  color: var(--secondary-color);
+  font-size: 1rem;
+  padding: 0.5 1rem;
+  border-bottom: var(--secondary-color) 1px dotted ;
+  transition: 0.4s;
+  margin: auto 0.5rem;
+}
+.Footer-Link:hover{
+  background: #dfdfdf;
+  color:var(--primary-color);;
+}
+
 
 @media(max-width: 1000px){
 

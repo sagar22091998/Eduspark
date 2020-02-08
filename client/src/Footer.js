@@ -8,13 +8,21 @@ class Footer extends Component{
       <footer className="Footer">
         <div className="Footer-Content">
           <div className="Footer-Main p-1">
-            <div className="Footer-Links">
-              <Link className="btn" to="/">Home</Link>
-              <Link className="btn" to="/register">Register</Link>
-              <Link className="btn" to="/">Home</Link>
-              <Link className="btn" to="/about">About</Link>
+            <div 
+              className="Footer-Links"
+              data-aos="fade-right"
+              data-aos-duration="500"
+              data-aos-once="true"
+            >
+              <Link className="Footer-Link" to="/">Home</Link>
+              <Link className="Footer-Link" to="/about">About Us</Link>
+              <Link className="Footer-Link" to="/register/login">Register</Link>
             </div>
-            <div className="Footer-Social">
+            <div 
+              className="Footer-Social"
+              data-aos="fade-left"
+              data-aos-duration="500"
+              data-aos-once="true">
               <a href="http://facebook.com" rel="noopener noreferrer" target="_blank" ><i className="fab fa-facebook fa-2x text-black "></i></a>
               <a href="http://twitter.com" rel="noopener noreferrer" target="_blank" ><i className="fab fa-twitter fa-2x text-black"></i></a>
               <a href="http://instagram.com" rel="noopener noreferrer" target="_blank" ><i className="fab fa-instagram fa-2x text-black"></i></a>

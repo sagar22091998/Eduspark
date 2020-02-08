@@ -26,3 +26,26 @@
   color: #fff;
   font-weight: 1000;
 }
+
+@media(max-width:750px){
+
+  .Showcase{
+    background: url(./main.jpg)  center/cover;
+  }
+  
+  }
+  
+  @media(min-width:2100px){
+  
+    .Showcase h1{
+      font-size: 6rem;
+      margin-bottom: 3rem;
+  
+    }
+  
+    .Showcase p{
+      font-size: 2rem;
+    }
+  
+  
+  }

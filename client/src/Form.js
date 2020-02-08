@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import "./Form.css";
+import Popup from "./Popup"
 
 
 class Form extends Component{
@@ -11,7 +12,9 @@ class Form extends Component{
       email: '',
       password: '',
       profileType: '',
+      error : false
     };
+    this.handleError=this.handleError.bind(this);
   }   
   handleChange =({ target }) =>{
     const {name, value} = target
@@ -39,12 +42,18 @@ class Form extends Component{
       console.log(res.data.token)
       localStorage.setItem('authToken', res.data.token)
       this.props.history.push('/')
-      this.resetUserInputs()
+      this.resetUserInputs();
     }).catch(()=> {
+      const {name,email,password,profileType} =  this.state; 
+      if(name==="" || email==="" || password==="" || profileType==="" )
+      this.handleError();
+
+      this.resetUserInputs();
       console.log('Internal server error')
     })
 
   }
+
 
   // For resetting the user inputs from the form
   resetUserInputs = () => {
@@ -56,9 +65,14 @@ class Form extends Component{
     })
   }
 
+  handleError(){
+    this.setState(x => ({error : !x.error}))
+  }
+
   render(){
     return(
       <form className="Form" onSubmit={this.submit}>
+        {this.state.error ? <Popup  toggleError = {this.handleError} /> :null }
         <div className="Form-Set">
           <label htmlFor="name">Name</label>
           <input 
