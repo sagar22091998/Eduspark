@@ -40,6 +40,7 @@
   background: rgba(37, 41, 46, 0.9);
 }
 
+
 .Profiles-Manage{
   text-align: center;
   display: flex;
@@ -47,6 +48,12 @@
   align-items: center;
   flex-direction: column;
   background: rgba(76, 76, 77, 0.65);
+}
+
+.Profiles-Manage p{
+  font-size: 1rem;
+  margin: 0.25rem; 
+  padding: 0;
 }
 
 .Add-Form{
