@@ -68,7 +68,7 @@ class Profiles extends Component{
     else if(this.state.profileType==="student")
       type=false;
 
-    let typeClass,typeClass1 ;
+    let typeClass ;
     let typeHTML = 
     <div className="Profiles-Add">
       <h1 className="m-heading">Add Course</h1>

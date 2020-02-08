@@ -18,7 +18,7 @@ class Grid extends Component{
           <div className="Grid-Back ">
             <div className="Grid-Back-Content">
               <p>{this.props.desc}</p>
-              <Link state className="btn-dark" to={{
+              <Link className="btn-dark" to={{
                 pathname:`/course/${this.props.id}`,
                 state:{
                   name : this.props.name,

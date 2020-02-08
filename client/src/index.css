@@ -114,5 +114,10 @@ a{ text-decoration: none;}
 .my-3{ margin: 3rem 0;}
 
 
-
-
+@media(min-width:2100px){
+  .l-heading,
+  .m-heading,
+  .s-heading{
+    text-shadow: 5px 5px var(--secondary-color);
+  }
+}

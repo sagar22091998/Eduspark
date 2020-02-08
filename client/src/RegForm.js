@@ -22,21 +22,21 @@ class RegForm extends Component{
   render(){
     let classLeft,classRight;
     if(!this.state.login){
-      classLeft = `Tatti-Left none`
-      classRight = `Tatti-Right`
+      classLeft = `Regform-Left none`
+      classRight = `Regform-Right`
     }
     else{
-      classLeft = `Tatti-Left`
-      classRight = `Tatti-Right none`
+      classLeft = `Regform-Left`
+      classRight = `Regform-Right none`
     }
 
     return(
-      <div className="Tatti">
+      <div className="Regform">
         <div className={classLeft}>
           <p>Already Registered?</p>
           <Link onClick={this.handleClick} className="regBtn" to="/register/login">Log In</Link>
         </div>
-        <div className="Tatti-Middle">
+        <div className="Regform-Middle">
           
           <Route exact path="/register/login" component={Login} />  
           <Route exact path="/register/form" component={Form} /> 
