@@ -21,12 +21,12 @@ class Grids extends Component{
     }
 
     render(){
-  
+
       return(
       <div className="Grids">
         <h2 className="m-heading my-2">Courses</h2>
         <div className="Grids-Container py-2">
-          {this.state.courses.map( (x)=> <Grid key={x._id} name={x.name} desc={x.description} /> )}
+          {this.state.courses.map( (x)=> <Grid id={x._id} key={x._id} name={x.name} desc={x.description} /> )}
         </div>
       </div>     
     );

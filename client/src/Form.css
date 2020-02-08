@@ -34,6 +34,8 @@
 
 .Form-Set input,
 .Form-Set label{
+  padding: 0.25rem;
+  font-family: 'Josefin Sans', sans-serif;
   font-size: 1.35rem;
   max-width: 300px;
   margin: 0 0.5rem;

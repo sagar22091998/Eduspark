@@ -23,6 +23,8 @@
 
 .Login input,
 .Login label{
+  padding: 0.2rem;
+  font-family: 'Josefin Sans', sans-serif;
   font-size: 1.2rem;
   max-width: 350px;
   margin: 0.15rem auto;

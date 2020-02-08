@@ -10,7 +10,7 @@ class Footer extends Component{
           <div className="Footer-Main p-1">
             <div 
               className="Footer-Links"
-              data-aos="fade-right"
+              data-aos="fade-up"
               data-aos-duration="500"
               data-aos-once="true"
             >
@@ -20,7 +20,7 @@ class Footer extends Component{
             </div>
             <div 
               className="Footer-Social"
-              data-aos="fade-left"
+              data-aos="fade-up"
               data-aos-duration="500"
               data-aos-once="true">
               <a href="http://facebook.com" rel="noopener noreferrer" target="_blank" ><i className="fab fa-facebook fa-2x text-black "></i></a>
