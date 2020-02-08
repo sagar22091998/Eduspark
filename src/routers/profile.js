@@ -69,18 +69,6 @@ router.post('/addCourses/:id', auth, async(req, res) => {
 })
 
 router.get('/profiles/me', auth, async (req, res) => {
-    // const decoded = jwt.verify(req.headers['authorization'],'thisismynewproject')
-    // Profile.findOne({ _id: decoded._id })
-    // .then(profile => {
-    //     if(profile){
-    //         res.json(profile)
-    //     }else{
-    //         res.send('User does not exist')
-    //     }
-    // }).catch(err => {
-    //     res.send('error: '+err)
-    // })
-    // console.log(profile)
     res.send(req.profile)
 })
 

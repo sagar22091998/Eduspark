@@ -40,6 +40,15 @@ router.get('/coursesAll', async(req, res) => {
     }
 })
 
+router.get('/studentCourses', auth, async(req, res) => {
+    let courses = []
+    for(let i=0;i<req.profile.myCourses.length;i++){
+        const course = await Course.findById(req.profile.myCourses[i])
+        courses.push(course)
+    }
+    res.send(courses)
+})
+
 router.get('/courses/:id', auth, async (req, res) => {
     const _id = req.params.id 
     try{

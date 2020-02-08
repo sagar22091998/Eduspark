@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Footer from './Footer';
 import Nav from "./Nav";
-import { getProfile, instructorCourses } from './userFunctions'
+import { getProfile, instructorCourses, studentCourses } from './userFunctions'
 import "./Profiles.css"
 import axios from 'axios';
 
@@ -35,14 +35,19 @@ class Profiles extends Component{
         profileType: res.profileType
       });
       if(res.profileType === "instructor"){
-        console.log(res.profileType)
         instructorCourses(token).then(response => {
           console.log(response)
-          
           this.setState({
             courses : response
           });
           
+        })
+      }else if(res.profileType === "student"){
+        studentCourses(token).then(response => {
+          console.log(response)
+          this.setState({
+            courses: response
+          })
         })
       }
     })

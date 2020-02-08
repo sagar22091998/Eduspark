@@ -39,3 +39,12 @@ export const instructorCourses = token => {
         console.log(err)
     })
 }
+
+export const studentCourses = token => {
+    return axios.get('/studentCourses', {headers: {Authorization: `Bearer ${token}`}})
+    .then(response => {
+        return response.data
+    }).catch(err => {
+        console.log(err)
+    })
+}
