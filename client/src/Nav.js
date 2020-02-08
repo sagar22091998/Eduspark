@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import "./Nav.css"
-import { logoutProfile } from './userFunctions'
 import axios from 'axios';
+import { withRouter } from 'react-router';
 class Nav extends Component{
 
   logout(){  
@@ -14,10 +14,9 @@ class Nav extends Component{
     }).then((res) => {
       console.log('Logout successfull')
       localStorage.removeItem('authToken')
-      document.location.reload(true);
+      this.props.history.push('/')
     })
   }
-
 
   render(){
 
@@ -46,7 +45,7 @@ class Nav extends Component{
               :
               <Link className={classProfile} to="/profile">Profile</Link>}
               {localStorage.authToken!==undefined && localStorage.authToken!=="hell" ?
-              <Link className="Nav-Links" to="/" onClick={this.logout}>Logout</Link>:null
+              <Link className="Nav-Links" to="/" onClick={this.logout.bind(this)}>Logout</Link>:null
               }
           </ul>
         </div>
@@ -56,4 +55,4 @@ class Nav extends Component{
 
 }
 
-export default (Nav);
+export default withRouter(Nav);

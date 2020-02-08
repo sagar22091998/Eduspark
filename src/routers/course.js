@@ -17,7 +17,7 @@ router.post('/courses', auth, async (req, res) => {
             res.status(400).send(e)
         }
     }else{
-        res.status(401).send({error: 'Student cannot create course'})
+        res.status(401).send('Student cannot create course')
     }
     
 })

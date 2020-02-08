@@ -31,7 +31,6 @@ class Login extends Component{
       data: payload
     }).then((res)=>{
       console.log('Login successfull!!')
-      console.log(res.data.token)
       localStorage.setItem('authToken', res.data.token)
       this.props.history.push('/')
       this.resetUserInputs()
