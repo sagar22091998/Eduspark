@@ -1,5 +1,5 @@
 .Profiles-Details{
-  height: 95vh;
+  height: 90vh;
   color: #FFF;
   display: grid;
    grid-template-columns: repeat(2,1fr); 
@@ -11,14 +11,12 @@
 
 .Student{
    background: url(./student.jpg)  center center/cover;
-
   }
 
 
 .Overlay{
   grid-row-start: 1;
   grid-row-end: 3;
-  flex: 1;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -39,10 +37,19 @@
 }
 
 .Profiles-Add{
-  height: 100%;
+  grid-row-start: 1;
+  grid-row-end: 2;
   background: red;
+
+
 }
+.Add{
+  display: flex;
+  flex-direction: column;
+}
+
 .Profiles-Manage{
-  height: 100%;
+  grid-row-start: 2;
+  grid-row-end: 3;
   background: blue;
 }

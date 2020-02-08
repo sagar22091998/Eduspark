@@ -14,7 +14,7 @@ class Home extends Component{
   render(){
     return(
       <div className="Home">
-        <Nav/>
+        <Nav current="Home"/>
         <Showcase/>
         <Grids/>
         <Footer/>

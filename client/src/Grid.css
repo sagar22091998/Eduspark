@@ -48,17 +48,20 @@
 
 @media(max-width:1920px){ 
   .Grid ,
-  .Grid-Front
+  .Grid-Front,
+  .Grid-Back
   { width: 300px; }
 }
 @media(max-width:1300px){
   .Grid ,
-  .Grid-Front
+  .Grid-Front ,
+  .Grid-Back
   { width: 450px; }
 }
 @media(max-width:1000px){ 
   .Grid ,
-  .Grid-Front
+  .Grid-Front ,
+  .Grid-Back
   { width: 300px;}
 }
 

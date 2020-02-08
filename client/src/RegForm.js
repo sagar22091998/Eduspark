@@ -18,8 +18,7 @@ class RegForm extends Component{
          return({login : !(x.login)}); 
       });
     }
-    
-
+  
   render(){
     let classLeft,classRight;
     if(!this.state.login){

@@ -62,26 +62,13 @@ class Profiles extends Component{
     else if(this.state.profileType==="student")
       type=false;
 
-    let typeClass ;
-    if(type)
+    let typeClass ,typeHTML;
+    if(type){
       typeClass = "Profiles-Details Instructor"
-    else
-      typeClass = "Profiles-Details Student"
-
-    return(
-      <div className="Profiles">
-        <Nav/>
-        <div className="Profiles-Main">
-          <div className={typeClass}>
-            <div className="Overlay"> 
-              <h1 className="l-heading">Hello ,{type?"Instructor": "Student"}</h1>
-              <h2 className="m-heading">Your Details</h2>
-              <p>Name :- {this.state.name}</p>
-              <p>Email :- {this.state.email}</p>
-            </div>
-            <div className="Profiles-Add p-1">
+      typeHTML = 
+            <div className="Profiles-Add">
               <h1 className="m-heading">Add Course</h1>
-              <form className="Form" onSubmit={this.submit}>
+              <form className="Add" onSubmit={this.submit}>
                 <label htmlFor="Cname">Name</label>
                 <input 
                   type="text" 
@@ -92,7 +79,7 @@ class Profiles extends Component{
                   onChange={this.handleChange}/>
                 <label htmlFor="ta">Email</label>
                 <input 
-                  type="textarea" 
+                  type="text" 
                   placeholder="Enter Description" 
                   id="ta"
                   value={this.state.desc}
@@ -101,7 +88,47 @@ class Profiles extends Component{
                 />
                 <input className = "btn" type="submit" value="Add"/>
               </form>
+            </div>      
+    }
+    else{
+      typeClass = "Profiles-Details Student"
+      typeHTML = 
+            <div className="Profiles-Add">
+              <h1 className="m-heading">Add Course</h1>
+              <form className="Add" onSubmit={this.submit}>
+                <label htmlFor="Cname">Name</label>
+                <input 
+                  type="text" 
+                  placeholder="Enter Course Name"
+                  value={this.state.courseName}
+                  name="courseName" 
+                  id="Cname"
+                  onChange={this.handleChange}/>
+                <label htmlFor="ta">Email</label>
+                <input 
+                  type="text" 
+                  placeholder="Enter Description" 
+                  id="ta"
+                  value={this.state.desc}
+                  name="desc"
+                  onChange={this.handleChange}
+                />
+                <input className = "btn" type="submit" value="Add"/>
+              </form>
+            </div>   
+    }
+    return(
+      <div className="Profiles">
+        <Nav current="Profiles"/>
+        <div className="Profiles-Main">
+          <div className={typeClass}>
+            <div className="Overlay"> 
+              <h1 className="l-heading">Hello ,{type?"Instructor": "Student"}</h1>
+              <h2 className="m-heading">Your Details</h2>
+              <p>Name :- {this.state.name}</p>
+              <p>Email :- {this.state.email}</p>
             </div>
+
             <div className="Profiles-Manage p-1">
               <p>write something good!!</p>
             </div>

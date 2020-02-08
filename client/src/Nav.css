@@ -35,15 +35,19 @@
   transition: 0.4s;
   margin: 0.5rem;
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-  /* border: solid 1px white; */
+ 
 }
 
 .Nav-Links:hover {
   color : #fff;
   background:var(--secondary-color);
-  /* border: solid 1px var(--primary-color); */
+  
 }
 
+.Current{
+  color : #fff;
+  background:#09477e;
+}
 
 /* Responsive */
 @media(max-width:650px){

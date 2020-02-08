@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import "./Form.css";
-import Popup from "./Popup"
+
 
 
 class Form extends Component{
@@ -11,8 +11,10 @@ class Form extends Component{
       name: '',
       email: '',
       password: '',
+      confirm: '',
       profileType: '',
-      error : false
+      error : false ,
+      errorType : ""
     };
     this.handleError=this.handleError.bind(this);
   }   
@@ -22,8 +24,27 @@ class Form extends Component{
   }
 
   submit =(event) => {
-    // prevent refreshing page
+    
     event.preventDefault();
+    
+    const {name,email,password,profileType,confirm} =  this.state; 
+    
+    if(name==="" || email==="" || password==="" || profileType==="" ||confirm===""){
+      this.handleError("Please Fill Out All the Fields");
+      return;
+    }
+    
+    if(this.state.confirm!==this.state.password)
+      {
+        this.handleError("Passwords Dont Match");
+        return;
+      }
+      
+    if(password.length<8){
+    this.handleError("Password length should be greater than 7");
+    return;
+     }
+ 
 
     // assign values
     const payload = {
@@ -44,10 +65,7 @@ class Form extends Component{
       this.props.history.push('/')
       this.resetUserInputs();
     }).catch(()=> {
-      const {name,email,password,profileType} =  this.state; 
-      if(name==="" || email==="" || password==="" || profileType==="" )
-      this.handleError();
-
+      
       this.resetUserInputs();
       console.log('Internal server error')
     })
@@ -65,14 +83,21 @@ class Form extends Component{
     })
   }
 
-  handleError(){
-    this.setState(x => ({error : !x.error}))
+  handleError( type ){
+
+    if(!this.state.error){
+    this.setState(  x => ({
+      error : !x.error}) );
+  }
+    
+  this.setState({errorType : type });
+
   }
 
   render(){
     return(
       <form className="Form" onSubmit={this.submit}>
-        {this.state.error ? <Popup  toggleError = {this.handleError} /> :null }
+        {this.state.error ? <label className="Error"> {this.state.errorType} </label> :null }
         <div className="Form-Set">
           <label htmlFor="name">Name</label>
           <input 
@@ -110,12 +135,12 @@ class Form extends Component{
             type="password" 
             placeholder="Re-enter Password"
             id="pass2"
-            value="asdsadsadsad"
-            name="confirmPass"
+            value={this.state.confirm}
+            name="confirm"
             onChange={this.handleChange}
             />
         </div> 
-        <div className="Form-Set">
+        <div className="Register-Type">
           <p> Sign In As </p>
           <input type="radio" name="profileType" value="instructor"  checked={this.state.profileType === "instructor"} onChange={ this.handleChange }/> Instructor 
           <input type="radio" name="profileType" value="student"  checked={this.state.profileType === "student"} onChange={ this.handleChange }/> Student

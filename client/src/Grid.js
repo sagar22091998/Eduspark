@@ -18,6 +18,7 @@ class Grid extends Component{
               <h3>Lorem ipsum dolor sit amet</h3>
               <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt veniam mollitia iste libero, tempora adipisci maxime officiis aliquid doloribus cumque?</p>
             </div>
+            <button>asdsad</button>
           </div>
         </div>
       </div>    

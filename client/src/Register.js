@@ -13,10 +13,10 @@ class Register extends Component{
   render(){
     return(
       <div className="Register ">
-        <Nav/>
+        <Nav current="Register"/>
         <div className="Register-Background">
           <div className="Register-Cover p-1">
-            <h1 className="l-heading my-1 text-secondary">Welcome To EduSpark</h1>
+            <h1 className="l-heading my-1 text-primary">Welcome To EduSpark</h1>
             <RegForm/>
           </div>
         </div>     
