@@ -3,6 +3,7 @@ import Footer from './Footer';
 import Nav from "./Nav";
 import { getProfile } from './userFunctions'
 import "./Profiles.css"
+import axios from 'axios';
 
 class Profiles extends Component{
 
@@ -35,6 +36,24 @@ class Profiles extends Component{
     
   }
 
+  submit=(event)=> {
+    const payload ={
+      name: this.state.courseName,
+      description: this.state.desc
+    }
+    const token = localStorage.authToken
+    axios({
+      url: '/courses',
+      method: 'POST',
+      data: payload,
+      headers: {Authorization: `Bearer ${token}`}
+    }).then((res) => {
+      console.log('Course created successfully!!')
+      this.props.history.push('/')
+    })
+
+  }
+
   render(){
 
     let type ;
@@ -62,7 +81,7 @@ class Profiles extends Component{
             </div>
             <div className="Profiles-Add p-1">
               <h1 className="m-heading">Add Course</h1>
-              <form>
+              <form className="Form" onSubmit={this.submit}>
                 <label htmlFor="Cname">Name</label>
                 <input 
                   type="text" 
@@ -84,7 +103,7 @@ class Profiles extends Component{
               </form>
             </div>
             <div className="Profiles-Manage p-1">
-              <p>Tatti khao garma garam</p>
+              <p>write something good!!</p>
             </div>
           </div>
         </div>

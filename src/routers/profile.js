@@ -3,6 +3,7 @@ const auth = require('../middleware/auth')
 const Profile = require('../models/profile')
 const router = new express.Router()
 const jwt = require('jsonwebtoken')
+
 router.post('/profiles', async(req, res) => {
     const profile = new Profile(req.body)
 
@@ -31,7 +32,7 @@ router.post('/profiles/logout', auth, async (req, res) => {
             return token.token !== req.token
         })
         await req.profile.save()
-        res.send()
+        res.send(req.profile)
     }catch (e){
         res.status(500).send(e)
     }

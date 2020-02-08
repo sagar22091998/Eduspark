@@ -11,11 +11,6 @@ const Course = mongoose.model('Course', {
         trim: true,
         default: ''
     },
-    approved: {
-        type: Boolean,
-        default: false,
-        required: true
-    },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
