@@ -38,7 +38,7 @@ class Courses extends Component{
           profileType: res.profileType,
           myCourses: res.myCourses
         });
-        const id = this.props.location.state.id
+        const id = this.props.location.state.id;
         if(this.state.myCourses.includes(id)){
           console.log('Course already added');
         }
@@ -47,18 +47,26 @@ class Courses extends Component{
   }
 
   render(){
+
+    let msg;
+    if(localStorage.authToken===undefined){
+        msg=<p className="Message">Login To Add Courses.</p>
+      }
+    else if(this.state.profileType==="instructor"){
+        msg=<p className="Message">Login As Student To Add Courses.</p>
+    }
+    else if(this.state.myCourses.includes(this.props.location.state.id)){
+        msg=<p className="Message">Already Subscribed.</p>
+    }
+    else
+        msg=<button className="btn" onClick={this.addCourse}>Add This Course Now</button>
+
     return(
       <div className="Courses">
         <Nav current=""/>
         <div className="Courses-Head">
           <h1 className="m-heading py-2">{this.props.location.state.name}</h1>
-          { localStorage.authToken===undefined 
-          ?"Login To Add Courses"
-          :(
-            this.state.profileType==="instructor"?
-            "Login As Student To Add Courses":
-            <button className="btn" onClick={this.addCourse}>Add This Course Now</button>)
-          }
+          { msg }
         </div>
         <div className="Courses-Content">
           <div className="Courses-Text text-primary p-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor doloremque, debitis nesciunt, enim deleniti sequi esse pariatur et, distinctio ab quod modi! </div>

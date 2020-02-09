@@ -61,8 +61,9 @@ class Form extends Component{
       localStorage.setItem('authToken', res.data.token)
       this.props.history.push('/')
     }).catch((err)=> {
-      console.log(err)
+      this.handleError("Email Already Exists");
       this.resetUserInputs();
+      console.log(err)
       console.log('Internal server error')
     })
 
@@ -73,7 +74,8 @@ class Form extends Component{
       name: '',
       email: '',
       password: '',
-      profileType: ''
+      profileType: '',
+      confirm: ''
     })
   }
 

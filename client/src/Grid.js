@@ -13,6 +13,7 @@ class Grid extends Component{
           <div className="Grid-Front">
             <div className="Grid-Overlay">
               <h3 className="s-heading">{this.props.name}</h3>
+              <p className="None">Tap for More</p>
             </div>
           </div>
           <div className="Grid-Back ">
