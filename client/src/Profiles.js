@@ -18,6 +18,7 @@ class Profiles extends Component{
       courses : []
     }
     this.handleChange = this.handleChange.bind(this); 
+    this.handleSubmit = this.handleSubmit.bind(this); 
   }
 
   handleChange(e){
@@ -53,13 +54,14 @@ class Profiles extends Component{
     })
   }
 
-  submit=(event)=> {
+  handleSubmit(e){
 
-    event.preventDefault();
+    e.preventDefault();
     const payload ={
       name: this.state.courseName,
       description: this.state.desc
     }
+
     const token = localStorage.authToken
     axios({
       url: '/courses',
@@ -89,7 +91,7 @@ class Profiles extends Component{
     let typeHTML = 
     <div className="Profiles-Add">
       <h1 className="m-heading">Add Course</h1>
-      <form className="Add-Form" onSubmit={this.submit}>
+      <form className="Add-Form" onSubmit={this.handleSubmit}>
         <label htmlFor="Cname">Name</label>
         <input 
           type="text" 

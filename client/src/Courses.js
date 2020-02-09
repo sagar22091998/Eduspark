@@ -13,19 +13,19 @@ class Courses extends Component{
       profileType : "None",
       myCourses: []
     }
+    this.addCourse = this.addCourse.bind(this); 
   }
 
-  addCourse= ()=> {
-    const token = localStorage.authToken
-    const id = this.props.location.state.id
-    console.log(id)
+  addCourse(){
+    const token = localStorage.authToken;
+    const id = this.props.location.state.id;
     axios({
       url: `/addCourses/${id}`,
       method: 'POST',
       headers: {Authorization: `Bearer ${token}`}
     }).then((res) => {
-      console.log(res.data)
-      this.props.history.push('/profile')
+      console.log(res.data);
+      this.props.history.push('/profile');
     })
   }
 
@@ -40,7 +40,7 @@ class Courses extends Component{
         });
         const id = this.props.location.state.id
         if(this.state.myCourses.includes(id)){
-          console.log('Course already added')
+          console.log('Course already added');
         }
       });
     }

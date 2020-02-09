@@ -11,16 +11,18 @@ class Login extends Component{
       password : "",
       error:false
     };
+    this.handleChange=this.handleChange.bind(this);
+    this.handleSumbit=this.handleSumbit.bind(this);
+    this.resetUserInputs=this.resetUserInputs.bind(this);
   }
 
-  handleChange =({ target }) => {
-    const { name, value } = target
-    this.setState({[name]: value})
+  handleChange(e){
+    this.setState({[e.target.name]: e.target.value});
   }
 
-  submit = (event) => {
-    event.preventDefault();
-
+  handleSumbit(e){
+    
+    e.preventDefault();
     const payload = {
       email: this.state.email,
       password: this.state.password
@@ -34,15 +36,15 @@ class Login extends Component{
       console.log('Login successfull!!')
       localStorage.setItem('authToken', res.data.token)
       this.props.history.push('/')
-      this.resetUserInputs()
     }).catch(()=>{
+      this.resetUserInputs();
       console.log("Error");
       this.setState({error:true})
     })
 
   }
 
-  resetUserInputs = () => {
+  resetUserInputs(){
     this.setState({
       email: '',
       password: ''
@@ -51,7 +53,7 @@ class Login extends Component{
 
   render(){
     return(
-        <form className="Login" onSubmit={this.submit}>
+        <form className="Login" onSubmit={this.handleSumbit}>
           <h1 className="m-heading">Login</h1>
           {this.state.error?<p className="Login-Error">Email Or Password Incorrect</p>:null}
           <label htmlFor="email">Email</label>

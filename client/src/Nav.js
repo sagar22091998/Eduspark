@@ -5,6 +5,11 @@ import axios from 'axios';
 import { withRouter } from 'react-router';
 class Nav extends Component{
 
+  constructor(props){
+    super(props);
+    this.logout = this.logout.bind(this);
+  }
+
   logout(){  
     const token = localStorage.authToken
     axios({
@@ -40,12 +45,12 @@ class Nav extends Component{
           <ul>
               <Link className={classHome} to="/">Home</Link>
               <Link className={classAbout} to="/about">About</Link>
-              {localStorage.authToken===undefined || localStorage.authToken==="hell"?
+              {localStorage.authToken===undefined ?
               <Link className={classRegister} to="/register/login">Register | Login</Link>
               :
               <Link className={classProfile} to="/profile">Profile</Link>}
-              {localStorage.authToken!==undefined && localStorage.authToken!=="hell" ?
-              <Link className="Nav-Links" to="/" onClick={this.logout.bind(this)}>Logout</Link>:null
+              {localStorage.authToken!==undefined ?
+              <Link className="Nav-Links" to="/" onClick={this.logout}>Logout</Link>:null
               }
           </ul>
         </div>

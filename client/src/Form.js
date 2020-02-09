@@ -17,16 +17,17 @@ class Form extends Component{
       errorType : ""
     };
     this.handleError=this.handleError.bind(this);
+    this.handleChange=this.handleChange.bind(this);
+    this.handleSumbit=this.handleSumbit.bind(this);
+    this.resetUserInputs=this.resetUserInputs.bind(this);
   }   
-  handleChange =({ target }) =>{
-    const {name, value} = target
-    this.setState({[name]: value});
+  handleChange(e){
+    this.setState({[e.target.name]: e.target.value});
   }
 
-  submit =(event) => {
+  handleSumbit(e){
     
-    event.preventDefault();
-    
+    e.preventDefault();
     const {name,email,password,profileType,confirm} =  this.state; 
     
     if(name==="" || email==="" || password==="" || profileType==="" ||confirm===""){
@@ -34,8 +35,7 @@ class Form extends Component{
       return;
     }
     
-    if(this.state.confirm!==this.state.password)
-      {
+    if(this.state.confirm!==this.state.password){
         this.handleError("Passwords Dont Match");
         return;
       }
@@ -45,8 +45,6 @@ class Form extends Component{
     return;
      }
  
-
-    // assign values
     const payload = {
       name: this.state.name,
       email: this.state.email,
@@ -60,10 +58,8 @@ class Form extends Component{
       data: payload
     }).then((res)=>{
       console.log('Data has been send to server')
-      console.log(res.data.token)
       localStorage.setItem('authToken', res.data.token)
       this.props.history.push('/')
-      this.resetUserInputs();
     }).catch((err)=> {
       console.log(err)
       this.resetUserInputs();
@@ -72,9 +68,7 @@ class Form extends Component{
 
   }
 
-
-  // For resetting the user inputs from the form
-  resetUserInputs = () => {
+  resetUserInputs(){
     this.setState({
       name: '',
       email: '',
@@ -86,17 +80,16 @@ class Form extends Component{
   handleError( type ){
 
     if(!this.state.error){
-    this.setState(  x => ({
-      error : !x.error}) );
-  }
+      this.setState(  x => ({error : !x.error}) );
+    }
     
-  this.setState({errorType : type });
+    this.setState({errorType : type });
 
   }
 
   render(){
     return(
-      <form className="Form" onSubmit={this.submit}>
+      <form className="Form" onSubmit={this.handleSumbit}>
         {this.state.error ? <label className="Error"> {this.state.errorType} </label> :null }
         <div className="Form-Set">
           <label htmlFor="name">Name</label>
