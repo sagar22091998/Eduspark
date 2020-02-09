@@ -1,6 +1,7 @@
 const express = require('express')
 const Course = require('../models/course')
 const auth = require('../middleware/auth')
+const Profile = require('../models/profile')
 const router = new express.Router()
 
 router.post('/courses', auth, async (req, res) => {
