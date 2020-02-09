@@ -64,8 +64,8 @@ class Form extends Component{
       localStorage.setItem('authToken', res.data.token)
       this.props.history.push('/')
       this.resetUserInputs();
-    }).catch(()=> {
-      
+    }).catch((err)=> {
+      console.log(err)
       this.resetUserInputs();
       console.log('Internal server error')
     })

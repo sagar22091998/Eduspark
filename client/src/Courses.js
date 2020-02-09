@@ -10,7 +10,8 @@ class Courses extends Component{
   constructor(props){
     super(props);
     this.state={
-      profileType : "None"
+      profileType : "None",
+      myCourses: []
     }
   }
 
@@ -33,7 +34,14 @@ class Courses extends Component{
     if(localStorage.authToken!==undefined){
       const token = localStorage.authToken;
       getProfile(token).then(res => {
-        this.setState({ profileType: res.profileType});
+        this.setState({ 
+          profileType: res.profileType,
+          myCourses: res.myCourses
+        });
+        const id = this.props.location.state.id
+        if(this.state.myCourses.includes(id)){
+          console.log('Course already added')
+        }
       });
     }
   }
