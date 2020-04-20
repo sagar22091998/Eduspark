@@ -12,7 +12,7 @@ Eduspark is a online learning platform where students can login and access cours
 # Steps for installation
 
 1. Clone or download the current repository.
-2. Navigate through the directory eduspark_ritviz in terminal.
+2. Navigate through the directory eduspark in terminal.
 3. Run "npm install" and then "cd client && npm install" in the terminal.
 
 
