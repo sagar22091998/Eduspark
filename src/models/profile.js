@@ -56,7 +56,7 @@ userSchema.virtual('courses', {
 
 userSchema.methods.generateAuthToken = async function () {
     const profile = this
-    const token = jwt.sign({ _id: profile._id.toString() }, 'thisismynewproject', { expiresIn: '15 days' } )
+    const token = jwt.sign({ _id: profile._id.toString() }, process.env.JWT_SECRET)
     profile.tokens = profile.tokens.concat({token})
     await profile.save()
     return token
