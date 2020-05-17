@@ -3,7 +3,6 @@ const auth = require('../middleware/auth')
 const Profile = require('../models/profile')
 const Course = require('../models/course')
 const router = new express.Router()
-const jwt = require('jsonwebtoken')
 
 router.post('/profiles', async(req, res) => {
     const profile = new Profile(req.body)
