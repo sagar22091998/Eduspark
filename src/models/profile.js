@@ -37,9 +37,9 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    myCourses: {
-        type: Array
-    },
+    // myCourses: {
+    //     type: Array
+    // },
     tokens: [{
         token: {
             type: String,
