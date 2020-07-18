@@ -2,6 +2,7 @@ const express = require('express')
 const Course = require('../models/course')
 const auth = require('../middleware/auth')
 const Profile = require('../models/profile')
+const CourseEnrolled = require('../models/courseEnrolled')
 const router = new express.Router()
 
 router.post('/courses', auth, async (req, res) => {
@@ -42,12 +43,25 @@ router.get('/coursesAll', async(req, res) => {
 })
 
 router.get('/studentCourses', auth, async(req, res) => {
+    // let courses = []
+    // for(let i=0;i<req.profile.myCourses.length;i++){
+    //     const course = await Course.findById(req.profile.myCourses[i])
+    //     courses.push(course)
+    // }
+    // res.send(courses)
     let courses = []
-    for(let i=0;i<req.profile.myCourses.length;i++){
-        const course = await Course.findById(req.profile.myCourses[i])
-        courses.push(course)
+    try{
+        const myCourses = await CourseEnrolled.find({studentId: req.profile._id}).populate('courseId')
+        myCourses.forEach((myCourse)=> {
+            course = {
+                name: myCourse.courseId.name
+            }
+            courses.push(course);
+        })
+        res.send(courses);
+    }catch(e){
+        res.status(500).send(e)
     }
-    res.send(courses)
 })
 
 router.get('/courses/:id', auth, async (req, res) => {
