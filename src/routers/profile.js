@@ -68,33 +68,41 @@ router.post('/addCourses/:id', auth, async(req, res) => {
                     courseCompleted: false
                 })
                 await newCourseEnrol.save();
-                res.status(200).send('Course added successfully')   
+                return res.status(200).send('Course added successfully')   
             }else{
-                res.send('Course already added.')
+                return res.send('Course already added.')
             }
         }catch(e){
             res.status(400).send(e)
         }
     }else{
-        res.status(401).send('Instructor cannot add course')
+        return res.status(401).send('Instructor cannot add course')
     }
 })
 
 router.get('/profiles/me', auth, async (req, res) => {
-    let courses = []
-    try{
-        const myCourses = await CourseEnrolled.find({studentId: req.profile._id}).populate('courseId')
-        myCourses.forEach((myCourse)=> {
-            course = {
-                name: myCourse.courseId.name
+    if(req.profile.profileType === 'student')
+    {
+        let courses = []
+        try{
+            const myCourses = await CourseEnrolled.find({studentId: req.profile._id})
+            myCourses.forEach((myCourse)=> {
+                courses.push(myCourse.courseId)
+            })
+            const response = {
+                name: req.profile.name,
+                email: req.profile.email,
+                password: req.profile.password,
+                profileType: req.profile.profileType,
+                myCourses: courses
             }
-            courses.push(course);
-        })
-        res.send(courses);
-    }catch(e){
-        res.status(500).send(e)
+            return res.send(response)
+        }catch(e){
+            res.status(500).send(e)
+        }
+    }else{
+        res.send(req.profile)
     }
-    res.send(req.profile)
 })
 
 router.patch('/profiles/me', auth, async (req, res) => {
