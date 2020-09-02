@@ -34,6 +34,7 @@ class Courses extends Component{
     if(localStorage.authToken!==undefined){
       const token = localStorage.authToken;
       getProfile(token).then(res => {
+        console.log(res)
         this.setState({ 
           profileType: res.profileType,
           myCourses: res.myCourses

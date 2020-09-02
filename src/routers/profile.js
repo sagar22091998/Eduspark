@@ -2,6 +2,7 @@ const express = require('express')
 const auth = require('../middleware/auth')
 const Profile = require('../models/profile')
 const Course = require('../models/course')
+const CourseEnrolled = require('../models/courseEnrolled')
 const router = new express.Router()
 
 router.post('/profiles', async(req, res) => {
@@ -54,28 +55,54 @@ router.post('/profiles/logoutAll', auth, async (req, res) => {
 router.post('/addCourses/:id', auth, async(req, res) => {
     if(req.profile.profileType === "student"){
         courseID = req.params.id
-        if(!req.profile.myCourses.includes(courseID)){
-            try{
-                const course = await Course.findById(courseID)
-                if(!course){
-                    return res.status(404).send({error: "Course doesn't exists"});
-                }
-                req.profile.myCourses = req.profile.myCourses.concat(courseID)
-                await req.profile.save()
-                res.status(200).send('Course added successfully')
-            }catch(e){
-                res.status(400).send(e)
+        try{
+            const courseEnrolled = await CourseEnrolled.findOne({
+                studentId: req.profile._id, 
+                courseID 
+            })
+            if(!courseEnrolled){ 
+                const newCourseEnrol = new CourseEnrolled({
+                    studentId: req.profile._id,
+                    courseID,
+                    videosCompleted: 0,
+                    courseCompleted: false
+                })
+                await newCourseEnrol.save();
+                return res.status(200).send('Course added successfully')   
+            }else{
+                return res.send('Course already added.')
             }
-        }else{
-            res.send('Course already added.')
+        }catch(e){
+            res.status(400).send(e)
         }
     }else{
-        res.status(401).send('Instructor cannot add course')
+        return res.status(401).send('Instructor cannot add course')
     }
 })
 
 router.get('/profiles/me', auth, async (req, res) => {
-    res.send(req.profile)
+    if(req.profile.profileType === 'student')
+    {
+        let courses = []
+        try{
+            const myCourses = await CourseEnrolled.find({studentId: req.profile._id})
+            myCourses.forEach((myCourse)=> {
+                courses.push(myCourse.courseId)
+            })
+            const response = {
+                name: req.profile.name,
+                email: req.profile.email,
+                password: req.profile.password,
+                profileType: req.profile.profileType,
+                myCourses: courses
+            }
+            return res.send(response)
+        }catch(e){
+            res.status(500).send(e)
+        }
+    }else{
+        res.send(req.profile)
+    }
 })
 
 router.patch('/profiles/me', auth, async (req, res) => {
