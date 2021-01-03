@@ -69,25 +69,50 @@ const profileSchema = new mongoose_1.Schema({
         type: String,
         trim: true,
         required: true,
+        unique: true,
         minlength: 10,
         maxlength: 10
     },
     profileType: {
-        type: Boolean,
+        type: Number,
         required: true,
         default: 0
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    versionKey: false
 });
+profileSchema.methods.toJSON = function () {
+    const profile = this;
+    const profileObject = profile.toObject();
+    delete profileObject.password;
+    delete profileObject._id;
+    return profileObject;
+};
 profileSchema.methods.generateAuthToken = function () {
     return __awaiter(this, void 0, void 0, function* () {
         const user = this;
         const secret = process.env.JWT_SECRET;
-        const token = jwt.sign({ _id: user._id.toString() }, secret, {
-            expiresIn: '7d'
+        const _id = user._id.toString();
+        const profileType = user.profileType;
+        const payload = { _id, profileType };
+        const token = jwt.sign(payload, secret, {
+            expiresIn: '10m'
         });
         return token;
+    });
+};
+profileSchema.statics.findByCredentials = function (email, password) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const profile = yield Profile.findOne({ email });
+        if (!profile) {
+            throw new Error('Unable to Login');
+        }
+        const isMatch = yield bcrypt.compare(password, profile.password);
+        if (!isMatch) {
+            throw new Error('Unable to Login');
+        }
+        return profile;
     });
 };
 profileSchema.pre('save', function (next) {
