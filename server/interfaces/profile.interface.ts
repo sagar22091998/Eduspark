@@ -1,11 +1,11 @@
 import { Document } from 'mongoose';
 
-export default interface IProfile extends Document {
+export default interface IProfileModel extends Document {
     name: string;
     email: string;
     password: string;
     mobileNumber: string;
-    profileType: boolean;
+    profileType: number;
     createdAt: Date;
     updatedAt: Date;
 }
