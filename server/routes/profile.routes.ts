@@ -23,9 +23,11 @@ const registerHandler = async (
             req.body.mobileNumber,
             req.body.profileType
         );
+        if (typeof response === 'string') throw new Error(response);
+
         return CREATE(res, response, 'Registration Successful');
     } catch (error) {
-        return BAD_REQUEST(res, error);
+        return BAD_REQUEST(res, error.message);
     }
 };
 
@@ -85,6 +87,7 @@ const updateHandler = async (
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (update) => ((req.profile as any)[update] = req.body[update])
         );
+        await req.profile.save();
         return SUCCESS(res, req.profile, 'Details Updated');
     } catch (err) {
         return BAD_REQUEST(res, err.message);

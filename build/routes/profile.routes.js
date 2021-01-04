@@ -40,10 +40,12 @@ const router = express_1.Router();
 const registerHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const response = yield controllers.register(req.body.name, req.body.email, req.body.password, req.body.mobileNumber, req.body.profileType);
+        if (typeof response === 'string')
+            throw new Error(response);
         return response_helper_1.CREATE(res, response, 'Registration Successful');
     }
     catch (error) {
-        return response_helper_1.BAD_REQUEST(res, error);
+        return response_helper_1.BAD_REQUEST(res, error.message);
     }
 });
 const loginHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -87,6 +89,7 @@ const updateHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         updates.forEach(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (update) => (req.profile[update] = req.body[update]));
+        yield req.profile.save();
         return response_helper_1.SUCCESS(res, req.profile, 'Details Updated');
     }
     catch (err) {
