@@ -84,7 +84,9 @@ const updateHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         if (!isValidOperation) {
             throw new Error('Invalid Updates');
         }
-        updates.forEach((update) => (req.profile[update] = req.body[update]));
+        updates.forEach(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (update) => (req.profile[update] = req.body[update]));
         return response_helper_1.SUCCESS(res, req.profile, 'Details Updated');
     }
     catch (err) {
