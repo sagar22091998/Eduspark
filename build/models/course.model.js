@@ -42,7 +42,8 @@ const courseSchema = new mongoose_1.Schema({
         default: 0
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    versionKey: false
 });
 courseSchema.pre('remove' || 'deleteMany', function (next) {
     return __awaiter(this, void 0, void 0, function* () {

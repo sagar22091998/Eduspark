@@ -5,6 +5,7 @@ import { config } from 'dotenv';
 import bodyParser from 'body-parser';
 import { connectFunc } from './config/connect';
 import profileRouter from './routes/profile.routes';
+import instructorCoursesRouter from './routes/instructor.courses.routes';
 
 config();
 const app = express();
@@ -36,6 +37,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/profile', profileRouter);
+app.use('/instructor/course', instructorCoursesRouter);
 
 connectFunc(process.env.NODE_ENV === 'production');
 
