@@ -1,0 +1,49 @@
+@import "../../../sass/mixins.scss";
+
+.showcase {
+  height: calc(100vh - 100px);
+  background: url(./../../../images/main.jpg)  top/cover;
+  background-attachment: fixed;
+
+  &__container{
+    @include flexcenter-v;
+    height: 100%; 
+    text-align: center;
+    padding : 0 2rem;
+    background-color: rgba(0, 0, 0, 0.35);
+    color: #fff;
+  
+    &--head{
+      @include heading;
+      font-size: 5rem;
+      margin-bottom: 2rem;
+    }
+    
+    &--text{
+      max-width: 1000px;
+      line-height: 2.5rem;
+      font-size: 2rem;
+    }
+  }
+}
+
+
+
+
+@media(max-width:500px) { 
+  .showcase {
+    background: url(./../../../images/main.jpg) center/cover;;
+
+    &__container{
+      padding : 1rem 0;
+    
+      &--head { font-size: 3.5rem; }
+      
+      &--text{
+        max-width: 300px;
+        line-height: 1.75rem;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

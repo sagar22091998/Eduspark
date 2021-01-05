@@ -1,0 +1,60 @@
+@import "../../../sass/mixins.scss";
+
+.loginreg{
+  background: url('../../../images/showcase.jpg') no-repeat center center/cover ;
+  height: calc(100vh - 100px);
+
+  &__container{
+    @include flexcenter-v;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.25);
+    height: 100%;
+  
+    &--head{
+      @include heading;
+      font-size: 5rem;
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+
+
+@media(max-width:1024px){
+  .loginreg{
+    &__container{
+    
+      &--head{
+        @include heading;
+        font-size: 3.5rem;
+        margin-bottom: 7.5rem;
+      }
+    }
+  }
+}
+
+@media(max-width:768px){
+  .loginreg{
+    &__container{
+    
+      &--head{
+        @include heading;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}
+
+@media(max-width:500px){
+  .loginreg{
+    &__container{
+    
+      &--head{
+        @include heading;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}
