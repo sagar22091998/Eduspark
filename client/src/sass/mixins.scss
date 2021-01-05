@@ -1,0 +1,66 @@
+$primary-color:#25292e;
+$dark-color : #707070;
+$secondary-color: #1761a0;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+a{ text-decoration: none; }
+
+li{ list-style: none; }
+
+.activePage {
+  background:#0d3253;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+@mixin heading{
+  font-family: 'Kaushan Script', cursive;
+  text-shadow: 4px 4px $secondary-color;  
+}
+
+@mixin heading-font{
+  font-family: 'Kaushan Script', cursive;  
+}
+
+@mixin flexcenter-h {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexcenter-v {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+@mixin btn-primary {
+  display: block;
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  background: $secondary-color;
+  color: #fff;
+  transition: 0.4s;
+
+  &:hover { background: #000; }
+  
+  @media(max-width:500px){
+      margin: 0.5rem auto;
+      padding: 0.35rem 0.5rem;
+      font-size: 0.8rem;
+  }
+}
