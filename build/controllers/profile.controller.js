@@ -15,14 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUser = exports.changePassword = exports.login = exports.register = void 0;
 const bcryptjs_1 = require("bcryptjs");
 const profile_model_1 = __importDefault(require("../models/profile.model"));
-const register = (name, email, password, mobileNumber, profileType) => __awaiter(void 0, void 0, void 0, function* () {
+const register = (name, email, password, mobileNumber) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const profile = new profile_model_1.default({
             name,
             email,
             password,
-            mobileNumber,
-            profileType
+            mobileNumber
         });
         yield profile.save();
         const token = yield profile.generateAuthToken();

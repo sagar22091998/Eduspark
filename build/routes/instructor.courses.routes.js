@@ -34,7 +34,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controllers = __importStar(require("../controllers/instructor.courses.controller"));
 const auth_middleware_1 = require("../middleware/auth.middleware");
-const profile_middleware_1 = require("../middleware/profile.middleware");
 const request_helper_1 = __importDefault(require("../helpers/request.helper"));
 const response_helper_1 = require("../helpers/response.helper");
 const router = express_1.Router();
@@ -88,10 +87,10 @@ const deleteHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         return response_helper_1.INTERNAL_ERROR(res, error.message);
     }
 });
-router.post('/create', [auth_middleware_1.verifyToken, profile_middleware_1.verifyInstructor], createHandler);
-router.get('/list', [auth_middleware_1.verifyToken, profile_middleware_1.verifyInstructor], getAllHandler);
-router.get('/details/:id', [auth_middleware_1.verifyToken, profile_middleware_1.verifyInstructor], getDetailsHandler);
-router.put('/update/:id', [auth_middleware_1.verifyToken, profile_middleware_1.verifyInstructor], updateHandler);
-router.delete('/delete/:id', [auth_middleware_1.verifyToken, profile_middleware_1.verifyInstructor], deleteHandler);
+router.post('/create', [auth_middleware_1.verifyToken], createHandler);
+router.get('/list', [auth_middleware_1.verifyToken], getAllHandler);
+router.get('/details/:id', [auth_middleware_1.verifyToken], getDetailsHandler);
+router.put('/update/:id', [auth_middleware_1.verifyToken], updateHandler);
+router.delete('/delete/:id', [auth_middleware_1.verifyToken], deleteHandler);
 exports.default = router;
 //# sourceMappingURL=instructor.courses.routes.js.map

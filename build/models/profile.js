@@ -29,11 +29,6 @@ const profileSchema = new mongoose_1.Schema({
         trim: true,
         required: true,
         minlength: 10,
-    },
-    profileType: {
-        type: Boolean,
-        required: true,
-        default: 0,
     }
 }, {
     timestamps: true

@@ -6,16 +6,14 @@ export const register = async (
     name: string,
     email: string,
     password: string,
-    mobileNumber: string,
-    profileType: number
+    mobileNumber: string
 ): Promise<unknown> => {
     try {
         const profile = new Profile({
             name,
             email,
             password,
-            mobileNumber,
-            profileType
+            mobileNumber
         });
         await profile.save();
         const token = await profile.generateAuthToken();

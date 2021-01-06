@@ -45,10 +45,8 @@ const verifyToken = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         if (!decoded)
             throw new Error('Token Expired');
         const _id = decoded._id;
-        const profileType = decoded.profileType;
         request_helper_1.default(req);
         req.userId = _id;
-        req.type = profileType;
         next();
     }
     catch (err) {
