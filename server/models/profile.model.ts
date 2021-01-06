@@ -43,11 +43,6 @@ const profileSchema: Schema = new Schema(
             unique: true,
             minlength: 10,
             maxlength: 10
-        },
-        profileType: {
-            type: Number,
-            required: true,
-            default: 0
         }
     },
     {
@@ -78,8 +73,7 @@ profileSchema.methods.generateAuthToken = async function () {
     const user = this!;
     const secret: string = process.env.JWT_SECRET!;
     const _id: string = user._id.toString();
-    const profileType: number = user.profileType;
-    const payload: IToken = { _id, profileType };
+    const payload: IToken = { _id };
     const token: string = jwt.sign(payload, secret, {
         expiresIn: '10m'
     });

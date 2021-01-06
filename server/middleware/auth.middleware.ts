@@ -16,10 +16,8 @@ export const verifyToken = async (
         const decoded = jwt.verify(token!, secret);
         if (!decoded) throw new Error('Token Expired');
         const _id = (decoded as IToken)._id;
-        const profileType = (decoded as IToken).profileType;
         assertIRequest(req);
         req.userId = _id;
-        req.type = profileType;
         next();
     } catch (err) {
         console.log(err);

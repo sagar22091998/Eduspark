@@ -20,8 +20,7 @@ const registerHandler = async (
             req.body.name,
             req.body.email,
             req.body.password,
-            req.body.mobileNumber,
-            req.body.profileType
+            req.body.mobileNumber
         );
         if (typeof response === 'string') throw new Error(response);
 

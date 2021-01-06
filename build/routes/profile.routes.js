@@ -39,7 +39,7 @@ const request_helper_1 = __importDefault(require("../helpers/request.helper"));
 const router = express_1.Router();
 const registerHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const response = yield controllers.register(req.body.name, req.body.email, req.body.password, req.body.mobileNumber, req.body.profileType);
+        const response = yield controllers.register(req.body.name, req.body.email, req.body.password, req.body.mobileNumber);
         if (typeof response === 'string')
             throw new Error(response);
         return response_helper_1.CREATE(res, response, 'Registration Successful');

@@ -72,11 +72,6 @@ const profileSchema = new mongoose_1.Schema({
         unique: true,
         minlength: 10,
         maxlength: 10
-    },
-    profileType: {
-        type: Number,
-        required: true,
-        default: 0
     }
 }, {
     timestamps: true,
@@ -94,8 +89,7 @@ profileSchema.methods.generateAuthToken = function () {
         const user = this;
         const secret = process.env.JWT_SECRET;
         const _id = user._id.toString();
-        const profileType = user.profileType;
-        const payload = { _id, profileType };
+        const payload = { _id };
         const token = jwt.sign(payload, secret, {
             expiresIn: '10m'
         });
