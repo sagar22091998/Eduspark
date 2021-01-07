@@ -41,15 +41,18 @@
       }
       
       & input{
-        border-radius: 5px;
-        border: 1px solid #000;
-        outline: none;
+        border-radius: 3px 0 0 3px;
         border: none;
+        outline: none;
         height: 40px;
         font-size: 1.2rem;
         padding: 0.5rem ;
+        
+        &:disabled{
+          background: #bbb;
+          color: $secondary-color;
+        }
       }
-
     }
   }
   

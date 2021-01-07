@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import RegForm from '../../../RegForm';
 import Forms from "../../SubComponents/Forms/Forms"
 import "./LoginRegister.scss"
 

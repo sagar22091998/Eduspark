@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import "./CoursesGrids.scss"
 import Grid from "../../SubComponents/Grid/Grid"
-// import { getAllCourses } from './userFunctions'
 
 class CoursesGrids extends Component{
 

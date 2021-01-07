@@ -7,6 +7,13 @@ const intialState = {
   isLoggedIn : false,
   inputEmail : "",
   inputPassword : "",
+
+  //Register
+  registerName : "",
+  registerEmail : "",
+  registerPassword : "",
+  registerConfirm : "",
+  registerMobile : "",
 }
 
 export default (state = intialState , action ) => { 

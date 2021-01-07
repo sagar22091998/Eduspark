@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import ProfileDetails from "../../SubComponents/ProfileDetails/ProfileDetails"
+import React, { Component } from 'react';
+import ProfileDetails from "../../SubComponents/ProfileDetails/ProfileDetails";
 import "./Profile.scss"
 import profile from "../../../images/profile.png"
 class Profile extends Component {
@@ -15,7 +15,7 @@ class Profile extends Component {
               <img src = {profile} alt=""/>
             </div>
           </div>
-        </div>      
+        </div>
       </div>
     )
   }

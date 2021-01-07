@@ -1,7 +1,7 @@
 import React, { Component , Fragment } from 'react';
 import { Redirect, Route , Switch , withRouter } from "react-router-dom";
 import { connect } from "react-redux"
-import { setSelectedPage , logoutHandler , setLoginStatus } from "../../../actions/index"
+import { setSelectedPage , logoutHandler , setLoginStatus , getProfile } from "../../../actions/index"
 import Home from "../../Pages/Home/Home";
 import LoginRegister from "../../Pages/LoginRegister/LoginRegister"
 import About from "../../Pages/About/About"
@@ -14,7 +14,7 @@ class MainRouter extends Component {
 
   componentDidMount(){
     
-    const { setSelectedPage , history , logoutHandler , setLoginStatus } = this.props;
+    const { setSelectedPage , history , logoutHandler , setLoginStatus , getProfile } = this.props;
 
     //For Navbar Links
     const selectedPage = history.location.pathname.split("/")[1];
@@ -37,8 +37,10 @@ class MainRouter extends Component {
       return;
     }
 
+    //Logged in
     const remainingMilliseconds = new Date(expiryDate).getTime() - new Date().getTime();
     setLoginStatus(true);
+    getProfile();
 
     setTimeout(() => {
       logoutHandler();
@@ -81,7 +83,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setSelectedPage : (page) => dispatch(setSelectedPage(page)),
     setLoginStatus : (status) => dispatch(setLoginStatus(status)),
-    logoutHandler : () => dispatch(logoutHandler())
+    logoutHandler : () => dispatch(logoutHandler()),
+    getProfile : () => dispatch(getProfile())
   }
 }
 

@@ -55,9 +55,15 @@ button {
   background: $secondary-color;
   color: #fff;
   transition: 0.4s;
-
+  cursor: pointer;
   &:hover { background: #000; }
   
+  &:disabled{
+    background: $dark-color;
+    cursor: default;
+    &:hover { background: $dark-color; }
+  }
+
   @media(max-width:500px){
       margin: 0.5rem auto;
       padding: 0.35rem 0.5rem;

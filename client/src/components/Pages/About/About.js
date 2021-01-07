@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import Creators from "../../SubComponents/Creators/Creators";
 import "./About.scss";
-// import Nav from "./Nav";
-
 
 class About extends Component{
   
-
   componentDidMount() {
     window.scrollTo(0,0);
   }

@@ -4,11 +4,12 @@ import { connect } from "react-redux"
 import { logoutHandler , setPopup , setLoginStatus } from "../../../actions/index"
 import "./Navbar.scss"
 import MessagePopup from "../MessagePopup/MessagePopup"
+import ChangePasswordModal from "../../SubComponents/ChangePasswordModal/ChangePasswordModal"
 
 class Navbar extends Component{
 
   render(){
-    const { selectedPage , logoutHandler , isLoggedIn } = this.props;
+    const { selectedPage , logoutHandler , isLoggedIn , changeModal } = this.props;
   
     return(
       <div className="navbar">
@@ -22,10 +23,13 @@ class Navbar extends Component{
           <Fragment>
             <Link to="/profile"><li className={selectedPage==="profile" ? "activePage" : ""}>Profile</li></Link>
             <li onClick={logoutHandler}>Logout</li>
+            <li>My Courses</li>
+            <li>Subscriptions</li>
           </Fragment>
           }
         </ul>
-        <MessagePopup/>
+        <ChangePasswordModal/>
+        { !changeModal && <MessagePopup />}
       </div>
     );
   }
@@ -35,7 +39,8 @@ class Navbar extends Component{
 const mapStatesToProps = (state) => { 
   return {
     selectedPage : state.auth.selectedPage,
-    isLoggedIn : state.auth.isLoggedIn
+    isLoggedIn : state.auth.isLoggedIn,
+    changeModal : state.profile.changeModal
   }
 } 
 
