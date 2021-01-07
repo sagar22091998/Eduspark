@@ -16,55 +16,35 @@ exports.deleteUser = exports.changePassword = exports.login = exports.register =
 const bcryptjs_1 = require("bcryptjs");
 const profile_model_1 = __importDefault(require("../models/profile.model"));
 const register = (name, email, password, mobileNumber) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const profile = new profile_model_1.default({
-            name,
-            email,
-            password,
-            mobileNumber
-        });
-        yield profile.save();
-        const token = yield profile.generateAuthToken();
-        return { profile, token };
-    }
-    catch (err) {
-        return err.message;
-    }
+    const profile = new profile_model_1.default({
+        name,
+        email,
+        password,
+        mobileNumber
+    });
+    yield profile.save();
+    const token = yield profile.generateAuthToken();
+    return { profile, token };
 });
 exports.register = register;
 const login = (email, password) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const profile = yield profile_model_1.default.findByCredentials(email, password);
-        const token = yield profile.generateAuthToken();
-        return { profile, token };
-    }
-    catch (err) {
-        return err.message;
-    }
+    const profile = yield profile_model_1.default.findByCredentials(email, password);
+    const token = yield profile.generateAuthToken();
+    return { profile, token };
 });
 exports.login = login;
 const changePassword = (profile, oldPassword, newPassword) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const isMatch = yield bcryptjs_1.compare(oldPassword, profile.password);
-        if (!isMatch)
-            throw new Error('Incorrect Password');
-        profile.password = newPassword;
-        yield profile.save();
-        return 'Changed Password Successfully';
-    }
-    catch (err) {
-        return err.message;
-    }
+    const isMatch = yield bcryptjs_1.compare(oldPassword, profile.password);
+    if (!isMatch)
+        throw new Error('Incorrect Password');
+    profile.password = newPassword;
+    yield profile.save();
+    return 'Changed Password Successfully';
 });
 exports.changePassword = changePassword;
 const deleteUser = (profile) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield profile.remove();
-        return 'Removed the account';
-    }
-    catch (err) {
-        return err.message;
-    }
+    yield profile.remove();
+    return 'Removed the account';
 });
 exports.deleteUser = deleteUser;
 //# sourceMappingURL=profile.controller.js.map

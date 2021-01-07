@@ -22,10 +22,15 @@ const registerHandler = async (
             req.body.password,
             req.body.mobileNumber
         );
-        if (typeof response === 'string') throw new Error(response);
-
         return CREATE(res, response, 'Registration Successful');
     } catch (error) {
+        if (error.name === 'MongoError' && error.code === 11000) {
+            if (Object.keys(error.keyPattern)[0] === 'email') {
+                error.message = 'Email must be unique';
+            } else if (Object.keys(error.keyPattern)[0] === 'mobileNumber') {
+                error.message = 'Mobile Number must be unique';
+            }
+        }
         return BAD_REQUEST(res, error.message);
     }
 };
@@ -36,12 +41,9 @@ const loginHandler = async (req: Request, res: Response): Promise<Response> => {
             req.body.email,
             req.body.password
         );
-        if (typeof response === 'string') {
-            throw response;
-        }
         return SUCCESS(res, response, 'Successfully Logged In');
     } catch (error) {
-        return BAD_REQUEST(res, error);
+        return BAD_REQUEST(res, error.message);
     }
 };
 
@@ -88,8 +90,15 @@ const updateHandler = async (
         );
         await req.profile.save();
         return SUCCESS(res, req.profile, 'Details Updated');
-    } catch (err) {
-        return BAD_REQUEST(res, err.message);
+    } catch (error) {
+        if (error.name === 'MongoError' && error.code === 11000) {
+            if (Object.keys(error.keyPattern)[0] === 'email') {
+                error.message = 'Email must be unique';
+            } else if (Object.keys(error.keyPattern)[0] === 'mobileNumber') {
+                error.message = 'Mobile Number must be unique';
+            }
+        }
+        return BAD_REQUEST(res, error.message);
     }
 };
 
