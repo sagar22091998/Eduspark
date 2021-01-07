@@ -50,7 +50,7 @@ const profileSchema = new mongoose_1.Schema({
         unique: true,
         validate(value) {
             if (!validator_1.default.isEmail(value)) {
-                throw new Error('Email is invalid');
+                throw new mongoose_1.Error('Email is invalid');
             }
         }
     },
@@ -61,7 +61,7 @@ const profileSchema = new mongoose_1.Schema({
         trim: true,
         validate(value) {
             if (value.toLowerCase().includes('password')) {
-                throw new Error('Password cannot contain "password"');
+                throw new mongoose_1.Error('Password cannot contain "password"');
             }
         }
     },
@@ -100,11 +100,11 @@ profileSchema.statics.findByCredentials = function (email, password) {
     return __awaiter(this, void 0, void 0, function* () {
         const profile = yield Profile.findOne({ email });
         if (!profile) {
-            throw new Error('Unable to Login');
+            throw new mongoose_1.Error('Unable to Login');
         }
         const isMatch = yield bcrypt.compare(password, profile.password);
         if (!isMatch) {
-            throw new Error('Unable to Login');
+            throw new mongoose_1.Error('Unable to Login');
         }
         return profile;
     });
