@@ -42,7 +42,8 @@ const questionSchema = new mongoose_1.Schema({
         required: true
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    versionKey: false
 });
 const Question = mongoose_1.model('Question', questionSchema);
 exports.default = Question;

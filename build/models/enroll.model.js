@@ -39,7 +39,8 @@ const enrollSchema = new mongoose_1.Schema({
         default: 0
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    versionKey: false
 });
 const Enroll = mongoose_1.model('Enroll', enrollSchema);
 exports.default = Enroll;
