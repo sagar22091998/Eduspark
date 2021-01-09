@@ -4,8 +4,10 @@ import cors from 'cors';
 import { config } from 'dotenv';
 import bodyParser from 'body-parser';
 import { connectFunc } from './config/connect';
+
 import profileRouter from './routes/profile.routes';
-import instructorCoursesRouter from './routes/instructor.courses.routes';
+import instructorCoursesRouter from './routes/instructor_courses.routes';
+import instructorVideosRouter from './routes/instructor_video.routes';
 
 config();
 const app = express();
@@ -38,6 +40,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/profile', profileRouter);
 app.use('/instructor/course', instructorCoursesRouter);
+app.use('/instructor/video', instructorVideosRouter);
 
 connectFunc(process.env.NODE_ENV === 'production');
 
