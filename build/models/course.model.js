@@ -45,6 +45,12 @@ const courseSchema = new mongoose_1.Schema({
     timestamps: true,
     versionKey: false
 });
+courseSchema.methods.toJSON = function () {
+    const course = this;
+    const courseObject = course.toObject();
+    delete courseObject.instructorId;
+    return courseObject;
+};
 courseSchema.pre('remove' || 'deleteMany', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
         yield video_model_1.default.deleteMany({ courseId: this._id });
