@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import * as controllers from '../controllers/instructor.courses.controller';
+import * as controllers from '../controllers/instructor_courses.controller';
 import { verifyToken } from '../middleware/auth.middleware';
 import assertIRequest from '../helpers/request.helper';
 import {

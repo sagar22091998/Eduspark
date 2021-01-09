@@ -41,7 +41,8 @@ const quizSchema = new mongoose_1.Schema({
         unique: true
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    versionKey: false
 });
 quizSchema.pre('remove' || 'deleteMany', function (next) {
     return __awaiter(this, void 0, void 0, function* () {

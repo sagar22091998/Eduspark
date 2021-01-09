@@ -26,9 +26,9 @@ const registerHandler = async (
     } catch (error) {
         if (error.name === 'MongoError' && error.code === 11000) {
             if (Object.keys(error.keyPattern)[0] === 'email') {
-                error.message = 'Email must be unique';
+                error.message = 'Email already exits';
             } else if (Object.keys(error.keyPattern)[0] === 'mobileNumber') {
-                error.message = 'Mobile Number must be unique';
+                error.message = 'Mobile Number already exits';
             }
         }
         return BAD_REQUEST(res, error.message);
@@ -93,9 +93,9 @@ const updateHandler = async (
     } catch (error) {
         if (error.name === 'MongoError' && error.code === 11000) {
             if (Object.keys(error.keyPattern)[0] === 'email') {
-                error.message = 'Email must be unique';
+                error.message = 'Email already exits';
             } else if (Object.keys(error.keyPattern)[0] === 'mobileNumber') {
-                error.message = 'Mobile Number must be unique';
+                error.message = 'Mobile Number already exits';
             }
         }
         return BAD_REQUEST(res, error.message);

@@ -45,10 +45,10 @@ const registerHandler = (req, res) => __awaiter(void 0, void 0, void 0, function
     catch (error) {
         if (error.name === 'MongoError' && error.code === 11000) {
             if (Object.keys(error.keyPattern)[0] === 'email') {
-                error.message = 'Email must be unique';
+                error.message = 'Email already exits';
             }
             else if (Object.keys(error.keyPattern)[0] === 'mobileNumber') {
-                error.message = 'Mobile Number must be unique';
+                error.message = 'Mobile Number already exits';
             }
         }
         return response_helper_1.BAD_REQUEST(res, error.message);
@@ -98,10 +98,10 @@ const updateHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     catch (error) {
         if (error.name === 'MongoError' && error.code === 11000) {
             if (Object.keys(error.keyPattern)[0] === 'email') {
-                error.message = 'Email must be unique';
+                error.message = 'Email already exits';
             }
             else if (Object.keys(error.keyPattern)[0] === 'mobileNumber') {
-                error.message = 'Mobile Number must be unique';
+                error.message = 'Mobile Number already exits';
             }
         }
         return response_helper_1.BAD_REQUEST(res, error.message);
