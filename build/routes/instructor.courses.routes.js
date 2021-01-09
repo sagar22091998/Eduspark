@@ -32,7 +32,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const controllers = __importStar(require("../controllers/instructor.courses.controller"));
+const controllers = __importStar(require("../controllers/instructor_courses.controller"));
 const auth_middleware_1 = require("../middleware/auth.middleware");
 const request_helper_1 = __importDefault(require("../helpers/request.helper"));
 const response_helper_1 = require("../helpers/response.helper");
