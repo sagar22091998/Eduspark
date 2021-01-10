@@ -105,7 +105,12 @@ profileSchema.pre('save', async function (this: IProfileModel, next) {
 });
 
 profileSchema.pre('remove' || 'deleteOne', async function (next) {
-    await Course.deleteMany({ instructorId: this._id });
+    const courses = await Course.find({ instructorId: this._id });
+    await Promise.all(
+        courses.map(async (element) => {
+            await element.remove();
+        })
+    );
     await Enroll.deleteMany({ studentId: this._id });
     await Score.deleteMany({ studentId: this._id });
     next();

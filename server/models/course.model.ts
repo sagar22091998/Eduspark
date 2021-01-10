@@ -49,7 +49,12 @@ courseSchema.methods.toJSON = function () {
 courseSchema.pre('remove' || 'deleteMany', async function (next) {
     await Video.deleteMany({ courseId: this._id });
     await Enroll.deleteMany({ courseId: this._id });
-    await Quiz.deleteMany({ courseId: this._id });
+    const quiz = await Quiz.find({ courseId: this._id });
+    await Promise.all(
+        quiz.map(async (element) => {
+            await element.remove();
+        })
+    );
     next();
 });
 

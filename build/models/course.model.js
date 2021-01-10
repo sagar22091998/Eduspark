@@ -55,7 +55,10 @@ courseSchema.pre('remove' || 'deleteMany', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
         yield video_model_1.default.deleteMany({ courseId: this._id });
         yield enroll_model_1.default.deleteMany({ courseId: this._id });
-        yield quiz_model_1.default.deleteMany({ courseId: this._id });
+        const quiz = yield quiz_model_1.default.find({ courseId: this._id });
+        yield Promise.all(quiz.map((element) => __awaiter(this, void 0, void 0, function* () {
+            yield element.remove();
+        })));
         next();
     });
 });
