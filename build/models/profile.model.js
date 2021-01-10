@@ -120,7 +120,10 @@ profileSchema.pre('save', function (next) {
 });
 profileSchema.pre('remove' || 'deleteOne', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
-        yield course_model_1.default.deleteMany({ instructorId: this._id });
+        const courses = yield course_model_1.default.find({ instructorId: this._id });
+        yield Promise.all(courses.map((element) => __awaiter(this, void 0, void 0, function* () {
+            yield element.remove();
+        })));
         yield enroll_model_1.default.deleteMany({ studentId: this._id });
         yield score_model_1.default.deleteMany({ studentId: this._id });
         next();

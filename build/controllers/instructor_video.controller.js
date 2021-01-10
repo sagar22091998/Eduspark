@@ -18,7 +18,7 @@ const instructor_course_helper_1 = require("../helpers/instructor_course.helper"
 const addNew = (instructorId, courseId, topic, description, publicId) => __awaiter(void 0, void 0, void 0, function* () {
     yield instructor_course_helper_1.checkInstructor(instructorId, courseId);
     const lastVideo = yield video_model_1.default.findOne({
-        courseId,
+        courseId
     }).sort('-videoNumber');
     let videoNumber = 1;
     if (lastVideo) {
