@@ -10,7 +10,6 @@ const questionSchema = new Schema(
         },
         questionNumber: {
             type: Number,
-            unique: true,
             required: true
         },
         question: {
@@ -48,6 +47,16 @@ const questionSchema = new Schema(
         versionKey: false
     }
 );
+
+questionSchema.methods.toJSON = function() {
+    const question = this!;
+    const questionObj = question.toObject();
+
+    delete questionObj._id;
+    delete questionObj.quizId;
+
+    return questionObj;
+}
 
 const Question: Model<IQuestion> = model<IQuestion>('Question', questionSchema);
 export default Question;

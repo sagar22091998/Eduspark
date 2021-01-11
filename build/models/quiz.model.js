@@ -37,13 +37,24 @@ const quizSchema = new mongoose_1.Schema({
     },
     quizNumber: {
         type: Number,
-        required: true,
-        unique: true
+        required: true
     }
 }, {
     timestamps: true,
     versionKey: false
 });
+quizSchema.virtual('questions', {
+    ref: 'Question',
+    localField: '_id',
+    foreignField: 'quizId'
+});
+quizSchema.methods.toJSON = function () {
+    const quiz = this;
+    const quizObj = quiz.toObject();
+    delete quizObj._id;
+    delete quizObj.courseId;
+    return quizObj;
+};
 quizSchema.pre('remove' || 'deleteMany', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
         yield question_model_1.default.deleteMany({ quizId: this._id });
