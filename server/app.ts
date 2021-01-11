@@ -8,6 +8,8 @@ import { connectFunc } from './config/connect';
 import profileRouter from './routes/profile.routes';
 import instructorCoursesRouter from './routes/instructor_courses.routes';
 import instructorVideosRouter from './routes/instructor_video.routes';
+import instructorQuizRouter from './routes/instructor_quiz.routes';
+import instructorQuestionRouter from './routes/instructor_question.routes';
 
 config();
 const app = express();
@@ -41,6 +43,8 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/profile', profileRouter);
 app.use('/instructor/course', instructorCoursesRouter);
 app.use('/instructor/video', instructorVideosRouter);
+app.use('/instructor/quiz', instructorQuizRouter);
+app.use('/instructor/question', instructorQuestionRouter);
 
 connectFunc(process.env.NODE_ENV === 'production');
 

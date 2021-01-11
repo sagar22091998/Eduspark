@@ -93,8 +93,7 @@ const shift = (instructorId, courseId, first, second) => __awaiter(void 0, void 
     yield firstVideo.save();
     yield secondVideo.save();
     const responseData = [];
-    responseData.push(firstVideo);
-    responseData.push(secondVideo);
+    responseData.push(firstVideo, secondVideo);
     return responseData;
 });
 exports.shift = shift;

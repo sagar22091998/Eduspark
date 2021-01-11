@@ -104,8 +104,7 @@ export const shift = async (
     await firstVideo.save();
     await secondVideo.save();
     const responseData: IVideo[] = [];
-    responseData.push(firstVideo);
-    responseData.push(secondVideo);
+    responseData.push(firstVideo, secondVideo);
     return responseData;
 };
 
