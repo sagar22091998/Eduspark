@@ -13,20 +13,22 @@ class Navbar extends Component{
   
     return(
       <div className="navbar">
-        <div className="navbar__logo"></div>
+        <Link to="/">
+          <div className="navbar__logo"></div>
+        </Link>
         <ul className="navbar__links">
-        <Link to="/"><li className={selectedPage==="" ? "activePage" : ""}>Home</li></Link>
-        <Link to="/about"><li className={selectedPage==="about" ? "activePage" : ""}>About</li></Link>
-        { !isLoggedIn ?
-          <Link to="/user/login"><li className={selectedPage==="user" ? "activePage" : ""}>Login | Register</li></Link>
-          :
-          <Fragment>
-            <Link to="/profile"><li className={selectedPage==="profile" ? "activePage" : ""}>Profile</li></Link>
-            <li onClick={logoutHandler}>Logout</li>
-            <li>My Courses</li>
-            <li>Subscriptions</li>
-          </Fragment>
-          }
+          <Link to="/"><li className={selectedPage==="" ? "activePage" : ""}>Home</li></Link>
+          <Link to="/about"><li className={selectedPage==="about" ? "activePage" : ""}>About</li></Link>
+          { !isLoggedIn ?
+            <Link to="/user/login"><li className={selectedPage==="user" ? "activePage" : ""}>Login | Register</li></Link>
+            :
+            <Fragment>
+              <Link to="/profile"><li className={selectedPage==="profile" ? "activePage" : ""}>Profile</li></Link>
+              <li onClick={logoutHandler}>Logout</li>
+              <li>My Courses</li>
+              <li>Subscriptions</li>
+            </Fragment>
+            }
         </ul>
         <ChangePasswordModal/>
         { !changeModal && <MessagePopup />}

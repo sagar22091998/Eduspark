@@ -2,13 +2,14 @@ import React, { Component , Fragment } from 'react';
 import { Redirect, Route , Switch , withRouter } from "react-router-dom";
 import { connect } from "react-redux"
 import { setSelectedPage , logoutHandler , setLoginStatus , getProfile } from "../../../actions/index"
+import MediaQuery from 'react-responsive'
 import Home from "../../Pages/Home/Home";
 import LoginRegister from "../../Pages/LoginRegister/LoginRegister"
 import About from "../../Pages/About/About"
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
 import Profile from '../../Pages/Profile/Profile';
-
+import MobileNavbar from "../../SubComponents/MobileNavbar/MobileNavbar";
 
 class MainRouter extends Component {
 
@@ -57,7 +58,12 @@ class MainRouter extends Component {
 
       return (
         <Fragment>
-          <Navbar/>
+          <MediaQuery minWidth={550}>
+            <Navbar/>
+          </MediaQuery>
+          <MediaQuery maxWidth={551}>
+            <MobileNavbar/>
+          </MediaQuery>
           <Switch>
             <Route exact path="/" component={ Home }/>
             <Route  path="/about" component={ About }/>

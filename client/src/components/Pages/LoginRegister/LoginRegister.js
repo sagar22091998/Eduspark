@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Forms from "../../SubComponents/Forms/Forms"
 import "./LoginRegister.scss"
+import { returnToTop } from '../../../utils/utilityFunctions'; 
 
 class LoginRegister extends Component{
 
   componentDidMount(){
-    window.scrollTo(0,0);
+    returnToTop();
   }
 
   render(){

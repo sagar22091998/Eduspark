@@ -94,9 +94,10 @@
   }
 }
 
-@media(max-width:500px){
+@media(max-width:550px){
   .profile{
-  
+    height: calc(100vh - 50px);
+    
     &__container{
       @include flexcenter-v;
 

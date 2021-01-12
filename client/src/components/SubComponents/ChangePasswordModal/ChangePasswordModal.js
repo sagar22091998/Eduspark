@@ -21,7 +21,7 @@ const styles = {
     position:"relative",
     border : "4px solid #000",
     width : "400px", 
-    "@media(max-width:500px)":{
+    "@media(max-width:550px)":{
       margin : "150px auto 0 auto",
       width : "300px"
     }
@@ -45,7 +45,7 @@ const styles = {
     textShadow: "1.5px 1.5px #1761a0",  
     fontSize:"2.5rem",
     margin:"1rem 0",    
-    "@media(max-width:500px)":{
+    "@media(max-width:550px)":{
       textShadow: "0px 0px",  
       fontSize:"1.25rem",
     }
@@ -66,7 +66,7 @@ const styles = {
       border :"1px solid #000",
       fontSize:"1.1rem"
     },
-    "@media(max-width:500px)":{
+    "@media(max-width:550px)":{
       fontSize:"0.85rem",
       padding : "1rem",
 
@@ -93,7 +93,7 @@ const styles = {
       background:"#000"
     },
 
-    "@media(max-width:500px)":{
+    "@media(max-width:550px)":{
       padding:"0.5rem",  
       margin: "1rem 0",
       fontSize: "0.85rem"

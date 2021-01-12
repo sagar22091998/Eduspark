@@ -29,32 +29,28 @@
       margin: 0 0.5rem;
       box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
       
-      &:hover {
-        color : #fff;
-        background:$secondary-color;
-      }
+      &:hover { background:$secondary-color; }
     }
   }
 }
 
-@media(max-width:500px){
+
+@media(max-width:768px){
   .navbar{
-    display: block;
-    
     &__logo {
-      height: 40px;
-      width: 150px;
+      height: 80px;
+      margin: 10px 0;
+      width: 140px;
       background: url(../../../images/logo.png) no-repeat center center/cover;
-      margin: 0 auto 10px auto;
     }
     &__links{
-      height: 30px;
-      padding: 10px 0;
-      
-      & li{
-        padding: 0.35rem;
-        font-size: 0.85rem;
-        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+      @include flexcenter-h;
+      padding: 0.5rem;
+  
+      & li {
+        padding: 0.5rem;
+        font-size: 1rem;
+        margin: 0 0.5rem;
       }
     }
   }

@@ -1,9 +1,11 @@
-import { SET_MESSAGE } from "../actions/actionTypes"
+import { SET_MESSAGE , SET_MOBILE_NAVBAR } from "../actions/actionTypes"
 
 const intialState = {
   statusPopup : false , 
   popupText : "" ,
-  popupType : "" 
+  popupType : "" ,
+
+  mobileDropdown : false
 }
 
 export default (state = intialState , action ) => { 
@@ -15,6 +17,11 @@ export default (state = intialState , action ) => {
         statusPopup : action.status,
         popupText : action.text,
         popupType : action.popupType 
+      }
+    case SET_MOBILE_NAVBAR :
+      return {
+        ...state,
+        mobileDropdown : action.status
       }
     default :
       return state;    

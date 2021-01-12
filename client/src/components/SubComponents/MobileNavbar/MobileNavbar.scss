@@ -1,0 +1,70 @@
+@import "../../../sass/mixins";
+
+.mobnav{
+  height: 50px;
+  background: $primary-color;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+
+  &__main{
+    @include flexcenter-h;
+    justify-content: space-between;
+    height: 100%;
+    padding-left: 1rem;
+    padding-right: 30%;
+    
+    &--menuicon{ 
+      cursor: pointer;
+      margin: 0; 
+      color: #fff;
+    }
+    
+    &--logo {
+      height: 30px;
+      width: 150px;
+      background: url(../../../images/logo.png) no-repeat center center/cover; 
+    } 
+  }
+
+  &__menu {
+    position: absolute;
+    height: calc(100vh - 50px);
+    width: 0;
+    z-index: 5;
+    visibility: hidden;
+    background: $secondary-color;
+    transition: all 0.25s ;
+
+    & svg{
+      margin: 5px 0 2.5px 10px;
+      border: 1px solid #fff;
+      visibility: hidden;
+      padding: 0rem;
+      font-size: 2rem;
+      transition: all 0.075s ;
+      cursor: pointer;
+    }
+
+    & li{
+      cursor: pointer;
+      visibility: hidden;
+      color: #fff;
+      transition: 0.5s;
+      margin: 0;
+      min-width: 150px;
+      padding: 0.75rem;
+      font-size: 1rem;
+      transition: all 0.075s ;
+      border-bottom: 2px solid #fff;
+    }
+  }
+
+  .menu--open {
+    width: 60%;
+    visibility: visible;
+
+    & li , & svg { visibility: visible; }
+  }
+}
