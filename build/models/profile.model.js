@@ -91,7 +91,7 @@ profileSchema.methods.generateAuthToken = function () {
         const _id = user._id.toString();
         const payload = { _id };
         const token = jwt.sign(payload, secret, {
-            expiresIn: '10m'
+            expiresIn: '1h'
         });
         return token;
     });

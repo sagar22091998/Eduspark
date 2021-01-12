@@ -75,7 +75,7 @@ profileSchema.methods.generateAuthToken = async function () {
     const _id: string = user._id.toString();
     const payload: IToken = { _id };
     const token: string = jwt.sign(payload, secret, {
-        expiresIn: '10m'
+        expiresIn: '1h'
     });
 
     return token;
