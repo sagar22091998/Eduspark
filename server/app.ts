@@ -10,6 +10,7 @@ import instructorCoursesRouter from './routes/instructor_courses.routes';
 import instructorVideosRouter from './routes/instructor_video.routes';
 import instructorQuizRouter from './routes/instructor_quiz.routes';
 import instructorQuestionRouter from './routes/instructor_question.routes';
+import publicCoursesRouter from './routes/public_courses.routes';
 
 config();
 const app = express();
@@ -45,10 +46,11 @@ app.use('/instructor/course', instructorCoursesRouter);
 app.use('/instructor/video', instructorVideosRouter);
 app.use('/instructor/quiz', instructorQuizRouter);
 app.use('/instructor/question', instructorQuestionRouter);
+app.use('/course', publicCoursesRouter);
 
 connectFunc(process.env.NODE_ENV === 'production');
 
-const port = process.env.PORT || 3000;
+const port: number = parseInt(process.env.PORT!) || 3000;
 const server = app.listen(port, () =>
     console.log(`Server started on port ${port}`)
 );
