@@ -48,7 +48,7 @@ const questionSchema = new Schema(
     }
 );
 
-questionSchema.methods.toJSON = function() {
+questionSchema.methods.toJSON = function () {
     const question = this!;
     const questionObj = question.toObject();
 
@@ -56,7 +56,7 @@ questionSchema.methods.toJSON = function() {
     delete questionObj.quizId;
 
     return questionObj;
-}
+};
 
 const Question: Model<IQuestion> = model<IQuestion>('Question', questionSchema);
 export default Question;

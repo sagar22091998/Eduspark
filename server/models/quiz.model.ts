@@ -41,15 +41,15 @@ quizSchema.virtual('questions', {
     foreignField: 'quizId'
 });
 
-quizSchema.methods.toJSON = function() {
+quizSchema.methods.toJSON = function () {
     const quiz = this!;
     const quizObj = quiz.toObject();
-    
+
     delete quizObj._id;
     delete quizObj.courseId;
 
     return quizObj;
-}
+};
 
 quizSchema.pre('remove' || 'deleteMany', async function (next) {
     await Question.deleteMany({ quizId: this._id });
