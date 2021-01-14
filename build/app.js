@@ -15,6 +15,7 @@ const instructor_video_routes_1 = __importDefault(require("./routes/instructor_v
 const instructor_quiz_routes_1 = __importDefault(require("./routes/instructor_quiz.routes"));
 const instructor_question_routes_1 = __importDefault(require("./routes/instructor_question.routes"));
 const public_courses_routes_1 = __importDefault(require("./routes/public_courses.routes"));
+const student_course_routes_1 = __importDefault(require("./routes/student_course.routes"));
 dotenv_1.config();
 const app = express_1.default();
 app.use(morgan_1.default('dev'));
@@ -42,6 +43,7 @@ app.use('/instructor/video', instructor_video_routes_1.default);
 app.use('/instructor/quiz', instructor_quiz_routes_1.default);
 app.use('/instructor/question', instructor_question_routes_1.default);
 app.use('/course', public_courses_routes_1.default);
+app.use('/student/course', student_course_routes_1.default);
 connect_1.connectFunc(process.env.NODE_ENV === 'production');
 const port = parseInt(process.env.PORT) || 3000;
 const server = app.listen(port, () => console.log(`Server started on port ${port}`));

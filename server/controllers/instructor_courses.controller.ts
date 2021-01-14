@@ -8,19 +8,20 @@ export const create = async (
     price: number,
     instructorId: string
 ): Promise<ICourse> => {
-    const course = new Course({
+    const course: ICourse = new Course({
         instructorId,
         name,
         description,
         price,
-        avgRatings: 0
+        avgRatings: 0,
+        isPublic: 0
     });
     await course.save();
     return course;
 };
 
 export const getAll = async (instructorId: string): Promise<ICourse[]> => {
-    const courses = await Course.find({
+    const courses: ICourse[] = await Course.find({
         instructorId
     });
     return courses;
@@ -35,11 +36,12 @@ export const getDetails = async (
     instructorId: string,
     courseId: string
 ): Promise<details> => {
-    const course = await Course.findOne({
+    const course: ICourse | null = await Course.findOne({
         instructorId,
         _id: courseId
     });
     if (!course) throw new Error('Course Not Found');
+    await course.populate({ path: 'videos', select: '-_id' }).execPopulate();
     const studentsEnrolled: number = await Enroll.countDocuments({
         courseId
     });
@@ -53,7 +55,7 @@ export const update = async (
     description: string,
     price: number
 ): Promise<ICourse> => {
-    const course = await Course.findOne({
+    const course: ICourse | null = await Course.findOne({
         instructorId,
         _id: courseId
     });
@@ -69,11 +71,26 @@ export const deleteCourse = async (
     instructorId: string,
     courseId: string
 ): Promise<ICourse> => {
-    const course = await Course.findOne({
+    const course: ICourse | null = await Course.findOne({
         instructorId,
         _id: courseId
     });
     if (!course) throw new Error('Course Not Found');
     await course.remove();
+    return course;
+};
+
+export const makeAvailable = async (
+    instructorId: string,
+    courseId: string,
+    isPublic: number
+): Promise<ICourse> => {
+    const course: ICourse | null = await Course.findOne({
+        instructorId,
+        _id: courseId
+    });
+    if (!course) throw new Error('Course Not Found');
+    course.isPublic = isPublic === 1 ? 1 : 0;
+    await course.save();
     return course;
 };

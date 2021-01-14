@@ -8,6 +8,7 @@ import {
     SUCCESS,
     INTERNAL_ERROR
 } from '../helpers/response.helper';
+import IVideo from '../interfaces/video.interface';
 
 const createHandler = async (
     req: Request,
@@ -15,7 +16,7 @@ const createHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.addNew(
+        const response: IVideo = await controllers.addNew(
             req.userId,
             req.params.courseId,
             req.body.topic,
@@ -31,7 +32,7 @@ const createHandler = async (
 const listHandler = async (req: Request, res: Response): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.getAll(
+        const response: IVideo[] = await controllers.getAll(
             req.userId,
             req.params.courseId
         );
@@ -47,7 +48,7 @@ const detailsHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.getDetails(
+        const response: IVideo = await controllers.getDetails(
             req.userId,
             req.params.courseId,
             parseInt(req.query.number!.toString())
@@ -64,7 +65,7 @@ const updateHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.update(
+        const response: IVideo = await controllers.update(
             req.userId,
             parseInt(req.query.number!.toString()),
             req.params.courseId,
@@ -81,7 +82,7 @@ const updateHandler = async (
 const shiftHandler = async (req: Request, res: Response): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.shift(
+        const response: IVideo[] = await controllers.shift(
             req.userId,
             req.params.courseId,
             req.body.firstVideo,
@@ -99,7 +100,7 @@ const deleteHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.deleteVideo(
+        const response: IVideo = await controllers.deleteVideo(
             req.userId,
             req.params.courseId,
             parseInt(req.query.number!.toString())

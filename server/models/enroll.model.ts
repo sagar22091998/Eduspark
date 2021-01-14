@@ -46,5 +46,15 @@ const enrollSchema = new Schema(
     }
 );
 
+enrollSchema.methods.toJSON = function () {
+    const enroll: IEnroll = this!;
+    const enrollObj = enroll.toObject();
+
+    delete enrollObj._id;
+    delete enrollObj.studentId;
+
+    return enrollObj;
+};
+
 const Enroll: Model<IEnroll> = model<IEnroll>('Enroll', enrollSchema);
 export default Enroll;

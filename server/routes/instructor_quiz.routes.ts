@@ -8,6 +8,7 @@ import {
     SUCCESS,
     INTERNAL_ERROR
 } from '../helpers/response.helper';
+import IQuiz from '../interfaces/quiz.interface';
 
 const createHandler = async (
     req: Request,
@@ -15,7 +16,7 @@ const createHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.create(
+        const response: IQuiz = await controllers.create(
             req.userId,
             req.params.courseId,
             req.body.topic,
@@ -31,7 +32,7 @@ const createHandler = async (
 const listHandler = async (req: Request, res: Response): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.viewAll(
+        const response: IQuiz[] = await controllers.viewAll(
             req.userId,
             req.params.courseId
         );
@@ -64,7 +65,7 @@ const updateHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.update(
+        const response: IQuiz = await controllers.update(
             req.userId,
             req.params.courseId,
             parseInt(req.query.quiz!.toString()),
@@ -81,7 +82,7 @@ const updateHandler = async (
 const shiftHandler = async (req: Request, res: Response): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.shift(
+        const response: IQuiz[] = await controllers.shift(
             req.userId,
             req.params.courseId,
             req.body.firstQuiz,
@@ -99,7 +100,7 @@ const deleteHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.deleteQuiz(
+        const response: IQuiz = await controllers.deleteQuiz(
             req.userId,
             req.params.courseId,
             parseInt(req.query.quiz!.toString())

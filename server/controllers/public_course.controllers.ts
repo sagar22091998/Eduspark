@@ -4,7 +4,7 @@ import ICourse from '../interfaces/course.interface';
 export const viewAll = async (page: number): Promise<ICourse[]> => {
     const limit = 8;
 
-    const courses = await Course.find({})
+    const courses: ICourse[] = await Course.find({ isPublic: 1 })
         .skip(page * limit)
         .limit(limit);
     return courses;
@@ -28,7 +28,7 @@ export const loggedInDetails = async (
 };
 
 export const details = async (courseId: string): Promise<ICourse> => {
-    const course = await Course.findOne({
+    const course: ICourse | null = await Course.findOne({
         _id: courseId
     });
     if (!course) throw new Error('Course not found');

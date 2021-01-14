@@ -73,18 +73,14 @@ const shift = (instructorId, courseId, first, second) => __awaiter(void 0, void 
     yield instructor_course_helper_1.checkInstructor(instructorId, courseId);
     if (first === second)
         throw new Error('Quiz should not be same');
-    const firstQuiz = yield quiz_model_1.default.findOne({
-        quizNumber: first,
-        courseId
+    const quizzes = yield quiz_model_1.default.find({
+        courseId,
+        quizNumber: { $in: [first, second] }
     });
-    if (!firstQuiz)
+    if (quizzes.length !== 2)
         throw new Error('Quiz not found');
-    const secondQuiz = yield quiz_model_1.default.findOne({
-        quizNumber: second,
-        courseId
-    });
-    if (!secondQuiz)
-        throw new Error('Quiz not found');
+    const firstQuiz = quizzes[0];
+    const secondQuiz = quizzes[1];
     [firstQuiz.quizNumber, secondQuiz.quizNumber] = [
         secondQuiz.quizNumber,
         firstQuiz.quizNumber

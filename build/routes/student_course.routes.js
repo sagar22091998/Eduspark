@@ -32,36 +32,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const controllers = __importStar(require("../controllers/instructor_courses.controller"));
+const controllers = __importStar(require("../controllers/student_course.controller"));
+const response_helper_1 = require("../helpers/response.helper");
 const auth_middleware_1 = require("../middleware/auth.middleware");
 const request_helper_1 = __importDefault(require("../helpers/request.helper"));
-const response_helper_1 = require("../helpers/response.helper");
-const router = express_1.Router();
-const createHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const purchaseHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         request_helper_1.default(req);
-        const response = yield controllers.create(req.body.name, req.body.description, req.body.price, req.userId);
-        return response_helper_1.CREATE(res, response, 'Created Course Successfully');
+        const response = yield controllers.purchaseCourse(req.userId, req.body.courseId);
+        return response_helper_1.CREATE(res, response, 'Course added successfully');
     }
     catch (err) {
         return response_helper_1.BAD_REQUEST(res, err.message);
     }
 });
-const getAllHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const subscribedHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         request_helper_1.default(req);
-        const response = yield controllers.getAll(req.userId);
-        return response_helper_1.SUCCESS(res, response, 'Instructor Courses Sent');
+        const response = yield controllers.purchasedCourses(req.userId);
+        return response_helper_1.SUCCESS(res, response, 'Viewed purchased courses');
     }
     catch (err) {
         return response_helper_1.BAD_REQUEST(res, err.message);
     }
 });
-const getDetailsHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const progressHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         request_helper_1.default(req);
-        const response = yield controllers.getDetails(req.userId, req.params.id);
-        return response_helper_1.SUCCESS(res, response, 'Course Details viewed');
+        const response = yield controllers.getProgress(req.userId, req.params.courseId);
+        return response_helper_1.SUCCESS(res, response, 'Course progress shown');
     }
     catch (err) {
         return response_helper_1.BAD_REQUEST(res, err.message);
@@ -70,38 +69,17 @@ const getDetailsHandler = (req, res) => __awaiter(void 0, void 0, void 0, functi
 const updateHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         request_helper_1.default(req);
-        const response = yield controllers.update(req.userId, req.params.id, req.body.name, req.body.description, req.body.price);
-        return response_helper_1.SUCCESS(res, response, 'Details Updated Successfully');
-    }
-    catch (error) {
-        return response_helper_1.BAD_REQUEST(res, error.message);
-    }
-});
-const deleteHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        request_helper_1.default(req);
-        const response = yield controllers.deleteCourse(req.userId, req.params.id);
-        return response_helper_1.SUCCESS(res, response, 'Deleted Course Successfully');
-    }
-    catch (error) {
-        return response_helper_1.INTERNAL_ERROR(res, error.message);
-    }
-});
-const publicHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        request_helper_1.default(req);
-        const response = yield controllers.makeAvailable(req.userId, req.params.id, req.body.isPublic);
-        return response_helper_1.SUCCESS(res, response, 'Successfully changed visibility');
+        const response = yield controllers.updateProgress(req.userId, req.params.courseId, req.body.videoProgress);
+        return response_helper_1.SUCCESS(res, response, 'Course progress updated');
     }
     catch (err) {
         return response_helper_1.BAD_REQUEST(res, err.message);
     }
 });
-router.post('/create', [auth_middleware_1.verifyToken], createHandler);
-router.get('/list', [auth_middleware_1.verifyToken], getAllHandler);
-router.get('/details/:id', [auth_middleware_1.verifyToken], getDetailsHandler);
-router.put('/change-visibility/:id', [auth_middleware_1.verifyToken], publicHandler);
-router.put('/update/:id', [auth_middleware_1.verifyToken], updateHandler);
-router.delete('/delete/:id', [auth_middleware_1.verifyToken], deleteHandler);
+const router = express_1.Router();
+router.get('/subscribed', auth_middleware_1.verifyToken, subscribedHandler);
+router.post('/purchase', auth_middleware_1.verifyToken, purchaseHandler);
+router.get('/progress/:courseId', auth_middleware_1.verifyToken, progressHandler);
+router.put('/progress/:courseId', auth_middleware_1.verifyToken, updateHandler);
 exports.default = router;
-//# sourceMappingURL=instructor_courses.routes.js.map
+//# sourceMappingURL=student_course.routes.js.map

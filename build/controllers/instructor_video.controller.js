@@ -74,18 +74,14 @@ const shift = (instructorId, courseId, first, second) => __awaiter(void 0, void 
     yield instructor_course_helper_1.checkInstructor(instructorId, courseId);
     if (first === second)
         throw new Error('Videos should not be same');
-    const firstVideo = yield video_model_1.default.findOne({
-        videoNumber: first,
-        courseId
+    const videos = yield video_model_1.default.find({
+        courseId,
+        videoNumber: { $in: [first, second] }
     });
-    if (!firstVideo)
+    if (videos.length !== 2)
         throw new Error('Video not found');
-    const secondVideo = yield video_model_1.default.findOne({
-        videoNumber: second,
-        courseId
-    });
-    if (!secondVideo)
-        throw new Error('Video not found');
+    const firstVideo = videos[0];
+    const secondVideo = videos[1];
     [firstVideo.videoNumber, secondVideo.videoNumber] = [
         secondVideo.videoNumber,
         firstVideo.videoNumber
