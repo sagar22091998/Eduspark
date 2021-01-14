@@ -1,10 +1,11 @@
+import ICourse from '../interfaces/course.interface';
 import Course from '../models/course.model';
 
 export const checkInstructor = async (
     instructorId: string,
     courseId: string
 ): Promise<string> => {
-    const course = await Course.findOne({
+    const course: ICourse | null = await Course.findOne({
         instructorId,
         _id: courseId
     });

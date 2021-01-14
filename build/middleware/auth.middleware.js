@@ -39,7 +39,8 @@ const request_helper_1 = __importDefault(require("../helpers/request.helper"));
 const verifyToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
-        const token = (_a = req.header('Authorization')) === null || _a === void 0 ? void 0 : _a.replace('Bearer ', '');
+        const token = (_a = req
+            .header('Authorization')) === null || _a === void 0 ? void 0 : _a.replace('Bearer ', '');
         const secret = process.env.JWT_SECRET;
         const decoded = jwt.verify(token, secret);
         if (!decoded)
@@ -58,7 +59,9 @@ exports.verifyToken = verifyToken;
 const verifyUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         request_helper_1.default(req);
-        const profile = yield profile_model_1.default.findOne({ _id: req.userId });
+        const profile = yield profile_model_1.default.findOne({
+            _id: req.userId
+        });
         if (!profile)
             throw new Error('User not found');
         req.profile = profile;

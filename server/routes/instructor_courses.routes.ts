@@ -8,6 +8,7 @@ import {
     SUCCESS,
     INTERNAL_ERROR
 } from '../helpers/response.helper';
+import ICourse from '../interfaces/course.interface';
 
 const router: Router = Router();
 
@@ -17,7 +18,7 @@ const createHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.create(
+        const response: ICourse = await controllers.create(
             req.body.name,
             req.body.description,
             req.body.price,
@@ -35,7 +36,7 @@ const getAllHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.getAll(req.userId);
+        const response: ICourse[] = await controllers.getAll(req.userId);
         return SUCCESS(res, response, 'Instructor Courses Sent');
     } catch (err) {
         return BAD_REQUEST(res, err.message);
@@ -64,7 +65,7 @@ const updateHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.update(
+        const response: ICourse = await controllers.update(
             req.userId,
             req.params.id,
             req.body.name,
@@ -83,7 +84,7 @@ const deleteHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.deleteCourse(
+        const response: ICourse = await controllers.deleteCourse(
             req.userId,
             req.params.id
         );

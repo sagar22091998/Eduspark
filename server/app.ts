@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, Express } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import { config } from 'dotenv';
@@ -13,7 +13,7 @@ import instructorQuestionRouter from './routes/instructor_question.routes';
 import publicCoursesRouter from './routes/public_courses.routes';
 
 config();
-const app = express();
+const app: Express = express();
 
 app.use(morgan('dev'));
 

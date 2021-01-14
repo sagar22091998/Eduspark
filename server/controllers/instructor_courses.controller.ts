@@ -8,7 +8,7 @@ export const create = async (
     price: number,
     instructorId: string
 ): Promise<ICourse> => {
-    const course = new Course({
+    const course: ICourse = new Course({
         instructorId,
         name,
         description,
@@ -20,7 +20,7 @@ export const create = async (
 };
 
 export const getAll = async (instructorId: string): Promise<ICourse[]> => {
-    const courses = await Course.find({
+    const courses: ICourse[] = await Course.find({
         instructorId
     });
     return courses;
@@ -35,7 +35,7 @@ export const getDetails = async (
     instructorId: string,
     courseId: string
 ): Promise<details> => {
-    const course = await Course.findOne({
+    const course: ICourse | null = await Course.findOne({
         instructorId,
         _id: courseId
     });
@@ -53,7 +53,7 @@ export const update = async (
     description: string,
     price: number
 ): Promise<ICourse> => {
-    const course = await Course.findOne({
+    const course: ICourse | null = await Course.findOne({
         instructorId,
         _id: courseId
     });
@@ -69,7 +69,7 @@ export const deleteCourse = async (
     instructorId: string,
     courseId: string
 ): Promise<ICourse> => {
-    const course = await Course.findOne({
+    const course: ICourse | null = await Course.findOne({
         instructorId,
         _id: courseId
     });
