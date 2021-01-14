@@ -5,7 +5,6 @@ export default interface IProfileModel extends Document {
     email: string;
     password: string;
     mobileNumber: string;
-    profileType: number;
     createdAt: Date;
     updatedAt: Date;
 }

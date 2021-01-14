@@ -9,7 +9,6 @@ const questionSchema = new mongoose_1.Schema({
     },
     questionNumber: {
         type: Number,
-        unique: true,
         required: true
     },
     question: {
@@ -42,8 +41,16 @@ const questionSchema = new mongoose_1.Schema({
         required: true
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    versionKey: false
 });
+questionSchema.methods.toJSON = function () {
+    const question = this;
+    const questionObj = question.toObject();
+    delete questionObj._id;
+    delete questionObj.quizId;
+    return questionObj;
+};
 const Question = mongoose_1.model('Question', questionSchema);
 exports.default = Question;
 //# sourceMappingURL=question.model.js.map

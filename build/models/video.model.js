@@ -16,7 +16,7 @@ const videoSchema = new mongoose_1.Schema({
         type: String,
         trim: true
     },
-    videoURL: {
+    publicId: {
         type: String,
         trim: true,
         required: true
@@ -31,8 +31,16 @@ const videoSchema = new mongoose_1.Schema({
         default: 0
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    versionKey: false
 });
+videoSchema.methods.toJSON = function () {
+    const video = this;
+    const videoObject = video.toObject();
+    delete videoObject._id;
+    delete videoObject.courseId;
+    return videoObject;
+};
 const Video = mongoose_1.model('Video', videoSchema);
 exports.default = Video;
 //# sourceMappingURL=video.model.js.map

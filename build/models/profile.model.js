@@ -50,7 +50,7 @@ const profileSchema = new mongoose_1.Schema({
         unique: true,
         validate(value) {
             if (!validator_1.default.isEmail(value)) {
-                throw new Error('Email is invalid');
+                throw new mongoose_1.Error('Email is invalid');
             }
         }
     },
@@ -61,7 +61,7 @@ const profileSchema = new mongoose_1.Schema({
         trim: true,
         validate(value) {
             if (value.toLowerCase().includes('password')) {
-                throw new Error('Password cannot contain "password"');
+                throw new mongoose_1.Error('Password cannot contain "password"');
             }
         }
     },
@@ -72,11 +72,6 @@ const profileSchema = new mongoose_1.Schema({
         unique: true,
         minlength: 10,
         maxlength: 10
-    },
-    profileType: {
-        type: Number,
-        required: true,
-        default: 0
     }
 }, {
     timestamps: true,
@@ -94,10 +89,9 @@ profileSchema.methods.generateAuthToken = function () {
         const user = this;
         const secret = process.env.JWT_SECRET;
         const _id = user._id.toString();
-        const profileType = user.profileType;
-        const payload = { _id, profileType };
+        const payload = { _id };
         const token = jwt.sign(payload, secret, {
-            expiresIn: '10m'
+            expiresIn: '1h'
         });
         return token;
     });
@@ -106,11 +100,11 @@ profileSchema.statics.findByCredentials = function (email, password) {
     return __awaiter(this, void 0, void 0, function* () {
         const profile = yield Profile.findOne({ email });
         if (!profile) {
-            throw new Error('Unable to Login');
+            throw new mongoose_1.Error('Unable to Login');
         }
         const isMatch = yield bcrypt.compare(password, profile.password);
         if (!isMatch) {
-            throw new Error('Unable to Login');
+            throw new mongoose_1.Error('Unable to Login');
         }
         return profile;
     });
@@ -126,7 +120,10 @@ profileSchema.pre('save', function (next) {
 });
 profileSchema.pre('remove' || 'deleteOne', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
-        yield course_model_1.default.deleteMany({ instructorId: this._id });
+        const courses = yield course_model_1.default.find({ instructorId: this._id });
+        yield Promise.all(courses.map((element) => __awaiter(this, void 0, void 0, function* () {
+            yield element.remove();
+        })));
         yield enroll_model_1.default.deleteMany({ studentId: this._id });
         yield score_model_1.default.deleteMany({ studentId: this._id });
         next();

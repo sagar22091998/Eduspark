@@ -26,14 +26,30 @@ const quizSchema = new Schema(
         },
         quizNumber: {
             type: Number,
-            required: true,
-            unique: true
+            required: true
         }
     },
     {
-        timestamps: true
+        timestamps: true,
+        versionKey: false
     }
 );
+
+quizSchema.virtual('questions', {
+    ref: 'Question',
+    localField: '_id',
+    foreignField: 'quizId'
+});
+
+quizSchema.methods.toJSON = function () {
+    const quiz = this!;
+    const quizObj = quiz.toObject();
+
+    delete quizObj._id;
+    delete quizObj.courseId;
+
+    return quizObj;
+};
 
 quizSchema.pre('remove' || 'deleteMany', async function (next) {
     await Question.deleteMany({ quizId: this._id });

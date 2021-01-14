@@ -1,4 +1,4 @@
-import { Schema, model, Model } from 'mongoose';
+import { Schema, model, Model, Error } from 'mongoose';
 import validator from 'validator';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
@@ -43,11 +43,6 @@ const profileSchema: Schema = new Schema(
             unique: true,
             minlength: 10,
             maxlength: 10
-        },
-        profileType: {
-            type: Number,
-            required: true,
-            default: 0
         }
     },
     {
@@ -78,10 +73,9 @@ profileSchema.methods.generateAuthToken = async function () {
     const user = this!;
     const secret: string = process.env.JWT_SECRET!;
     const _id: string = user._id.toString();
-    const profileType: number = user.profileType;
-    const payload: IToken = { _id, profileType };
+    const payload: IToken = { _id };
     const token: string = jwt.sign(payload, secret, {
-        expiresIn: '10m'
+        expiresIn: '1h'
     });
 
     return token;
@@ -111,7 +105,12 @@ profileSchema.pre('save', async function (this: IProfileModel, next) {
 });
 
 profileSchema.pre('remove' || 'deleteOne', async function (next) {
-    await Course.deleteMany({ instructorId: this._id });
+    const courses = await Course.find({ instructorId: this._id });
+    await Promise.all(
+        courses.map(async (element) => {
+            await element.remove();
+        })
+    );
     await Enroll.deleteMany({ studentId: this._id });
     await Score.deleteMany({ studentId: this._id });
     next();

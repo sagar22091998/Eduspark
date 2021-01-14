@@ -17,7 +17,7 @@ const videoSchema = new Schema(
             type: String,
             trim: true
         },
-        videoURL: {
+        publicId: {
             type: String,
             trim: true,
             required: true
@@ -33,9 +33,18 @@ const videoSchema = new Schema(
         }
     },
     {
-        timestamps: true
+        timestamps: true,
+        versionKey: false
     }
 );
+
+videoSchema.methods.toJSON = function () {
+    const video = this!;
+    const videoObject = video.toObject();
+    delete videoObject._id;
+    delete videoObject.courseId;
+    return videoObject;
+};
 
 const Video: Model<IVideo> = model<IVideo>('Video', videoSchema);
 export default Video;

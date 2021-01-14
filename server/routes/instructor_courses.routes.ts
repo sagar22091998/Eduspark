@@ -1,7 +1,6 @@
 import { Router, Request, Response } from 'express';
-import * as controllers from '../controllers/instructor.courses.controller';
+import * as controllers from '../controllers/instructor_courses.controller';
 import { verifyToken } from '../middleware/auth.middleware';
-import { verifyInstructor } from '../middleware/profile.middleware';
 import assertIRequest from '../helpers/request.helper';
 import {
     BAD_REQUEST,
@@ -94,10 +93,10 @@ const deleteHandler = async (
     }
 };
 
-router.post('/create', [verifyToken, verifyInstructor], createHandler);
-router.get('/list', [verifyToken, verifyInstructor], getAllHandler);
-router.get('/details/:id', [verifyToken, verifyInstructor], getDetailsHandler);
-router.put('/update/:id', [verifyToken, verifyInstructor], updateHandler);
-router.delete('/delete/:id', [verifyToken, verifyInstructor], deleteHandler);
+router.post('/create', [verifyToken], createHandler);
+router.get('/list', [verifyToken], getAllHandler);
+router.get('/details/:id', [verifyToken], getDetailsHandler);
+router.put('/update/:id', [verifyToken], updateHandler);
+router.delete('/delete/:id', [verifyToken], deleteHandler);
 
 export default router;
