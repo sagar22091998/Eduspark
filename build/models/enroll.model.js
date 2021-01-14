@@ -42,6 +42,13 @@ const enrollSchema = new mongoose_1.Schema({
     timestamps: true,
     versionKey: false
 });
+enrollSchema.methods.toJSON = function () {
+    const enroll = this;
+    const enrollObj = enroll.toObject();
+    delete enrollObj._id;
+    delete enrollObj.studentId;
+    return enrollObj;
+};
 const Enroll = mongoose_1.model('Enroll', enrollSchema);
 exports.default = Enroll;
 //# sourceMappingURL=enroll.model.js.map

@@ -11,6 +11,7 @@ import instructorVideosRouter from './routes/instructor_video.routes';
 import instructorQuizRouter from './routes/instructor_quiz.routes';
 import instructorQuestionRouter from './routes/instructor_question.routes';
 import publicCoursesRouter from './routes/public_courses.routes';
+import studentCoursesRouter from './routes/student_course.routes';
 
 config();
 const app: Express = express();
@@ -47,6 +48,7 @@ app.use('/instructor/video', instructorVideosRouter);
 app.use('/instructor/quiz', instructorQuizRouter);
 app.use('/instructor/question', instructorQuestionRouter);
 app.use('/course', publicCoursesRouter);
+app.use('/student/course', studentCoursesRouter);
 
 connectFunc(process.env.NODE_ENV === 'production');
 
