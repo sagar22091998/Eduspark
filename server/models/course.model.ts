@@ -29,6 +29,11 @@ const courseSchema = new Schema(
             type: Number,
             required: true,
             default: 0
+        },
+        isPublic: {
+            type: Number,
+            required: true,
+            default: 0
         }
     },
     {

@@ -94,9 +94,27 @@ const deleteHandler = async (
     }
 };
 
+const publicHandler = async (
+    req: Request,
+    res: Response
+): Promise<Response> => {
+    try {
+        assertIRequest(req);
+        const response: ICourse = await controllers.makeAvailable(
+            req.userId,
+            req.params.id,
+            req.body.isPublic
+        );
+        return SUCCESS(res, response, 'Successfully changed visibility');
+    } catch (err) {
+        return BAD_REQUEST(res, err.message);
+    }
+};
+
 router.post('/create', [verifyToken], createHandler);
 router.get('/list', [verifyToken], getAllHandler);
 router.get('/details/:id', [verifyToken], getDetailsHandler);
+router.put('/change-visibility/:id', [verifyToken], publicHandler);
 router.put('/update/:id', [verifyToken], updateHandler);
 router.delete('/delete/:id', [verifyToken], deleteHandler);
 

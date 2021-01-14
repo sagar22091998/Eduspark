@@ -4,7 +4,7 @@ import ICourse from '../interfaces/course.interface';
 export const viewAll = async (page: number): Promise<ICourse[]> => {
     const limit = 8;
 
-    const courses: ICourse[] = await Course.find({})
+    const courses: ICourse[] = await Course.find({ isPublic: 1 })
         .skip(page * limit)
         .limit(limit);
     return courses;

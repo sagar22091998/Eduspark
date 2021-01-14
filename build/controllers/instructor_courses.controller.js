@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCourse = exports.update = exports.getDetails = exports.getAll = exports.create = void 0;
+exports.makeAvailable = exports.deleteCourse = exports.update = exports.getDetails = exports.getAll = exports.create = void 0;
 const enroll_model_1 = __importDefault(require("../models/enroll.model"));
 const course_model_1 = __importDefault(require("../models/course.model"));
 const create = (name, description, price, instructorId) => __awaiter(void 0, void 0, void 0, function* () {
@@ -21,7 +21,8 @@ const create = (name, description, price, instructorId) => __awaiter(void 0, voi
         name,
         description,
         price,
-        avgRatings: 0
+        avgRatings: 0,
+        isPublic: 0
     });
     yield course.save();
     return course;
@@ -73,4 +74,16 @@ const deleteCourse = (instructorId, courseId) => __awaiter(void 0, void 0, void 
     return course;
 });
 exports.deleteCourse = deleteCourse;
+const makeAvailable = (instructorId, courseId, isPublic) => __awaiter(void 0, void 0, void 0, function* () {
+    const course = yield course_model_1.default.findOne({
+        instructorId,
+        _id: courseId
+    });
+    if (!course)
+        throw new Error('Course Not Found');
+    course.isPublic = isPublic === 1 ? 1 : 0;
+    yield course.save();
+    return course;
+});
+exports.makeAvailable = makeAvailable;
 //# sourceMappingURL=instructor_courses.controller.js.map

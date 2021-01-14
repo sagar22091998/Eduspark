@@ -16,7 +16,7 @@ exports.details = exports.loggedInDetails = exports.viewAll = void 0;
 const course_model_1 = __importDefault(require("../models/course.model"));
 const viewAll = (page) => __awaiter(void 0, void 0, void 0, function* () {
     const limit = 8;
-    const courses = yield course_model_1.default.find({})
+    const courses = yield course_model_1.default.find({ isPublic: 1 })
         .skip(page * limit)
         .limit(limit);
     return courses;

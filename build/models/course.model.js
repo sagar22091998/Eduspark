@@ -40,6 +40,11 @@ const courseSchema = new mongoose_1.Schema({
         type: Number,
         required: true,
         default: 0
+    },
+    isPublic: {
+        type: Number,
+        required: true,
+        default: 0
     }
 }, {
     timestamps: true,
@@ -49,7 +54,7 @@ const courseSchema = new mongoose_1.Schema({
 courseSchema.virtual('videos', {
     ref: 'Video',
     localField: '_id',
-    foreignField: 'courseId',
+    foreignField: 'courseId'
 });
 courseSchema.methods.toJSON = function () {
     const course = this;

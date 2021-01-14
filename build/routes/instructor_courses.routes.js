@@ -87,9 +87,20 @@ const deleteHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         return response_helper_1.INTERNAL_ERROR(res, error.message);
     }
 });
+const publicHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        request_helper_1.default(req);
+        const response = yield controllers.makeAvailable(req.userId, req.params.id, req.body.isPublic);
+        return response_helper_1.SUCCESS(res, response, 'Successfully changed visibility');
+    }
+    catch (err) {
+        return response_helper_1.BAD_REQUEST(res, err.message);
+    }
+});
 router.post('/create', [auth_middleware_1.verifyToken], createHandler);
 router.get('/list', [auth_middleware_1.verifyToken], getAllHandler);
 router.get('/details/:id', [auth_middleware_1.verifyToken], getDetailsHandler);
+router.put('/change-visibility/:id', [auth_middleware_1.verifyToken], publicHandler);
 router.put('/update/:id', [auth_middleware_1.verifyToken], updateHandler);
 router.delete('/delete/:id', [auth_middleware_1.verifyToken], deleteHandler);
 exports.default = router;
