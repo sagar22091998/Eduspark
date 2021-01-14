@@ -41,6 +41,7 @@ const getDetails = (instructorId, courseId) => __awaiter(void 0, void 0, void 0,
     });
     if (!course)
         throw new Error('Course Not Found');
+    yield course.populate({ path: 'videos', select: '-_id' }).execPopulate();
     const studentsEnrolled = yield enroll_model_1.default.countDocuments({
         courseId
     });

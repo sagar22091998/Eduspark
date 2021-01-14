@@ -29,7 +29,7 @@ const purchaseCourse = (studentId, courseId) => __awaiter(void 0, void 0, void 0
         courseId
     });
     if (alreadyEnrolled)
-        throw new Error("Already enrolled in the course");
+        throw new Error('Already enrolled in the course');
     const enroll = new enroll_model_1.default({
         studentId,
         courseId: courseId,

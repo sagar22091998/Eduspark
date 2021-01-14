@@ -40,6 +40,7 @@ export const getDetails = async (
         _id: courseId
     });
     if (!course) throw new Error('Course Not Found');
+    await course.populate({ path: 'videos', select: '-_id' }).execPopulate();
     const studentsEnrolled: number = await Enroll.countDocuments({
         courseId
     });

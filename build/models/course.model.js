@@ -43,7 +43,13 @@ const courseSchema = new mongoose_1.Schema({
     }
 }, {
     timestamps: true,
-    versionKey: false
+    versionKey: false,
+    toObject: { virtuals: true }
+});
+courseSchema.virtual('videos', {
+    ref: 'Video',
+    localField: '_id',
+    foreignField: 'courseId',
 });
 courseSchema.methods.toJSON = function () {
     const course = this;
