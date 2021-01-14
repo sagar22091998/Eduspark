@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MainRouter from "./components/SubComponents/MainRouter/MainRouter"
+import MainRouter from "./components/MainRouter/MainRouter"
 
 //Redux
 import { Provider } from "react-redux"

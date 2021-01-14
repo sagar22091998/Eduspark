@@ -2,30 +2,42 @@ import React, { Component } from 'react'
 import { returnToTop } from '../../../utils/utilityFunctions';
 import "./MyCourses.scss"
 import { connect } from "react-redux"
-import { } from "../../../actions/index"
+import { setAddModal , getCoursesList } from "../../../actions/index"
+import CourseStrip from "../../SubComponents/CourseStrip/CourseStrip"
+import AddCourse from "../../SubComponents/AddCourse/AddCourse"
+import DeleteModal from "../../SubComponents/DeleteModal/DeleteModal"
+import EditDetails from "../../SubComponents/EditDetails/EditDetails"
+import AssignmentReturnedIcon from '@material-ui/icons/AssignmentReturned';
 
-// background: linear-gradient(90deg, rgba(23,97,160,1) 13%, rgba(37,41,46,1) 65%);
 class MyCourses extends Component {
 
   componentDidMount() {
     returnToTop();
+    this.props.getCoursesList();
   }
 
   render() {
+    const { setAddModal , coursesList , coursesLoading } = this.props;
+
     return (
       <div className="courses">
         <div className="courses__container">
           <h1 className="courses__container--head">My Courses</h1>
-          <button className="courses__container--add">Add Your New Course</button>
-          {true ? 
-          <p className="courses__container--empty">No Courses Added</p>
-            :
-          <div className="courses__container--list">
-
-
-          </div>
+          <button className="courses__container--add" onClick={()=>setAddModal(true)}>Add Your New Course</button>
+          { 
+            coursesLoading ? <h1>Tatti</h1> :
+            coursesList.length === 0 ? 
+            <p className="courses__container--empty">No Courses Added yet.</p>
+              :
+            <div className="courses__container--list">
+              <h2 className="courses__container--list--head">Added Courses<AssignmentReturnedIcon/></h2>
+              {coursesList.map( course => <CourseStrip key={course._id} title={course.name} desc={course.description} price={String(course.price)} courseId={course._id}/>)}
+            </div>
           }
-        </div> 
+        </div>
+        <AddCourse/>
+        <DeleteModal/> 
+        <EditDetails/> 
       </div>
     )
   }
@@ -33,20 +45,15 @@ class MyCourses extends Component {
 
 const mapStatesToProps = (state) => { 
   return {
-    selectedPage : state.auth.selectedPage,
-    isLoggedIn : state.auth.isLoggedIn,
-    changeModal : state.profile.changeModal,
-    mobileDropdown : state.common.mobileDropdown,
+    coursesList : state.courses.coursesList,
+    coursesLoading : state.courses.coursesLoading,
   }
 } 
 
 const mapDispatchToProps = (dispatch) => { 
   return {
-    setPopup : (status,text,popupType) => dispatch(setPopup(status,text,popupType)),
-    setLoginStatus : (status) => dispatch(setLoginStatus(status)),
-    setMobileDropdown : (status) => dispatch(setMobileDropdown(status)),
-    logoutHandler : () => dispatch(logoutHandler())
-    
+    setAddModal : (status) => dispatch(setAddModal(status)),
+    getCoursesList : () => dispatch(getCoursesList())    
   }
 }
 

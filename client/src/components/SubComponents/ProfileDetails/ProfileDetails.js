@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import { setProfileFields , editProfileFields , updateProfile , setPopup , setChangeModal } from "../../../actions/index"
+import ChangePasswordModal from '../ChangePasswordModal/ChangePasswordModal'
 import { isEmpty } from "../../../utils/validators"
 import isEmail from "validator/es/lib/isEmail"
 import isMobilePhone from "validator/es/lib/isMobilePhone"
@@ -66,6 +67,7 @@ class ProfileDetails extends Component {
           <button className="details__btns--reset" onClick={ () => setChangeModal(true) }>Reset Password</button>
           <button className="details__btns--update" onClick={this.handleUpdate} disabled={ profileName=== newName && profileEmail=== newEmail && profileMobile=== newMobile }>Update</button>
         </div>
+        <ChangePasswordModal/>
       </div>
     )
   }

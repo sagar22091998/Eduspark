@@ -33,7 +33,7 @@ class MessagePopup extends Component {
       <Snackbar
         open={statusPopup} 
         onClose={() => setPopup(false,popupText,popupType)} 
-        autoHideDuration={3500}
+        autoHideDuration={2500}
         >
         <Alert severity={popupType}>
           <div style={style}>

@@ -46,7 +46,7 @@ export const loginHandler = ( credentials ) => async ( dispatch ) => {
     dispatch(setLoginStatus(true));
     
     //Expiration Time Calculation
-    const remainingMilliseconds = 60 * 9 * 1000;
+    const remainingMilliseconds = 60 * 58 * 1000; //58 minutes
     const expiryDate = new Date (
       new Date().getTime() + remainingMilliseconds
     );

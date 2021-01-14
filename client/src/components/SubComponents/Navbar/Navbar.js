@@ -4,12 +4,11 @@ import { connect } from "react-redux"
 import { logoutHandler , setPopup , setLoginStatus } from "../../../actions/index"
 import "./Navbar.scss"
 import MessagePopup from "../MessagePopup/MessagePopup"
-import ChangePasswordModal from "../../SubComponents/ChangePasswordModal/ChangePasswordModal"
 
 class Navbar extends Component{
 
   render(){
-    const { selectedPage , logoutHandler , isLoggedIn , changeModal } = this.props;
+    const { selectedPage , logoutHandler , isLoggedIn , changeModal , addModal , editModal } = this.props;
   
     return(
       <div className="navbar">
@@ -24,25 +23,25 @@ class Navbar extends Component{
             :
             <Fragment>
               <Link to="/profile"><li className={selectedPage==="profile" ? "activePage" : ""}>Profile</li></Link>
-              <li onClick={logoutHandler}>Logout</li>
-              <li>My Courses</li>
+              <Link to="/mycourses"><li className={selectedPage==="mycourses" ? "activePage" : ""} >My Courses</li></Link>
               <li>Subscriptions</li>
+              <li onClick={logoutHandler}>Logout</li>
             </Fragment>
             }
         </ul>
-        <ChangePasswordModal/>
-        { !changeModal && <MessagePopup />}
+        { !editModal && !changeModal && !addModal && <MessagePopup />}
       </div>
     );
   }
-
 }
 
 const mapStatesToProps = (state) => { 
   return {
     selectedPage : state.auth.selectedPage,
     isLoggedIn : state.auth.isLoggedIn,
-    changeModal : state.profile.changeModal
+    editModal : state.courses.editModal, 
+    changeModal : state.profile.changeModal,
+    addModal : state.courses.addModal,
   }
 } 
 

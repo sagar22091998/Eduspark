@@ -4,7 +4,6 @@ import { connect } from "react-redux"
 import { logoutHandler , setPopup , setLoginStatus , setMobileDropdown } from "../../../actions/index"
 import "./MobileNavbar.scss"
 import MessagePopup from "../MessagePopup/MessagePopup"
-import ChangePasswordModal from "../../SubComponents/ChangePasswordModal/ChangePasswordModal"
 
 //Material UI
 import MenuIcon from '@material-ui/icons/Menu';
@@ -13,7 +12,7 @@ import CloseIcon from '@material-ui/icons/Close';
 class MobileNavbar extends Component {
 
   render() {
-    const { selectedPage , logoutHandler , isLoggedIn , changeModal , mobileDropdown , setMobileDropdown } = this.props;
+    const { selectedPage , logoutHandler , isLoggedIn , changeModal , mobileDropdown , setMobileDropdown , addModal , editModal } = this.props;
 
     return (
       <div className="mobnav">
@@ -34,13 +33,12 @@ class MobileNavbar extends Component {
                 // setMobileDropdown(false)
                 logoutHandler()
               }}>Logout</li>
-              <li onClick={() => { setMobileDropdown(false)}}>My Courses</li>
+              <Link to="/mycourses" onClick={() => { setMobileDropdown(false)}}><li className={selectedPage==="mycourses" ? "activePage" : ""} >My Courses</li></Link>
               <li onClick={() => { setMobileDropdown(false)}}>Subscriptions</li>
             </Fragment>
           }
         </ul>
-        <ChangePasswordModal/>
-        { !changeModal && <MessagePopup />}
+        { !editModal && !addModal && !changeModal && <MessagePopup />}
       </div>
     )
   }
@@ -50,8 +48,10 @@ const mapStatesToProps = (state) => {
   return {
     selectedPage : state.auth.selectedPage,
     isLoggedIn : state.auth.isLoggedIn,
+    editModal : state.courses.editModal ,
     changeModal : state.profile.changeModal,
     mobileDropdown : state.common.mobileDropdown,
+    addModal : state.courses.addModal
   }
 } 
 
