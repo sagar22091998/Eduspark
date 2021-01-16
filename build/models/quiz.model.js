@@ -41,7 +41,8 @@ const quizSchema = new mongoose_1.Schema({
     }
 }, {
     timestamps: true,
-    versionKey: false
+    versionKey: false,
+    toObject: { virtuals: true }
 });
 quizSchema.virtual('questions', {
     ref: 'Question',
@@ -53,6 +54,7 @@ quizSchema.methods.toJSON = function () {
     const quizObj = quiz.toObject();
     delete quizObj._id;
     delete quizObj.courseId;
+    delete quizObj.id;
     return quizObj;
 };
 quizSchema.pre('remove' || 'deleteMany', function (next) {
