@@ -48,9 +48,9 @@ export const getDetails = async (
     const quiz: IQuiz | null = await Quiz.findOne({
         courseId,
         quizNumber
-    })
-        .populate('questions')
-        .exec();
+    });
+    if(!quiz) throw new Error("Quiz not found");
+    await quiz.populate({path: 'questions', select: '-_id'}).execPopulate();
     return quiz;
 };
 
