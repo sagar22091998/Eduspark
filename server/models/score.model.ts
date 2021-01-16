@@ -33,5 +33,16 @@ const scoreSchema = new Schema(
     }
 );
 
+scoreSchema.methods.toJSON = function () {
+    const score: IScore = this!;
+    const scoreObj = score.toObject();
+
+    delete scoreObj._id;
+    delete scoreObj.studentId;
+    delete scoreObj.quizId;
+
+    return scoreObj;
+};
+
 const Score: Model<IScore> = model<IScore>('Score', scoreSchema);
 export default Score;
