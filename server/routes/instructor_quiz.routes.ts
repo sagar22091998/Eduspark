@@ -9,6 +9,7 @@ import {
     INTERNAL_ERROR
 } from '../helpers/response.helper';
 import IQuiz from '../interfaces/quiz.interface';
+import IScore from '../interfaces/score.interface';
 
 const createHandler = async (
     req: Request,
@@ -111,6 +112,23 @@ const deleteHandler = async (
     }
 };
 
+const leaderboardHandler = async (
+    req: Request,
+    res: Response
+): Promise<Response> => {
+    try {
+        assertIRequest(req);
+        const response: IScore[] = await controllers.leaderboard(
+            req.userId,
+            req.params.courseId,
+            parseInt(req.query.quiz!.toString())
+        );
+        return SUCCESS(res, response, 'Viewed Leaderboard');
+    } catch (error) {
+        return BAD_REQUEST(res, error.message);
+    }
+};
+
 const router: Router = Router();
 
 router.post('/create/:courseId', verifyToken, createHandler);
@@ -119,5 +137,6 @@ router.get('/details/:courseId', verifyToken, detailsHandler);
 router.put('/update/:courseId', verifyToken, updateHandler);
 router.put('/shift/:courseId', verifyToken, shiftHandler);
 router.delete('/delete/:courseId', verifyToken, deleteHandler);
+router.get('/leaderboard/:courseId', verifyToken, leaderboardHandler);
 
 export default router;

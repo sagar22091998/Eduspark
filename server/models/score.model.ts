@@ -18,10 +18,6 @@ const scoreSchema = new Schema(
             required: true,
             default: 0
         },
-        startTime: {
-            type: Date,
-            required: true
-        },
         duration: {
             type: Number,
             required: true
@@ -38,7 +34,6 @@ scoreSchema.methods.toJSON = function () {
     const scoreObj = score.toObject();
 
     delete scoreObj._id;
-    delete scoreObj.studentId;
     delete scoreObj.quizId;
 
     return scoreObj;

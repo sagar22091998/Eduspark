@@ -12,6 +12,7 @@ import instructorQuizRouter from './routes/instructor_quiz.routes';
 import instructorQuestionRouter from './routes/instructor_question.routes';
 import publicCoursesRouter from './routes/public_courses.routes';
 import studentCoursesRouter from './routes/student_course.routes';
+import studentQuizRouter from './routes/student_quiz.routes';
 
 config();
 const app: Express = express();
@@ -49,6 +50,7 @@ app.use('/instructor/quiz', instructorQuizRouter);
 app.use('/instructor/question', instructorQuestionRouter);
 app.use('/course', publicCoursesRouter);
 app.use('/student/course', studentCoursesRouter);
+app.use('/student/quiz', studentQuizRouter);
 
 connectFunc(process.env.NODE_ENV === 'production');
 

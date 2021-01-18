@@ -32,15 +32,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const controllers = __importStar(require("../controllers/instructor_quiz.controller"));
+const controllers = __importStar(require("../controllers/student_quiz.controller"));
+const response_helper_1 = require("../helpers/response.helper");
 const auth_middleware_1 = require("../middleware/auth.middleware");
 const request_helper_1 = __importDefault(require("../helpers/request.helper"));
-const response_helper_1 = require("../helpers/response.helper");
-const createHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const startHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         request_helper_1.default(req);
-        const response = yield controllers.create(req.userId, req.params.courseId, req.body.topic, req.body.description, req.body.totalTime);
-        return response_helper_1.CREATE(res, response, 'Quiz created successfully');
+        const response = yield controllers.startQuiz(req.params.courseId, req.userId, parseInt(req.query.quiz.toString()));
+        return response_helper_1.SUCCESS(res, response, 'Quiz started successfully');
+    }
+    catch (error) {
+        return response_helper_1.BAD_REQUEST(res, error.message);
+    }
+});
+const endHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        request_helper_1.default(req);
+        const response = yield controllers.endQuiz(req.params.courseId, req.userId, parseInt(req.query.quiz.toString()), req.body.answers);
+        return response_helper_1.SUCCESS(res, response, 'Answers submitted successfully');
     }
     catch (error) {
         return response_helper_1.BAD_REQUEST(res, error.message);
@@ -49,51 +59,11 @@ const createHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 const listHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         request_helper_1.default(req);
-        const response = yield controllers.viewAll(req.userId, req.params.courseId);
+        const response = yield controllers.listAll(req.userId, req.params.courseId);
         return response_helper_1.SUCCESS(res, response, 'List of quizzes shown');
     }
     catch (error) {
         return response_helper_1.BAD_REQUEST(res, error.message);
-    }
-});
-const detailsHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        request_helper_1.default(req);
-        const response = yield controllers.getDetails(req.userId, req.params.courseId, parseInt(req.query.quiz.toString()));
-        return response_helper_1.SUCCESS(res, response, 'Quiz details shown');
-    }
-    catch (error) {
-        return response_helper_1.BAD_REQUEST(res, error.message);
-    }
-});
-const updateHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        request_helper_1.default(req);
-        const response = yield controllers.update(req.userId, req.params.courseId, parseInt(req.query.quiz.toString()), req.body.topic, req.body.description, req.body.totalTime);
-        return response_helper_1.SUCCESS(res, response, 'Details updated successfully');
-    }
-    catch (error) {
-        return response_helper_1.BAD_REQUEST(res, error.message);
-    }
-});
-const shiftHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        request_helper_1.default(req);
-        const response = yield controllers.shift(req.userId, req.params.courseId, req.body.firstQuiz, req.body.secondQuiz);
-        return response_helper_1.SUCCESS(res, response, 'Order shifted successfully');
-    }
-    catch (error) {
-        return response_helper_1.BAD_REQUEST(res, error.message);
-    }
-});
-const deleteHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        request_helper_1.default(req);
-        const response = yield controllers.deleteQuiz(req.userId, req.params.courseId, parseInt(req.query.quiz.toString()));
-        return response_helper_1.SUCCESS(res, response, 'Quiz deleted successfully');
-    }
-    catch (error) {
-        return response_helper_1.INTERNAL_ERROR(res, error.message);
     }
 });
 const leaderboardHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -107,12 +77,9 @@ const leaderboardHandler = (req, res) => __awaiter(void 0, void 0, void 0, funct
     }
 });
 const router = express_1.Router();
-router.post('/create/:courseId', auth_middleware_1.verifyToken, createHandler);
+router.get('/start/:courseId', auth_middleware_1.verifyToken, startHandler);
+router.post('/end/:courseId', auth_middleware_1.verifyToken, endHandler);
 router.get('/list/:courseId', auth_middleware_1.verifyToken, listHandler);
-router.get('/details/:courseId', auth_middleware_1.verifyToken, detailsHandler);
-router.put('/update/:courseId', auth_middleware_1.verifyToken, updateHandler);
-router.put('/shift/:courseId', auth_middleware_1.verifyToken, shiftHandler);
-router.delete('/delete/:courseId', auth_middleware_1.verifyToken, deleteHandler);
 router.get('/leaderboard/:courseId', auth_middleware_1.verifyToken, leaderboardHandler);
 exports.default = router;
-//# sourceMappingURL=instructor_quiz.routes.js.map
+//# sourceMappingURL=student_quiz.routes.js.map

@@ -1,6 +1,7 @@
 import Enroll from '../models/enroll.model';
 import ICourse from '../interfaces/course.interface';
 import Course from '../models/course.model';
+import { ICourseDetails } from '../interfaces/response.interface';
 
 export const create = async (
     name: string,
@@ -27,15 +28,10 @@ export const getAll = async (instructorId: string): Promise<ICourse[]> => {
     return courses;
 };
 
-export interface details {
-    course: ICourse;
-    studentsEnrolled: number;
-}
-
 export const getDetails = async (
     instructorId: string,
     courseId: string
-): Promise<details> => {
+): Promise<ICourseDetails> => {
     const course: ICourse | null = await Course.findOne({
         instructorId,
         _id: courseId
