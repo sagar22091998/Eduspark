@@ -17,10 +17,6 @@ const scoreSchema = new mongoose_1.Schema({
         required: true,
         default: 0
     },
-    startTime: {
-        type: Date,
-        required: true
-    },
     duration: {
         type: Number,
         required: true
@@ -29,6 +25,13 @@ const scoreSchema = new mongoose_1.Schema({
     timestamps: true,
     versionKey: false
 });
+scoreSchema.methods.toJSON = function () {
+    const score = this;
+    const scoreObj = score.toObject();
+    delete scoreObj._id;
+    delete scoreObj.quizId;
+    return scoreObj;
+};
 const Score = mongoose_1.model('Score', scoreSchema);
 exports.default = Score;
 //# sourceMappingURL=score.model.js.map

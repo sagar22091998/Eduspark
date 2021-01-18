@@ -1,6 +1,8 @@
 import Quiz from '../models/quiz.model';
 import IQuiz from '../interfaces/quiz.interface';
 import { checkInstructor } from '../helpers/instructor_course.helper';
+import IScore from '../interfaces/score.interface';
+import Score from '../models/score.model';
 
 export const create = async (
     instructorId: string,
@@ -49,8 +51,8 @@ export const getDetails = async (
         courseId,
         quizNumber
     });
-    if(!quiz) throw new Error("Quiz not found");
-    await quiz.populate({path: 'questions', select: '-_id'}).execPopulate();
+    if (!quiz) throw new Error('Quiz not found');
+    await quiz.populate({ path: 'questions', select: '-_id' }).execPopulate();
     return quiz;
 };
 
@@ -124,4 +126,23 @@ export const deleteQuiz = async (
     );
     await quiz.remove();
     return quiz;
+};
+
+export const leaderboard = async (
+    instructorId: string,
+    courseId: string,
+    quizNumber: number
+): Promise<IScore[]> => {
+    await checkInstructor(instructorId, courseId);
+    const quiz: IQuiz | null = await Quiz.findOne({
+        courseId,
+        quizNumber
+    });
+    if (!quiz) throw new Error('Quiz not found');
+    const scores: IScore[] = await Score.find({
+        quizId: quiz._id
+    })
+        .sort({ score: -1, duration: 1 })
+        .populate('studentId', '-_id name');
+    return scores;
 };

@@ -4,6 +4,7 @@ import IEnroll from '../interfaces/enroll.interface';
 import Enroll from '../models/enroll.model';
 import IVideo from '../interfaces/video.interface';
 import Video from '../models/video.model';
+import { IProgressDetails } from '../interfaces/response.interface';
 
 export const purchaseCourse = async (
     studentId: string,
@@ -31,11 +32,6 @@ export const purchaseCourse = async (
     return enroll;
 };
 
-export interface progressDetails {
-    enroll: IEnroll;
-    videos: IVideo[];
-}
-
 export const purchasedCourses = async (
     studentId: string
 ): Promise<IEnroll[]> => {
@@ -48,7 +44,7 @@ export const purchasedCourses = async (
 export const getProgress = async (
     studentId: string,
     courseId: string
-): Promise<progressDetails> => {
+): Promise<IProgressDetails> => {
     const enroll: IEnroll | null = await Enroll.findOne({
         courseId,
         studentId
@@ -71,7 +67,7 @@ export const updateProgress = async (
     studentId: string,
     courseId: string,
     videoProgress: number
-): Promise<progressDetails> => {
+): Promise<IProgressDetails> => {
     const enroll: IEnroll | null = await Enroll.findOne({
         courseId,
         studentId
