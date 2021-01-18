@@ -4,6 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const redis_1 = __importDefault(require("redis"));
+const dotenv_1 = require("dotenv");
+dotenv_1.config();
 const redisClient = redis_1.default.createClient(process.env.REDIS_URL || 'redis://localhost:6379');
 redisClient.on('ready', () => {
     console.log('Redis is ready');

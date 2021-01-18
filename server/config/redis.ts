@@ -1,4 +1,7 @@
 import redis, { RedisClient } from 'redis';
+import { config } from 'dotenv';
+
+config();
 
 const redisClient: RedisClient = redis.createClient(
     process.env.REDIS_URL || 'redis://localhost:6379'
