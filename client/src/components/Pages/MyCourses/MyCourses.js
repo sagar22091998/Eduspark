@@ -8,12 +8,17 @@ import AddCourse from "../../SubComponents/AddCourse/AddCourse"
 import DeleteModal from "../../SubComponents/DeleteModal/DeleteModal"
 import EditDetails from "../../SubComponents/EditDetails/EditDetails"
 import AssignmentReturnedIcon from '@material-ui/icons/AssignmentReturned';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class MyCourses extends Component {
 
   componentDidMount() {
     returnToTop();
     this.props.getCoursesList();
+  }
+
+  componentWillUnmount(){
+    
   }
 
   render() {
@@ -25,18 +30,18 @@ class MyCourses extends Component {
           <h1 className="courses__container--head">My Courses</h1>
           <button className="courses__container--add" onClick={()=>setAddModal(true)}>Add Your New Course</button>
           { 
-            coursesLoading ? <h1>Tatti</h1> :
-            coursesList.length === 0 ? 
+            coursesLoading ? <div className = "courses__container--loading" ><CircularProgress size={200}/></div> :
+            (coursesList.length === 0 ? 
             <p className="courses__container--empty">No Courses Added yet.</p>
               :
             <div className="courses__container--list">
               <h2 className="courses__container--list--head">Added Courses<AssignmentReturnedIcon/></h2>
               {coursesList.map( course => <CourseStrip key={course._id} title={course.name} desc={course.description} price={String(course.price)} courseId={course._id}/>)}
-            </div>
+            </div>)
           }
         </div>
         <AddCourse/>
-        <DeleteModal/> 
+        <DeleteModal deleteType="COURSE"/> 
         <EditDetails/> 
       </div>
     )

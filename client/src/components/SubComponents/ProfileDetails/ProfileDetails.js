@@ -10,6 +10,10 @@ import EditIcon from '@material-ui/icons/Edit';
 
 class ProfileDetails extends Component {
   
+  handleProfileFields = (e) =>{
+    this.props.setProfileFields(e.target.name,e.target.value)
+  }
+
   handleUpdate = () => {
     const { newName , newEmail , newMobile , updateProfile , setPopup } = this.props;
 
@@ -32,14 +36,14 @@ class ProfileDetails extends Component {
   }
 
   render(){
-    const { profileName , profileEmail , profileMobile , newName , newEmail , newMobile , setProfileFields , editName , editMobile , editEmail , editProfileFields , setChangeModal } = this.props;
+    const { profileName , profileEmail , profileMobile , newName , newEmail , newMobile , editName , editMobile , editEmail , editProfileFields , setChangeModal } = this.props;
 
     return (
       <div className="details">
         <div className="details__fields">
           <p className="details__fields--label">Name</p>
           <div className="details__fields--text">
-            <input type="text" name="newName" disabled={!editName} value={ newName } onChange={(e)=>{ setProfileFields(e.target.name,e.target.value)}} />
+            <input type="text" name="newName" disabled={!editName} value={ newName } onChange={this.handleProfileFields}/>
             <div className="details__fields--text--img" onClick={(e) => { editProfileFields("editName",!editName)}}>
               <EditIcon />
             </div>
@@ -48,7 +52,7 @@ class ProfileDetails extends Component {
         <div className="details__fields">
           <p className="details__fields--label">Email</p>
           <div className="details__fields--text">
-            <input type="text" name="newEmail" disabled={!editEmail} value={ newEmail } onChange={(e)=>{ setProfileFields(e.target.name,e.target.value)}} />
+            <input type="text" name="newEmail" disabled={!editEmail} value={ newEmail } onChange={this.handleProfileFields}/>
             <div className="details__fields--text--img" onClick={(e) => { editProfileFields("editEmail",!editEmail)}}>
               <EditIcon/>
             </div>
@@ -57,14 +61,14 @@ class ProfileDetails extends Component {
         <div className="details__fields">
           <p className="details__fields--label">Phone</p>
           <div className="details__fields--text">
-            <input type="text" name="newMobile" disabled={!editMobile} value={ newMobile } onChange={(e)=>{ setProfileFields(e.target.name,e.target.value)}} />
+            <input type="text" name="newMobile" disabled={!editMobile} value={ newMobile } onChange={this.handleProfileFields}/>
             <div className="details__fields--text--img" onClick={(e) => { editProfileFields("editMobile",!editMobile)}}>
               <EditIcon/>
             </div>
           </div>
         </div>
         <div className="details__btns">
-          <button className="details__btns--reset" onClick={ () => setChangeModal(true) }>Reset Password</button>
+          <button className="details__btns--reset" onClick={ () => setChangeModal(true) }>Change Password</button>
           <button className="details__btns--update" onClick={this.handleUpdate} disabled={ profileName=== newName && profileEmail=== newEmail && profileMobile=== newMobile }>Update</button>
         </div>
         <ChangePasswordModal/>

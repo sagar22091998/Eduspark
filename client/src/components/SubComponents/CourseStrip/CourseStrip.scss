@@ -12,16 +12,33 @@
     padding: 1rem;
     width: 100%;
     font-size: 2rem;
+
+    &--text{ 
+      color: #fff;
+      cursor: pointer;
+    }
+    
     &--icons{
-      & svg{ 
-        margin:  0 0.5rem;
+      
+      & svg{
+        cursor: pointer; 
+        margin: 0 0.75rem;
         font-size: 2.5rem;
-        cursor: pointer;
         transition: 0.35s;
+        border: 2px solid #fff;
+        border-radius:50%;
+        padding: 0.25rem;  
       }
 
-      &--edit:hover { color :  orange; }
-      &--delete:hover { color :  red; }
+      
+      &--edit:hover { 
+        color :  orange; 
+        border-color: orange;
+      }
+      &--delete:hover { 
+        color :  red; 
+        border-color: red;
+      }
     }
   }
   
@@ -53,6 +70,24 @@
   }
 }
 
+
+@media(max-width:1024px){
+  .strip {   
+    &__head{
+      &--icons{
+        &--edit{ 
+          color :  orange; 
+          border-color: orange;
+        }
+        &--delete{ 
+          color :  red; 
+          border-color: red;
+        }
+      }
+    }
+  }
+}
+
 @media(max-width:550px){
   .strip {
     border: 1px solid #000;
@@ -65,9 +100,6 @@
           margin:  0 0.35rem;
           font-size: 1.5rem;
         }
-  
-        &--edit { color :  orange; }
-        &--delete { color :  red; }
       }
     }
     

@@ -78,7 +78,7 @@ class RegisterForm extends Component{
         </div> 
         <div className="register__fields">
           <label htmlFor="mobile">Mobile Number</label>
-          <input type="number" placeholder="Enter Mobile Number" id="mobile"
+          <input type="text" placeholder="Enter Mobile Number" id="mobile"
             value={registerMobile} name="registerMobile" onChange={this.handleRegisterFields}/>
         </div>
         <div><button onClick={this.handleRegisteration} className="register__btn" >Register</button></div>

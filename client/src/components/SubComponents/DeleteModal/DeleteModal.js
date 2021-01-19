@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import { setPopup , setDeleteModal , deleteCourse  } from "../../../actions/index"
+import { setPopup , setDeleteModal , deleteCourse , deleteVideo } from "../../../actions/index"
 
 //Material UI
 import { withStyles } from '@material-ui/core/styles';
@@ -63,8 +63,21 @@ const styles = {
 
 class DeleteModal extends Component {
 
+  
+  handleDelelte = () => {
+    const { deleteVideo , deleteCourse , courseId , deleteType } = this.props;
+
+    if(deleteType==="COURSE"){
+      deleteCourse();
+    } 
+    else if(deleteType==="VIDEO"){
+      deleteVideo(courseId)
+    }
+
+  }
+
   render(){
-    const { deleteModal , setDeleteModal , deleteCourse } = this.props;
+    const { deleteModal , setDeleteModal  } = this.props;
   
     const { modal , main , closeicon , text , head  , btncontainer , btn } = this.props.classes;
 
@@ -88,7 +101,7 @@ class DeleteModal extends Component {
               <h1 className={head}>Are You Sure?</h1>
               <p className={text}>All the contents related to this course will be removed</p>
               <div className={btncontainer}>
-                <button className={btn} onClick={deleteCourse}>Yes</button>
+                <button className={btn} onClick={this.handleDelelte}>Yes</button>
                 <button className={btn} onClick={() => setDeleteModal(false)}>No</button>
               </div>
             </div>
@@ -109,7 +122,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setPopup : (status,text,popupType) => dispatch(setPopup(status,text,popupType)),
     setDeleteModal : (status) => dispatch(setDeleteModal(status)),
-    deleteCourse : () => dispatch(deleteCourse())
+    deleteCourse : () => dispatch(deleteCourse()),
+    deleteVideo : (courseId) => dispatch(deleteVideo(courseId)),
   }
 }
 

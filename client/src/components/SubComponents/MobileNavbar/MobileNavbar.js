@@ -12,7 +12,7 @@ import CloseIcon from '@material-ui/icons/Close';
 class MobileNavbar extends Component {
 
   render() {
-    const { selectedPage , logoutHandler , isLoggedIn , changeModal , mobileDropdown , setMobileDropdown , addModal , editModal } = this.props;
+    const { selectedPage , logoutHandler , isLoggedIn , changeModal , mobileDropdown , setMobileDropdown , addModal , editModal , editTitleModal } = this.props;
 
     return (
       <div className="mobnav">
@@ -38,7 +38,7 @@ class MobileNavbar extends Component {
             </Fragment>
           }
         </ul>
-        { !editModal && !addModal && !changeModal && <MessagePopup />}
+        {!editTitleModal &&  !editModal && !addModal && !changeModal && <MessagePopup />}
       </div>
     )
   }
@@ -51,7 +51,8 @@ const mapStatesToProps = (state) => {
     editModal : state.courses.editModal ,
     changeModal : state.profile.changeModal,
     mobileDropdown : state.common.mobileDropdown,
-    addModal : state.courses.addModal
+    addModal : state.courses.addModal,
+    editTitleModal : state.details.editTitleModal
   }
 } 
 

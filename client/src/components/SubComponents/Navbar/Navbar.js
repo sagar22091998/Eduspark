@@ -8,7 +8,7 @@ import MessagePopup from "../MessagePopup/MessagePopup"
 class Navbar extends Component{
 
   render(){
-    const { selectedPage , logoutHandler , isLoggedIn , changeModal , addModal , editModal } = this.props;
+    const { selectedPage , logoutHandler , isLoggedIn , changeModal , addModal , editModal , editTitleModal } = this.props;
   
     return(
       <div className="navbar">
@@ -29,7 +29,7 @@ class Navbar extends Component{
             </Fragment>
             }
         </ul>
-        { !editModal && !changeModal && !addModal && <MessagePopup />}
+        {!editTitleModal && !editModal && !changeModal && !addModal && <MessagePopup />}
       </div>
     );
   }
@@ -42,6 +42,7 @@ const mapStatesToProps = (state) => {
     editModal : state.courses.editModal, 
     changeModal : state.profile.changeModal,
     addModal : state.courses.addModal,
+    editTitleModal : state.details.editTitleModal,
   }
 } 
 

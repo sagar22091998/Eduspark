@@ -11,6 +11,7 @@ import Footer from '../SubComponents/Footer/Footer';
 import Profile from '../Pages/Profile/Profile';
 import MobileNavbar from "../SubComponents/MobileNavbar/MobileNavbar";
 import MyCourses from '../Pages/MyCourses/MyCourses';
+import CourseDetails from '../Pages/CourseDetails/CourseDetails';
 
 class MainRouter extends Component {
 
@@ -71,7 +72,7 @@ class MainRouter extends Component {
             {!isLoggedIn && <Route path="/user" component={ LoginRegister }/> }
             {isLoggedIn && <Route path="/profile" component={ Profile }/>}
             {isLoggedIn && <Route path="/mycourses" component={ MyCourses }/>}
-            {isLoggedIn && <Route path="/course/:courseID" component={ MyCourses }/>}
+            {isLoggedIn && <Route path="/course/:courseID" component={ CourseDetails }/>}
             <Redirect to="/" />
           </Switch>
           <Footer/>

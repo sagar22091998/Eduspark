@@ -1,0 +1,138 @@
+@import "../../../sass/mixins.scss";
+
+.videoitem {
+  @include flexcenter-h;
+  justify-content: space-between;
+  border: 3px solid $light-color;
+  background: $secondary-color;
+  width: 100%;
+  background: #000; 
+  cursor: pointer;
+  
+  &__title {
+    font-size: 1.75rem;
+    @include flexcenter-h;
+    justify-content: space-between;
+    color: #fff;
+    margin-left: 1rem;
+  }
+
+  &__update {
+    @include flexcenter-h;
+    justify-content: flex-end;
+    background: $secondary-color;
+    padding: 0.25rem;
+
+    & svg{
+      font-size: 2.5rem;
+      transition: 0.35s;
+      border-radius:50%;
+      padding: 0.25rem; 
+    }
+
+    &--edit,&--delete {
+      cursor: pointer;  
+      background-color: #fff; 
+      margin: 0 0.5rem;
+    }
+    
+    &--edit:hover{
+      background-color: orange;
+      color: #fff;
+    }
+
+    &--delete:hover{
+      background-color: red;
+      color: #fff;
+    }
+
+    &--order{
+      @include flexcenter-v;
+    
+
+      &--up,&--down{
+        cursor: pointer; 
+        margin: 0.25rem;
+        background-color: #fff;
+        &:hover{
+          background-color: green;
+          color: #fff;
+        }
+      }
+            
+      &--disabled{ 
+        background: #555;
+        color: #000;
+      }
+    }
+  }
+}
+
+.selectedVideo { border: 3px solid lime; }
+
+@media(max-width:1024px){
+  .videoitem {  
+    &__update {
+      &--edit{
+        background-color: orange;
+        color: #fff;
+      }
+  
+      &--delete{
+        background-color: red;
+        color: #fff;
+      }
+  
+      &--order{
+        &--up,&--down{
+          background-color: green;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+
+@media(max-width:768px){
+  .videoitem {
+    
+    &__title { font-size: 1.35rem; }
+  
+    &__update {
+      padding: 0.25rem;
+  
+      & svg { font-size: 1.75rem; }
+  
+      &--edit,&--delete { margin: 0 0.25rem; }
+    }
+  }
+}
+
+@media(max-width:550px){
+  .videoitem {
+    border: 2px solid $light-color;
+
+    &__title {
+      font-size: 1rem;
+      margin-left: 0.5rem;
+    }
+  
+    &__update {
+      padding: 0.15rem;
+  
+      & svg{
+        font-size: 1.25rem;
+        padding: 0.15rem; 
+      }
+  
+      &--edit,&--delete { margin: 0 0.15rem; }
+
+  
+      &--order{
+        &--up,&--down { margin: 0.15rem; }
+      }
+    }
+  }
+  .selectedVideo { border: 2px solid lime; }
+}

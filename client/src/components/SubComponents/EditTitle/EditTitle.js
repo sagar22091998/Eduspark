@@ -1,6 +1,6 @@
 import React , { Component } from 'react';
 import { connect } from "react-redux"
-import { setCoursesFields , setEditModal , updateCourse , setPopup } from "../../../actions/index"
+import { setDetailFields , setEditTitleModal , editVideoTitle , setPopup } from "../../../actions/index"
 import { isEmpty } from "../../../utils/validators"
 import MessagePopup from "../MessagePopup/MessagePopup"
 
@@ -18,7 +18,7 @@ const styles = {
     background: "#25292e",
     borderRadius :"10px",
     position:"relative",
-    border : "4px solid #fff",
+    border : "4px solid #AED6F1",
     width : "500px", 
     "@media(max-width:550px)":{
       margin : "150px auto 0 auto",
@@ -59,7 +59,8 @@ const styles = {
     justifyContent:"space-between",
     alignItems:"center",
     padding : "1rem 2rem",
-    borderTop:"4px solid #fff",
+    borderTop:"4px solid #AED6F1",
+    borderBottom:"4px solid #AED6F1",
 
     "& input,& textarea":{
       borderRadius:"5px",
@@ -82,9 +83,6 @@ const styles = {
         width:"125px"
       }
     }
-  },
-  fieldBorder:{
-    borderBottom:"4px solid #fff"
   },
   btn:{
     padding:"0.75rem",
@@ -113,65 +111,48 @@ const styles = {
   }
 }
 
-class EditDetails extends Component {
-  
-  handleCourseFields = (e) =>{
-    this.props.setCoursesFields(e.target.name,e.target.value)
-  }
+class EditTitle extends Component {
 
   handleUpdate = () => {  
-    const { newName , newPrice , newDescription , setPopup , updateCourse } = this.props;
+    const { newTitle , editVideoTitle , courseId } = this.props;
 
-    if(isEmpty({ newName , newPrice , newDescription })){
-      setPopup(true,"Enter all fields","error")
+    if(isEmpty({ newTitle })){
+      setPopup(true,"Title can't be empty","error")
       return;
     }  
 
-    if(newPrice <= 0){
-      setPopup(true,"Invalid Price Amount","error")
-      return;
-    }  
-
-    updateCourse({ newName , newPrice , newDescription });
+    editVideoTitle(courseId,newTitle);
   }
 
 
   render(){
-    const { editModal , newName , newPrice , newDescription , oldName , oldPrice , oldDescription , setEditModal } = this.props;
+    const { editTitleModal , newTitle , oldTitle , setEditTitleModal , setDetailFields } = this.props;
   
-    const { modal , main , closeicon , head , fields , btn , fieldBorder} = this.props.classes;
+    const { modal , main , closeicon , head , fields , btn } = this.props.classes;
 
     return (
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        open={ editModal }
+        open={ editTitleModal }
         style={{zIndex:"1000"}}
-        onClose={() => setEditModal(false)}
+        onClose={() => setEditTitleModal(false)}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 100
         }}  
       >
-        <Fade in={ editModal }>
+        <Fade in={ editTitleModal }>
           <div className={modal}>
-            <CloseIcon className={closeicon} onClick={() => setEditModal(false)}/>
+            <CloseIcon className={closeicon} onClick={() => setEditTitleModal(false)}/>
             <div className={main}>
-              <h1 className={head}>Update Course</h1>
+              <h1 className={head}>Edit Video Title</h1>
               <div className={fields}>
-                <label htmlFor="newName">Course Title</label>
-                <input value={newName} type="text" name="newName" onChange={this.handleCourseFields} id="newName" />
+                <label htmlFor="newTitle">Title</label>
+                <input value={newTitle} type="text" name="newTitle" onChange={(e) => setDetailFields(e.target.name,e.target.value)} id="newTitle" />
               </div>
-              <div className={fields}>
-                <label htmlFor="newPrice">Price (in ₹)</label>
-                <input value={newPrice} type="number" name="newPrice" onChange={this.handleCourseFields} id="newPrice" />
-              </div>
-              <div className={`${fields} , ${fieldBorder}`}>
-                <label htmlFor="newDescription">Course Description</label>
-                <textarea value={newDescription} name="newDescription" onChange={this.handleCourseFields} id="newDescription" />
-              </div>
-              <button className={btn} onClick={this.handleUpdate} disabled={ oldName === newName && oldDescription === newDescription && oldPrice === newPrice }>Update</button>
+              <button className={btn} onClick={this.handleUpdate} disabled={ oldTitle === newTitle}>Update</button>
             </div>
             <MessagePopup/>
           </div>
@@ -184,22 +165,19 @@ class EditDetails extends Component {
 
 const mapStatesToProps = (state) => { 
   return {
-    editModal : state.courses.editModal ,
-    oldName : state.courses.oldName ,
-    oldDescription : state.courses.oldDescription ,
-    oldPrice : state.courses.oldPrice ,
-    newName : state.courses.newName ,
-    newDescription : state.courses.newDescription ,
-    newPrice : state.courses.newPrice
+    newTitle : state.details.newTitle,
+    oldTitle : state.details.oldTitle,
+    editTitleModal : state.details.editTitleModal
   }
 } 
 
 const mapDispatchToProps = (dispatch) => { 
   return {
-    setEditModal : (status) => dispatch(setEditModal(status)),
-    setCoursesFields : (name,value) => dispatch(setCoursesFields(name,value)),
-    updateCourse : (newDetails) => dispatch(updateCourse(newDetails)),    setPopup : (status,text,popupType) => dispatch(setPopup(status,text,popupType))
+    editVideoTitle : (courseId,newTitle) => dispatch(editVideoTitle(courseId,newTitle)),    
+    setPopup : (status,text,popupType) => dispatch(setPopup(status,text,popupType)),
+    setEditTitleModal : (status) => dispatch(setEditTitleModal(status)),
+    setDetailFields : (name,value) => dispatch(setDetailFields(name,value)),
   }
 }
 
-export default withStyles(styles)(connect( mapStatesToProps , mapDispatchToProps )(EditDetails));
+export default withStyles(styles)(connect( mapStatesToProps , mapDispatchToProps )(EditTitle));

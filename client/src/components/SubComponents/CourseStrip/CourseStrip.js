@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import "./CourseStrip.scss";
 import { connect } from "react-redux"
 import { setDeleteModal , setSelectedCourse , setEditModal } from "../../../actions/index"
+import { Link } from "react-router-dom";
 
 //Material UI
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -23,12 +24,12 @@ class CourseStrip extends Component{
     setEditModal(true, {title,desc,price});
   }
   render(){
-    const { title , desc , price } = this.props;
+    const { title , desc , price , courseId } = this.props;
 
     return(
       <div className="strip">
         <div className="strip__head">
-          <p className="strip__head--text">{title}</p> 
+          <Link className="strip__head--text" to={`/course/${courseId}`}>{title}</Link>
           <p className="strip__head--icons">
             <EditIcon onClick={this.handleEdit} className="strip__head--icons--edit"/> 
             <DeleteIcon onClick={this.handleDelete} className="strip__head--icons--delete"/> 

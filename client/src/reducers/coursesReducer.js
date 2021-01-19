@@ -11,15 +11,18 @@ const intialState = {
   coursesLoading : true,
   
   deleteModal : false,
-  selectedCourse : "",
-
   editModal : false,
+  
   oldName : "",
   oldPrice : "",
   oldDescription : "",
   newName : "",
   newPrice : "",
-  newDescription : ""
+  newDescription : "",
+
+  //Used in detials page too
+
+  selectedCourse : ""
 }
 
 export default (state = intialState , action ) => { 
