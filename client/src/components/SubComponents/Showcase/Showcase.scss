@@ -30,10 +30,11 @@
 
 
 
-@media(max-width:500px) { 
+@media(max-width:550px) { 
   .showcase {
     background: url(./../../../images/main.jpg) center/cover;;
-
+    height: calc(100vh - 50px);
+    
     &__container{
       padding : 1rem 0;
     

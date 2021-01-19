@@ -1,0 +1,70 @@
+@import "../../../sass/mixins.scss";
+
+.courseinfo{
+  background: url('../../../images/detail1.png');
+  &__overlay{
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+  }
+  
+  &__loading{
+    @include flexcenter-h;
+    min-height: 100vh;
+
+    & svg { color: #fff;}
+  }
+
+  &__details{
+    color: #fff;
+    &--head{
+      @include heading;
+      font-size: 5rem;
+      text-align: center;
+    }
+
+    &--desc{
+      margin: 0.5rem 0;
+      font-size: 1.5rem;
+      text-align: center
+    }
+    &--other{
+      @include flexcenter-h;
+      justify-content: space-between;
+      & p{
+        padding: 0.5rem;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+
+@media(max-width:768px){
+  .courseinfo{
+    &__overlay { padding: 0.5rem; }
+    
+    &__details{
+      &--head{ font-size: 3rem;}
+  
+      &--desc{
+        margin: 1rem 0;
+        font-size: 1.25rem;
+      }
+      &--other{ & p { font-size: 1.25rem; } }
+    }
+  }
+}
+
+@media(max-width:550px){
+  .courseinfo{  
+    &__details{
+      &--head{
+        font-size: 1.35rem;
+        text-shadow: 1px 1px $secondary-color;
+      }
+  
+      &--desc { font-size: 0.85rem; }
+      &--other { & p{font-size: 0.85rem;} }
+    }
+  }  
+}

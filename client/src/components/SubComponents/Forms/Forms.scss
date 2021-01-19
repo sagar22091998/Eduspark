@@ -68,7 +68,7 @@
 
 
 
-@media(max-width:500px){
+@media(max-width:550px){
   .forms{
     @include flexcenter-v;
     height: calc(80vh - 100px);

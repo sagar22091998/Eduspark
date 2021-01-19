@@ -46,10 +46,11 @@
   }
 }
 
-@media(max-width:500px){
+@media(max-width:550px){
   .loginreg{
-    &__container{
+    height: calc(100vh - 50px);
     
+    &__container{
       &--head{
         @include heading;
         font-size: 2rem;

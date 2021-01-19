@@ -7,6 +7,10 @@ import isEmail from "validator/es/lib/isEmail"
 
 class LoginForm extends Component{
 
+  handleLoginFields = (e) =>{
+    this.props.setAuthFields(e.target.name,e.target.value)
+  }
+
   handleLogin = () =>{
     const { inputPassword , inputEmail , loginHandler , setPopup } = this.props;
 
@@ -22,19 +26,27 @@ class LoginForm extends Component{
     loginHandler({inputPassword,inputEmail});
   }
 
+  componentWillUnmount(){
+    //Reseting Fields
+
+    const { setAuthFields } = this.props;
+    setAuthFields("inputPassword","")
+    setAuthFields("inputEmail","")
+  }
+
   render(){
-    const { inputEmail , inputPassword , setAuthFields } = this.props;
+    const { inputEmail , inputPassword } = this.props;
 
     return(
       <div className="login">
         <h1 className="login__head">Login</h1>
         <div className="login__fields">
           <label htmlFor="email">Email</label>
-          <input type="email" placeholder="Enter Email" value={ inputEmail }name="inputEmail" id="name" onChange={(e)=>{ setAuthFields(e.target.name,e.target.value) }}/>
+          <input type="email" placeholder="Enter Email" value={ inputEmail }name="inputEmail" id="name" onChange={this.handleLoginFields}/>
         </div>
         <div className="login__fields">
           <label htmlFor="password">Password</label>
-          <input type="password" placeholder="Enter Password" value={ inputPassword }  name="inputPassword" id="password" onChange={(e)=>{ setAuthFields(e.target.name,e.target.value) }}/>
+          <input type="password" placeholder="Enter Password" value={ inputPassword }  name="inputPassword" id="password" onChange={this.handleLoginFields}/>
         </div>
         <button onClick={this.handleLogin} className="login__btn">Login</button>
       </div> 

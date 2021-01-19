@@ -7,7 +7,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { Snackbar } from '@material-ui/core'
 import MuiAlert from '@material-ui/lab/Alert';
 function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+  return <MuiAlert elevation={8} variant="filled" {...props} />;
 }
 
 class MessagePopup extends Component {
@@ -18,21 +18,28 @@ class MessagePopup extends Component {
       display:"flex",
       justifyContent:"space-around",
       alignItems:"center",
-      fontWeight:"900"
+      fontSize:"1.1rem",
+      padding:"0 1rem 0 0"
+    }
+
+    const cross ={
+      position : "absolute",
+      top : "22.5%",
+      right : "2.5%",
+      cursor :"pointer"
     }
 
     return (
       <Snackbar
         open={statusPopup} 
         onClose={() => setPopup(false,popupText,popupType)} 
-        autoHideDuration={2500} 
+        autoHideDuration={2500}
         >
-
         <Alert severity={popupType}>
-          <span style={style}>
-            {popupText}
-            <CloseIcon onClick={() => setPopup(false,popupText,popupType)}/>
-          </span>
+          <div style={style}>
+            <span>{popupText}</span>
+            <CloseIcon style={cross} onClick={() => setPopup(false,popupText,popupType)}/>
+          </div>
         </Alert>
       </Snackbar>
     )

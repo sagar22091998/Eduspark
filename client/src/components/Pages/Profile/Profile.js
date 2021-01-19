@@ -1,9 +1,15 @@
-import React, { Component } from 'react'
-import ProfileDetails from "../../SubComponents/ProfileDetails/ProfileDetails"
+import React, { Component } from 'react';
+import ProfileDetails from "../../SubComponents/ProfileDetails/ProfileDetails";
 import "./Profile.scss"
 import profile from "../../../images/profile.png"
+import { returnToTop } from '../../../utils/utilityFunctions'; 
+
 class Profile extends Component {
   
+  componentDidMount(){
+    returnToTop();
+  }
+
   render(){
     return (
       <div className="profile">
@@ -15,7 +21,7 @@ class Profile extends Component {
               <img src = {profile} alt=""/>
             </div>
           </div>
-        </div>      
+        </div>
       </div>
     )
   }

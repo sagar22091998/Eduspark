@@ -55,7 +55,7 @@
   }
 }
 
-@media(max-width:500px){
+@media(max-width:550px){
   
   .login {
     padding: 0 1rem;
@@ -77,28 +77,4 @@
       }
     }
   }
-}
-
-
-
-@media(min-width:2300px){
-
- .Login input[type="submit"]{
-  display: inline-block;
-  margin: 1rem auto;
-  padding: 0.75rem 1.5rem;
-  font-size: 1.5rem;
-}
-
-.Login input,
-.Login label{
-  font-size: 2rem;
-  max-width: 500px;
-  margin: 0.5rem auto;
-}
-.Login h1{
-  margin-bottom: 5rem;
-  font-size: 5rem;
-}
-
 }

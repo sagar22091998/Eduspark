@@ -1,6 +1,7 @@
 $primary-color:#25292e;
 $dark-color : #707070;
 $secondary-color: #1761a0;
+$light-color: #AED6F1;
 
 * {
   margin: 0;
@@ -9,7 +10,10 @@ $secondary-color: #1761a0;
   font-family: 'Josefin Sans', sans-serif;
 }
 
-a{ text-decoration: none; }
+a{ 
+  text-decoration: none; 
+  outline: none;
+}
 
 li{ list-style: none; }
 
@@ -55,9 +59,15 @@ button {
   background: $secondary-color;
   color: #fff;
   transition: 0.4s;
-
+  cursor: pointer;
   &:hover { background: #000; }
   
+  &:disabled{
+    background: $dark-color;
+    cursor: default;
+    &:hover { background: $dark-color; }
+  }
+
   @media(max-width:500px){
       margin: 0.5rem auto;
       padding: 0.35rem 0.5rem;

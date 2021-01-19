@@ -44,10 +44,10 @@
 }
 
 
-@media(max-width:500px){
+@media(max-width:550px){
   .about{
     &__main{
-      
+      height: calc(100vh - 50px);
       &__container{
         &--head { font-size: 3rem; }
         

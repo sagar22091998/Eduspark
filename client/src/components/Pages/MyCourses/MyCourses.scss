@@ -1,0 +1,90 @@
+@import "../../../sass/mixins.scss";
+
+.courses{
+  background: url(../../../images/course3.jpg) no-repeat;
+  background-position: 0px 0px; 
+  background-attachment: fixed;
+
+  &__container{
+    @include flexcenter-v;
+    justify-content: flex-start;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.65);
+    height: 100%;
+    min-height: calc(100vh - 100px);
+    
+    &--head{
+      @include heading;
+      font-size: 5rem;
+      margin: 2rem 0;
+    }
+    
+    &--loading{
+      margin: 5rem 0;
+      
+      & svg { color: #fff;}
+    }
+
+    &--empty{
+      text-align: center;
+      font-size: 1.5rem;
+      margin: 1.5rem 0;
+      max-width: 900px;
+      line-height: 2.5rem;
+    }
+
+    &--add{
+      @include btn-primary;
+      padding: 1rem 2rem;
+      font-size: 2rem ;
+    }
+
+    &--list{
+      margin: 1rem 0;
+      width: 70%;
+
+      &--head{
+        @include flexcenter-h;
+        @include heading-font;
+        margin: 1rem 0;
+        text-shadow: 2px 2px #000;
+        font-size: 2.5rem;
+
+        & svg{
+          margin-left: 1.5rem;
+          font-size: 2.5rem;
+        }
+      }
+    }
+  }
+}
+
+
+@media(max-width:550px){
+  .courses{
+    &__container{
+      min-height: calc(100vh - 50px);
+      
+      &--head{
+        @include heading;
+        font-size: 2.5rem;
+        margin:1rem 0;
+      }
+      
+      &--add{
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem ;
+      }
+  
+      &--list {
+        width: 90%;
+        
+        &--head{ 
+          font-size: 1.75rem; 
+          
+          & svg{ font-size: 1.5rem;}
+        } 
+      }
+    }
+  }
+}

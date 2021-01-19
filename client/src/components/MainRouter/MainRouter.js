@@ -1,20 +1,23 @@
 import React, { Component , Fragment } from 'react';
 import { Redirect, Route , Switch , withRouter } from "react-router-dom";
 import { connect } from "react-redux"
-import { setSelectedPage , logoutHandler , setLoginStatus } from "../../../actions/index"
-import Home from "../../Pages/Home/Home";
-import LoginRegister from "../../Pages/LoginRegister/LoginRegister"
-import About from "../../Pages/About/About"
-import Navbar from '../Navbar/Navbar';
-import Footer from '../Footer/Footer';
-import Profile from '../../Pages/Profile/Profile';
-
+import { setSelectedPage , logoutHandler , setLoginStatus , getProfile } from "../../actions/index"
+import MediaQuery from 'react-responsive'
+import Home from "../Pages/Home/Home";
+import LoginRegister from "../Pages/LoginRegister/LoginRegister"
+import About from "../Pages/About/About"
+import Navbar from '../SubComponents/Navbar/Navbar';
+import Footer from '../SubComponents/Footer/Footer';
+import Profile from '../Pages/Profile/Profile';
+import MobileNavbar from "../SubComponents/MobileNavbar/MobileNavbar";
+import MyCourses from '../Pages/MyCourses/MyCourses';
+import CourseDetails from '../Pages/CourseDetails/CourseDetails';
 
 class MainRouter extends Component {
 
   componentDidMount(){
     
-    const { setSelectedPage , history , logoutHandler , setLoginStatus } = this.props;
+    const { setSelectedPage , history , logoutHandler , setLoginStatus , getProfile } = this.props;
 
     //For Navbar Links
     const selectedPage = history.location.pathname.split("/")[1];
@@ -37,8 +40,10 @@ class MainRouter extends Component {
       return;
     }
 
+    //Logged in
     const remainingMilliseconds = new Date(expiryDate).getTime() - new Date().getTime();
     setLoginStatus(true);
+    getProfile();
 
     setTimeout(() => {
       logoutHandler();
@@ -55,14 +60,19 @@ class MainRouter extends Component {
 
       return (
         <Fragment>
-          <Navbar/>
+          <MediaQuery minWidth={550}>
+            <Navbar/>
+          </MediaQuery>
+          <MediaQuery maxWidth={551}>
+            <MobileNavbar/>
+          </MediaQuery>
           <Switch>
             <Route exact path="/" component={ Home }/>
             <Route  path="/about" component={ About }/>
-            {!isLoggedIn ? 
-            <Route  path="/user" component={ LoginRegister }/> 
-              :
-            <Route  path="/profile" component={ Profile }/>}
+            {!isLoggedIn && <Route path="/user" component={ LoginRegister }/> }
+            {isLoggedIn && <Route path="/profile" component={ Profile }/>}
+            {isLoggedIn && <Route path="/mycourses" component={ MyCourses }/>}
+            {isLoggedIn && <Route path="/course/:courseID" component={ CourseDetails }/>}
             <Redirect to="/" />
           </Switch>
           <Footer/>
@@ -81,7 +91,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setSelectedPage : (page) => dispatch(setSelectedPage(page)),
     setLoginStatus : (status) => dispatch(setLoginStatus(status)),
-    logoutHandler : () => dispatch(logoutHandler())
+    logoutHandler : () => dispatch(logoutHandler()),
+    getProfile : () => dispatch(getProfile())
   }
 }
 
