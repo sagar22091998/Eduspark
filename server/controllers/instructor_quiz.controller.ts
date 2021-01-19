@@ -52,7 +52,13 @@ export const getDetails = async (
         quizNumber
     });
     if (!quiz) throw new Error('Quiz not found');
-    await quiz.populate({ path: 'questions', select: '-_id' }).execPopulate();
+    await quiz
+        .populate({
+            path: 'questions',
+            select: '-_id',
+            options: { sort: { quizNumber: 1 } }
+        })
+        .execPopulate();
     return quiz;
 };
 
