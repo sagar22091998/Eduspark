@@ -40,7 +40,7 @@ class VideoManager extends Component {
               {allVideosList.map(item => <VideoListItem courseId = {courseId} key = {item.videoNumber} selectedVideo={currentVideo===item.publicId} videoNumber={item.videoNumber} videoTitle = {item.topic} publicId={item.publicId} lastItem={allVideosList.length===item.videoNumber}/> )}
             </div>
           </Fragment>
-          : <div className="videos__empty">No videos added to this course.Add your videos now!</div>
+          : <div className="videos__empty">No videos added to this course. Add your videos now!</div>
         }
         <DeleteModal courseId={courseId} deleteType="VIDEO"/> 
         <EditTitle courseId={courseId}/>
