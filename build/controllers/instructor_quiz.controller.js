@@ -52,7 +52,13 @@ const getDetails = (instructorId, courseId, quizNumber) => __awaiter(void 0, voi
     });
     if (!quiz)
         throw new Error('Quiz not found');
-    yield quiz.populate({ path: 'questions', select: '-_id' }).execPopulate();
+    yield quiz
+        .populate({
+        path: 'questions',
+        select: '-_id',
+        options: { sort: { quizNumber: 1 } }
+    })
+        .execPopulate();
     return quiz;
 });
 exports.getDetails = getDetails;
