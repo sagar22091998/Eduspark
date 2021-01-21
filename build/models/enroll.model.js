@@ -12,22 +12,6 @@ const enrollSchema = new mongoose_1.Schema({
         required: true,
         ref: 'Course'
     },
-    paymentType: {
-        type: String,
-        trim: true
-    },
-    paymentStatus: {
-        type: String,
-        trim: true
-    },
-    orderId: {
-        type: String,
-        trim: true
-    },
-    paymentTxn: {
-        type: String,
-        trim: true
-    },
     videoCompleted: {
         type: Number,
         required: true,
