@@ -35,3 +35,9 @@ export interface ILeaderboard {
     myScore: IScore;
     allScores: IScore[];
 }
+
+export interface IPaymentInitiate {
+    id: string;
+    currency: string;
+    amount: number;
+}

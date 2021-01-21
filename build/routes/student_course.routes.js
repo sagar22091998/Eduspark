@@ -46,6 +46,26 @@ const purchaseHandler = (req, res) => __awaiter(void 0, void 0, void 0, function
         return response_helper_1.BAD_REQUEST(res, err.message);
     }
 });
+const initiatePaymentHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        request_helper_1.default(req);
+        const response = yield controllers.initiatePayment(req.userId, req.body.courseId);
+        return response_helper_1.SUCCESS(res, response, 'Payment Initiated');
+    }
+    catch (error) {
+        return response_helper_1.BAD_REQUEST(res, error.message);
+    }
+});
+const verifyHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        request_helper_1.default(req);
+        const response = yield controllers.verification(req.body.payload.payment.entity.order_id);
+        return response_helper_1.SUCCESS(res, response, 'Verified Successfully');
+    }
+    catch (error) {
+        return response_helper_1.BAD_REQUEST(res, error.message);
+    }
+});
 const subscribedHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         request_helper_1.default(req);
@@ -79,6 +99,8 @@ const updateHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 const router = express_1.Router();
 router.get('/subscribed', auth_middleware_1.verifyToken, subscribedHandler);
 router.post('/purchase', auth_middleware_1.verifyToken, purchaseHandler);
+router.post('/initiate', auth_middleware_1.verifyToken, initiatePaymentHandler);
+router.post('/verification', verifyHandler);
 router.get('/progress/:courseId', auth_middleware_1.verifyToken, progressHandler);
 router.put('/progress/:courseId', auth_middleware_1.verifyToken, updateHandler);
 exports.default = router;
