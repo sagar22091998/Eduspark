@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import { setPopup , setDeleteModal , deleteCourse , deleteVideo } from "../../../actions/index"
+import { setPopup , setDeleteModal , deleteCourse , deleteVideo , deleteQuiz , deleteQuestion } from "../../../actions/index"
 
 //Material UI
 import { withStyles } from '@material-ui/core/styles';
@@ -35,6 +35,10 @@ const styles = {
     color:"red",
     padding:"0.5rem 1rem",
     textAlign:"center",
+
+    "& span":{
+      textTransform:"lowercase"
+    }
   },
   head:{
     fontSize:"1.5rem",
@@ -65,7 +69,7 @@ class DeleteModal extends Component {
 
   
   handleDelelte = () => {
-    const { deleteVideo , deleteCourse , courseId , deleteType } = this.props;
+    const { deleteVideo , deleteQuestion , deleteCourse , courseId , deleteType , deleteQuiz , quizNumber } = this.props;
 
     if(deleteType==="COURSE"){
       deleteCourse();
@@ -73,11 +77,17 @@ class DeleteModal extends Component {
     else if(deleteType==="VIDEO"){
       deleteVideo(courseId)
     }
+    else if(deleteType==="QUIZ"){
+      deleteQuiz(courseId)
+    }
+    else if(deleteType==="QUESTION"){
+      deleteQuestion({courseId,quizNumber})
+    }
 
   }
 
   render(){
-    const { deleteModal , setDeleteModal  } = this.props;
+    const { deleteModal , setDeleteModal , deleteType } = this.props;
   
     const { modal , main , closeicon , text , head  , btncontainer , btn } = this.props.classes;
 
@@ -99,7 +109,7 @@ class DeleteModal extends Component {
             <CloseIcon className={closeicon} onClick={() => setDeleteModal(false)}/>
             <div className={main}>
               <h1 className={head}>Are You Sure?</h1>
-              <p className={text}>All the contents related to this course will be removed</p>
+              <p className={text}>All the contents related to this <span>{deleteType}</span> will be removed</p>
               <div className={btncontainer}>
                 <button className={btn} onClick={this.handleDelelte}>Yes</button>
                 <button className={btn} onClick={() => setDeleteModal(false)}>No</button>
@@ -114,7 +124,8 @@ class DeleteModal extends Component {
 
 const mapStatesToProps = (state) => { 
   return {
-    deleteModal : state.courses.deleteModal
+    deleteModal : state.courses.deleteModal,
+    currentQuestion : state.quizdetails.currentQuestion,
   }
 } 
 
@@ -124,6 +135,8 @@ const mapDispatchToProps = (dispatch) => {
     setDeleteModal : (status) => dispatch(setDeleteModal(status)),
     deleteCourse : () => dispatch(deleteCourse()),
     deleteVideo : (courseId) => dispatch(deleteVideo(courseId)),
+    deleteQuiz : (courseId) => dispatch(deleteQuiz(courseId)),
+    deleteQuestion : (ids) => dispatch(deleteQuestion(ids)),
   }
 }
 

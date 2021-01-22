@@ -6,12 +6,14 @@ import MediaQuery from 'react-responsive'
 import Home from "../Pages/Home/Home";
 import LoginRegister from "../Pages/LoginRegister/LoginRegister"
 import About from "../Pages/About/About"
-import Navbar from '../SubComponents/Navbar/Navbar';
-import Footer from '../SubComponents/Footer/Footer';
+import Navbar from '../SubComponents/HeaderFooters/Navbar/Navbar';
+import Footer from '../SubComponents/HeaderFooters/Footer/Footer';
 import Profile from '../Pages/Profile/Profile';
-import MobileNavbar from "../SubComponents/MobileNavbar/MobileNavbar";
+import MobileNavbar from "../SubComponents/HeaderFooters/MobileNavbar/MobileNavbar";
 import MyCourses from '../Pages/MyCourses/MyCourses';
 import CourseDetails from '../Pages/CourseDetails/CourseDetails';
+import MyQuizes from '../Pages/MyQuizes/MyQuizes';
+import QuizDetails from '../Pages/QuizDetails/QuizDetails';
 
 class MainRouter extends Component {
 
@@ -72,7 +74,9 @@ class MainRouter extends Component {
             {!isLoggedIn && <Route path="/user" component={ LoginRegister }/> }
             {isLoggedIn && <Route path="/profile" component={ Profile }/>}
             {isLoggedIn && <Route path="/mycourses" component={ MyCourses }/>}
-            {isLoggedIn && <Route path="/course/:courseID" component={ CourseDetails }/>}
+            {isLoggedIn && <Route exact path="/course/:courseID/quizes/:quizNumber" component={ QuizDetails }/>}
+            {isLoggedIn && <Route exact path="/course/:courseID/quizes" component={ MyQuizes }/>}
+            {isLoggedIn && <Route exact path="/course/:courseID" component={ CourseDetails }/>}
             <Redirect to="/" />
           </Switch>
           <Footer/>

@@ -1,4 +1,4 @@
-import { SET_COURSES_FIELDS , SET_COURSES_LIST, SET_DELETE_COURSES_MODAL , SET_COURSES_LOADING , SET_ADD_COURSES_MODAL , SET_SELECTED_COURSE , SET_EDIT_MODAL } from "../actions/actionTypes"
+import { SET_COURSES_FIELDS , SET_COURSES_LIST, SET_DELETE_MODAL , SET_COURSES_LOADING , SET_ADD_COURSES_MODAL , SET_SELECTED_COURSE , SET_EDIT_MODAL } from "../actions/actionTypes"
 
 const intialState = {
   //Course
@@ -43,7 +43,7 @@ export default (state = intialState , action ) => {
         ...state,
         addModal : action.status
       }  
-    case SET_DELETE_COURSES_MODAL :
+    case SET_DELETE_MODAL :
       return {
         ...state,
         deleteModal : action.status

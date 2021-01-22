@@ -1,6 +1,6 @@
 import React, { Component , Fragment } from 'react';
-import Showcase from '../../SubComponents/Showcase/Showcase';
-import CoursesGrids from '../../SubComponents/CoursesGrids/CoursesGrids';
+import Showcase from '../../SubComponents/HomePage/Showcase/Showcase';
+// import CoursesGrids from '../../SubComponents/HomePage/CoursesGrids/CoursesGrids';
 import { returnToTop } from '../../../utils/utilityFunctions'; 
 
 class Home extends Component{
@@ -12,7 +12,7 @@ class Home extends Component{
     return(
       <Fragment>
         <Showcase/>
-        <CoursesGrids/>
+        {/* <CoursesGrids/> */}
       </Fragment>
     );
   }

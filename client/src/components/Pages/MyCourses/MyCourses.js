@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { returnToTop } from '../../../utils/utilityFunctions';
 import "./MyCourses.scss"
 import { connect } from "react-redux"
-import { setAddModal , getCoursesList } from "../../../actions/index"
-import CourseStrip from "../../SubComponents/CourseStrip/CourseStrip"
-import AddCourse from "../../SubComponents/AddCourse/AddCourse"
+import { setAddModal , getCoursesList , setDeleteModal , setEditModal } from "../../../actions/index"
+import CourseStrip from "../../SubComponents/InstructorCoursesPage/CourseStrip/CourseStrip"
+import AddCourse from "../../SubComponents/InstructorCoursesPage/AddCourse/AddCourse"
 import DeleteModal from "../../SubComponents/DeleteModal/DeleteModal"
-import EditDetails from "../../SubComponents/EditDetails/EditDetails"
+import EditDetails from "../../SubComponents/InstructorCoursesPage/EditDetails/EditDetails"
 import AssignmentReturnedIcon from '@material-ui/icons/AssignmentReturned';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -18,7 +18,11 @@ class MyCourses extends Component {
   }
 
   componentWillUnmount(){
-    
+    const { setEditModal , setDeleteModal , setAddModal } = this.props;
+  
+    setEditModal(false);
+    setDeleteModal(false);
+    setAddModal(false);
   }
 
   render() {
@@ -51,13 +55,15 @@ class MyCourses extends Component {
 const mapStatesToProps = (state) => { 
   return {
     coursesList : state.courses.coursesList,
-    coursesLoading : state.courses.coursesLoading,
+    coursesLoading : state.courses.coursesLoading
   }
 } 
 
 const mapDispatchToProps = (dispatch) => { 
   return {
     setAddModal : (status) => dispatch(setAddModal(status)),
+    setEditModal : (status,oldDetails) => dispatch(setEditModal(status,oldDetails)),
+    setDeleteModal : (status) => dispatch(setDeleteModal(status)),
     getCoursesList : () => dispatch(getCoursesList())    
   }
 }

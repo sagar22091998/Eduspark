@@ -1,7 +1,7 @@
 @import "../../../sass/mixins.scss";
 
 .courses{
-  background: url(../../../images/course3.jpg) no-repeat;
+  background: url(../../../images/repeat1.jpg) repeat;
   background-position: 0px 0px; 
   background-attachment: fixed;
 
@@ -15,8 +15,8 @@
     
     &--head{
       @include heading;
-      font-size: 5rem;
-      margin: 2rem 0;
+      font-size: 4rem;
+      margin: 1.75rem 0;
     }
     
     &--loading{
@@ -26,17 +26,22 @@
     }
 
     &--empty{
+      border: 3px solid #fff;
+      border-radius: 20px;
+      padding: 1rem;
+      background :#000;
       text-align: center;
       font-size: 1.5rem;
-      margin: 1.5rem 0;
-      max-width: 900px;
-      line-height: 2.5rem;
+      margin: 7.5rem 0;
     }
 
     &--add{
       @include btn-primary;
-      padding: 1rem 2rem;
-      font-size: 2rem ;
+      padding: 0.85rem 1.7rem;
+      font-size: 1.75rem ;
+      border: 1px solid $secondary-color;
+
+      &:hover { border: 1px solid $light-color;}
     }
 
     &--list{
@@ -60,6 +65,10 @@
 }
 
 
+@media(max-width:1024px){
+  .courses{ &__container{ &--empty{ margin: 11.5rem 0; } } }
+}
+
 @media(max-width:550px){
   .courses{
     &__container{
@@ -70,6 +79,7 @@
         font-size: 2.5rem;
         margin:1rem 0;
       }
+      
       
       &--add{
         padding: 0.75rem 1.5rem;
@@ -84,6 +94,11 @@
           
           & svg{ font-size: 1.5rem;}
         } 
+      }
+
+      &--empty{
+        font-size: 1rem;
+        margin: 9rem 0;
       }
     }
   }

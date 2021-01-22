@@ -127,7 +127,7 @@ export const editVideoTitle = (courseId,newTitle) => async ( dispatch , getState
     dispatch(setDetailFields("newTitle",""));
   } 
   else {
-    console.log("Videos not removed.");
+    console.log("Videos title not updated.");
   }
 }
 

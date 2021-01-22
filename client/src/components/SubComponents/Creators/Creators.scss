@@ -33,7 +33,22 @@
 }
 
 
-/* Responsive */
+@media(max-width:1450px){
+  .creators{
+    background-color: $secondary-color;
+    padding: 1rem;
+
+    &__heading { font-size: 3rem; }
+
+    &__images{
+      &--img{
+        margin: 1rem 5rem ;
+        height: 400px;
+        & img { height: 350px; }
+      }
+    }
+  }  
+}
 
 @media(max-width:768px){
 

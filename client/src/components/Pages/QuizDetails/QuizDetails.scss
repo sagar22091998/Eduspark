@@ -1,0 +1,97 @@
+@import "../../../sass/mixins.scss";
+
+.quizinfo{
+  background: url('../../../images/repeat3.png');
+ 
+  &__overlay{
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 1rem;
+    min-height: calc(100vh - 100px);
+  }
+  
+  &__loading{
+    @include flexcenter-h;
+    min-height: 100vh;
+
+    & svg { color: #fff;}
+  }
+
+  &__details{
+    color: #fff;
+    &--head{
+      @include heading;
+      font-size: 4rem;
+      text-align: center;
+    }
+
+    &--other{
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      margin: 1rem 0;
+      font-size: 2rem;
+
+      &--time{
+        display: flex;
+        justify-content: flex-end;
+        
+        & svg{
+          font-size: 1.75rem;
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+
+  &__add{
+    @include btn-primary;
+    border: 1px solid $secondary-color;
+    padding: 0.85rem 1.7rem;
+    font-size: 1.75rem;
+    
+    &:hover{
+      border: 1px solid #fff;
+    }
+  }
+
+  &__empty{
+    border: 3px solid $secondary-color;
+    border-radius: 20px;
+    padding: 1rem;
+    background :$light-color;
+    text-align: center;
+    font-size: 1.5rem;
+    max-width: 400px;
+    margin: 7.5rem auto;
+  }
+}
+
+
+// @media(max-width:768px){
+//   .courseinfo{
+//     &__overlay { padding: 0.5rem; }
+    
+//     &__details{
+//       &--head{ font-size: 3rem;}
+  
+//       &--desc{
+//         margin: 1rem 0;
+//         font-size: 1.25rem;
+//       }
+//       &--other{ & p { font-size: 1.25rem; } }
+//     }
+//   }
+// }
+
+// @media(max-width:550px){
+//   .courseinfo{  
+//     &__details{
+//       &--head{
+//         font-size: 1.35rem;
+//         text-shadow: 1px 1px $secondary-color;
+//       }
+  
+//       &--desc { font-size: 0.85rem; }
+//       &--other { & p{font-size: 0.85rem;} }
+//     }
+//   }  
+// }
