@@ -8,7 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import { returnToTop } from '../../../../utils/utilityFunctions';
+import { returnToTopAt } from '../../../../utils/utilityFunctions';
 
 class VideoListItem extends Component {
 
@@ -16,7 +16,7 @@ class VideoListItem extends Component {
   handleVideo = () => {
     const { setCurrentVideo , publicId } = this.props;
     setCurrentVideo(publicId);
-    returnToTop();
+    returnToTopAt("225");
   }
   
   handleDelete = (e) => {

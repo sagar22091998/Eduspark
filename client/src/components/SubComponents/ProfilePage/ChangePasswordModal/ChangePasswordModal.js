@@ -20,9 +20,11 @@ const styles = {
     borderRadius :"10px",
     position:"relative",
     border : "4px solid #000",
-    width : "400px", 
-    "@media(max-width:550px)":{
+    width : "400px",
+    "@media(max-width:1600px)":{
       margin : "150px auto 0 auto",
+    },
+    "@media(max-width:550px)":{
       width : "300px"
     }
   },

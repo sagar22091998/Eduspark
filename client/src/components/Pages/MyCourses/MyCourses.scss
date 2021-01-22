@@ -15,8 +15,8 @@
     
     &--head{
       @include heading;
-      font-size: 5rem;
-      margin: 2rem 0;
+      font-size: 4rem;
+      margin: 1.75rem 0;
     }
     
     &--loading{
@@ -37,8 +37,8 @@
 
     &--add{
       @include btn-primary;
-      padding: 1rem 2rem;
-      font-size: 2rem ;
+      padding: 0.85rem 1.7rem;
+      font-size: 1.75rem ;
       border: 1px solid $secondary-color;
 
       &:hover { border: 1px solid $light-color;}

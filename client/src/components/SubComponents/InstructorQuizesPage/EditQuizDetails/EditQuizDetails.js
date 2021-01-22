@@ -20,8 +20,10 @@ const styles = {
     position:"relative",
     border : "4px solid #fff",
     width : "500px", 
+    "@media(max-width:1600px)":{
+      margin : "100px auto 0 auto",
+    },
     "@media(max-width:550px)":{
-      margin : "150px auto 0 auto",
       width : "300px"
     }
   },

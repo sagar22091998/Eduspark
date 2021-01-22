@@ -12,13 +12,15 @@
   
     &--head{
       @include heading;
-      font-size: 5rem;
+      font-size: 4rem;
       margin-bottom: 2rem;
     }
   }
 }
 
-
+@media(max-width:1450px){
+  .loginreg { &__container { &--head { margin-bottom: 1rem; } } }
+}
 
 @media(max-width:1024px){
   .loginreg{
