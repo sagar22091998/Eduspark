@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, Express } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import { config } from 'dotenv';
@@ -11,9 +11,11 @@ import instructorVideosRouter from './routes/instructor_video.routes';
 import instructorQuizRouter from './routes/instructor_quiz.routes';
 import instructorQuestionRouter from './routes/instructor_question.routes';
 import publicCoursesRouter from './routes/public_courses.routes';
+import studentCoursesRouter from './routes/student_course.routes';
+import studentQuizRouter from './routes/student_quiz.routes';
 
 config();
-const app = express();
+const app: Express = express();
 
 app.use(morgan('dev'));
 
@@ -47,6 +49,8 @@ app.use('/instructor/video', instructorVideosRouter);
 app.use('/instructor/quiz', instructorQuizRouter);
 app.use('/instructor/question', instructorQuestionRouter);
 app.use('/course', publicCoursesRouter);
+app.use('/student/course', studentCoursesRouter);
+app.use('/student/quiz', studentQuizRouter);
 
 connectFunc(process.env.NODE_ENV === 'production');
 

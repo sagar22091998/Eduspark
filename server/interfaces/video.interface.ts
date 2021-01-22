@@ -4,7 +4,7 @@ export default interface IVideo extends Document {
     courseId: Types.ObjectId;
     topic: string;
     description: string;
-    publicId: string;
+    publicId?: string;
     videoNumber: number;
     quizNext: number;
     createdAt: Date;

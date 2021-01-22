@@ -29,13 +29,25 @@ const courseSchema = new Schema(
             type: Number,
             required: true,
             default: 0
+        },
+        isPublic: {
+            type: Number,
+            required: true,
+            default: 0
         }
     },
     {
         timestamps: true,
-        versionKey: false
+        versionKey: false,
+        toObject: { virtuals: true }
     }
 );
+
+courseSchema.virtual('videos', {
+    ref: 'Video',
+    localField: '_id',
+    foreignField: 'courseId'
+});
 
 courseSchema.methods.toJSON = function () {
     const course = this!;

@@ -21,7 +21,7 @@ const loginDetailsHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.loggedInDetails(
+        const response: ICourse = await controllers.loggedInDetails(
             req.params.courseId,
             req.userId
         );
@@ -36,7 +36,9 @@ const detailsHandler = async (
     res: Response
 ): Promise<Response> => {
     try {
-        const response = await controllers.details(req.params.courseId);
+        const response: ICourse = await controllers.details(
+            req.params.courseId
+        );
         return SUCCESS(res, response, 'Course details shown');
     } catch (err) {
         return BAD_REQUEST(res, err.message);

@@ -7,6 +7,7 @@ export default interface ICourse extends Document {
     description: string;
     price: number;
     avgRatings: number;
+    isPublic: number;
     createdAt: Date;
     updatedAt: Date;
 }

@@ -12,9 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteQuiz = exports.shift = exports.update = exports.getDetails = exports.viewAll = exports.create = void 0;
+exports.leaderboard = exports.deleteQuiz = exports.shift = exports.update = exports.getDetails = exports.viewAll = exports.create = void 0;
 const quiz_model_1 = __importDefault(require("../models/quiz.model"));
 const instructor_course_helper_1 = require("../helpers/instructor_course.helper");
+const score_model_1 = __importDefault(require("../models/score.model"));
 const create = (instructorId, courseId, topic, description, totalTime) => __awaiter(void 0, void 0, void 0, function* () {
     yield instructor_course_helper_1.checkInstructor(instructorId, courseId);
     const lastQuiz = yield quiz_model_1.default.findOne({
@@ -48,9 +49,16 @@ const getDetails = (instructorId, courseId, quizNumber) => __awaiter(void 0, voi
     const quiz = yield quiz_model_1.default.findOne({
         courseId,
         quizNumber
+    });
+    if (!quiz)
+        throw new Error('Quiz not found');
+    yield quiz
+        .populate({
+        path: 'questions',
+        select: '-_id',
+        options: { sort: { quizNumber: 1 } }
     })
-        .populate('questions')
-        .exec();
+        .execPopulate();
     return quiz;
 });
 exports.getDetails = getDetails;
@@ -73,18 +81,14 @@ const shift = (instructorId, courseId, first, second) => __awaiter(void 0, void 
     yield instructor_course_helper_1.checkInstructor(instructorId, courseId);
     if (first === second)
         throw new Error('Quiz should not be same');
-    const firstQuiz = yield quiz_model_1.default.findOne({
-        quizNumber: first,
-        courseId
+    const quizzes = yield quiz_model_1.default.find({
+        courseId,
+        quizNumber: { $in: [first, second] }
     });
-    if (!firstQuiz)
+    if (quizzes.length !== 2)
         throw new Error('Quiz not found');
-    const secondQuiz = yield quiz_model_1.default.findOne({
-        quizNumber: second,
-        courseId
-    });
-    if (!secondQuiz)
-        throw new Error('Quiz not found');
+    const firstQuiz = quizzes[0];
+    const secondQuiz = quizzes[1];
     [firstQuiz.quizNumber, secondQuiz.quizNumber] = [
         secondQuiz.quizNumber,
         firstQuiz.quizNumber
@@ -116,4 +120,20 @@ const deleteQuiz = (instructorId, courseId, quizNumber) => __awaiter(void 0, voi
     return quiz;
 });
 exports.deleteQuiz = deleteQuiz;
+const leaderboard = (instructorId, courseId, quizNumber) => __awaiter(void 0, void 0, void 0, function* () {
+    yield instructor_course_helper_1.checkInstructor(instructorId, courseId);
+    const quiz = yield quiz_model_1.default.findOne({
+        courseId,
+        quizNumber
+    });
+    if (!quiz)
+        throw new Error('Quiz not found');
+    const scores = yield score_model_1.default.find({
+        quizId: quiz._id
+    })
+        .sort({ score: -1, duration: 1 })
+        .populate('studentId', '-_id name');
+    return scores;
+});
+exports.leaderboard = leaderboard;
 //# sourceMappingURL=instructor_quiz.controller.js.map

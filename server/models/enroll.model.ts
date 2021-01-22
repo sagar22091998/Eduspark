@@ -13,22 +13,6 @@ const enrollSchema = new Schema(
             required: true,
             ref: 'Course'
         },
-        paymentType: {
-            type: String,
-            trim: true
-        },
-        paymentStatus: {
-            type: String,
-            trim: true
-        },
-        orderId: {
-            type: String,
-            trim: true
-        },
-        paymentTxn: {
-            type: String,
-            trim: true
-        },
         videoCompleted: {
             type: Number,
             required: true,
@@ -45,6 +29,16 @@ const enrollSchema = new Schema(
         versionKey: false
     }
 );
+
+enrollSchema.methods.toJSON = function () {
+    const enroll: IEnroll = this!;
+    const enrollObj = enroll.toObject();
+
+    delete enrollObj._id;
+    delete enrollObj.studentId;
+
+    return enrollObj;
+};
 
 const Enroll: Model<IEnroll> = model<IEnroll>('Enroll', enrollSchema);
 export default Enroll;

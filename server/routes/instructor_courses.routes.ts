@@ -8,6 +8,7 @@ import {
     SUCCESS,
     INTERNAL_ERROR
 } from '../helpers/response.helper';
+import ICourse from '../interfaces/course.interface';
 
 const router: Router = Router();
 
@@ -17,7 +18,7 @@ const createHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.create(
+        const response: ICourse = await controllers.create(
             req.body.name,
             req.body.description,
             req.body.price,
@@ -35,7 +36,7 @@ const getAllHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.getAll(req.userId);
+        const response: ICourse[] = await controllers.getAll(req.userId);
         return SUCCESS(res, response, 'Instructor Courses Sent');
     } catch (err) {
         return BAD_REQUEST(res, err.message);
@@ -64,7 +65,7 @@ const updateHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.update(
+        const response: ICourse = await controllers.update(
             req.userId,
             req.params.id,
             req.body.name,
@@ -83,7 +84,7 @@ const deleteHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.deleteCourse(
+        const response: ICourse = await controllers.deleteCourse(
             req.userId,
             req.params.id
         );
@@ -93,9 +94,27 @@ const deleteHandler = async (
     }
 };
 
+const publicHandler = async (
+    req: Request,
+    res: Response
+): Promise<Response> => {
+    try {
+        assertIRequest(req);
+        const response: ICourse = await controllers.makeAvailable(
+            req.userId,
+            req.params.id,
+            req.body.isPublic
+        );
+        return SUCCESS(res, response, 'Successfully changed visibility');
+    } catch (err) {
+        return BAD_REQUEST(res, err.message);
+    }
+};
+
 router.post('/create', [verifyToken], createHandler);
 router.get('/list', [verifyToken], getAllHandler);
 router.get('/details/:id', [verifyToken], getDetailsHandler);
+router.put('/change-visibility/:id', [verifyToken], publicHandler);
 router.put('/update/:id', [verifyToken], updateHandler);
 router.delete('/delete/:id', [verifyToken], deleteHandler);
 

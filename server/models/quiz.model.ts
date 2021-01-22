@@ -31,7 +31,8 @@ const quizSchema = new Schema(
     },
     {
         timestamps: true,
-        versionKey: false
+        versionKey: false,
+        toObject: { virtuals: true }
     }
 );
 
@@ -47,6 +48,7 @@ quizSchema.methods.toJSON = function () {
 
     delete quizObj._id;
     delete quizObj.courseId;
+    delete quizObj.id;
 
     return quizObj;
 };

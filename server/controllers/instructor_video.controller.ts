@@ -10,14 +10,14 @@ export const addNew = async (
     publicId: string
 ): Promise<IVideo> => {
     await checkInstructor(instructorId, courseId);
-    const lastVideo = await Video.findOne({
+    const lastVideo: IVideo | null = await Video.findOne({
         courseId
     }).sort('-videoNumber');
     let videoNumber = 1;
     if (lastVideo) {
         videoNumber = lastVideo.videoNumber + 1;
     }
-    const video = new Video({
+    const video: IVideo = new Video({
         courseId,
         topic,
         description,
@@ -33,7 +33,7 @@ export const getAll = async (
     courseId: string
 ): Promise<IVideo[]> => {
     await checkInstructor(instructorId, courseId);
-    const videos = await Video.find({
+    const videos: IVideo[] = await Video.find({
         courseId
     }).sort('videoNumber');
     return videos;
@@ -45,7 +45,7 @@ export const getDetails = async (
     videoNumber: number
 ): Promise<IVideo> => {
     await checkInstructor(instructorId, courseId);
-    const video = await Video.findOne({
+    const video: IVideo | null = await Video.findOne({
         courseId,
         videoNumber
     });
@@ -64,7 +64,7 @@ export const update = async (
     publicId: string
 ): Promise<IVideo> => {
     await checkInstructor(instructorId, courseId);
-    const video = await Video.findOne({
+    const video: IVideo | null = await Video.findOne({
         videoNumber,
         courseId
     });
@@ -84,19 +84,13 @@ export const shift = async (
 ): Promise<IVideo[]> => {
     await checkInstructor(instructorId, courseId);
     if (first === second) throw new Error('Videos should not be same');
-
-    const firstVideo = await Video.findOne({
-        videoNumber: first,
-        courseId
+    const videos: IVideo[] = await Video.find({
+        courseId,
+        videoNumber: { $in: [first, second] }
     });
-    if (!firstVideo) throw new Error('Video not found');
-
-    const secondVideo = await Video.findOne({
-        videoNumber: second,
-        courseId
-    });
-    if (!secondVideo) throw new Error('Video not found');
-
+    if (videos.length !== 2) throw new Error('Video not found');
+    const firstVideo: IVideo = videos[0];
+    const secondVideo: IVideo = videos[1];
     [firstVideo.videoNumber, secondVideo.videoNumber] = [
         secondVideo.videoNumber,
         firstVideo.videoNumber
@@ -114,13 +108,13 @@ export const deleteVideo = async (
     videoNumber: number
 ): Promise<IVideo> => {
     await checkInstructor(instructorId, courseId);
-    const video = await Video.findOne({
+    const video: IVideo | null = await Video.findOne({
         videoNumber,
         courseId
     });
     if (!video) throw new Error('Video not found');
 
-    const videos = await Video.find({
+    const videos: IVideo[] = await Video.find({
         courseId,
         videoNumber: { $gte: videoNumber }
     });

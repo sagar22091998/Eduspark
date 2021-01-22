@@ -18,10 +18,6 @@ const scoreSchema = new Schema(
             required: true,
             default: 0
         },
-        startTime: {
-            type: Date,
-            required: true
-        },
         duration: {
             type: Number,
             required: true
@@ -32,6 +28,16 @@ const scoreSchema = new Schema(
         versionKey: false
     }
 );
+
+scoreSchema.methods.toJSON = function () {
+    const score: IScore = this!;
+    const scoreObj = score.toObject();
+
+    delete scoreObj._id;
+    delete scoreObj.quizId;
+
+    return scoreObj;
+};
 
 const Score: Model<IScore> = model<IScore>('Score', scoreSchema);
 export default Score;

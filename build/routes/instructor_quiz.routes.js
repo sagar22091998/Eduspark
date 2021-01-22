@@ -96,6 +96,16 @@ const deleteHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         return response_helper_1.INTERNAL_ERROR(res, error.message);
     }
 });
+const leaderboardHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        request_helper_1.default(req);
+        const response = yield controllers.leaderboard(req.userId, req.params.courseId, parseInt(req.query.quiz.toString()));
+        return response_helper_1.SUCCESS(res, response, 'Viewed Leaderboard');
+    }
+    catch (error) {
+        return response_helper_1.BAD_REQUEST(res, error.message);
+    }
+});
 const router = express_1.Router();
 router.post('/create/:courseId', auth_middleware_1.verifyToken, createHandler);
 router.get('/list/:courseId', auth_middleware_1.verifyToken, listHandler);
@@ -103,5 +113,6 @@ router.get('/details/:courseId', auth_middleware_1.verifyToken, detailsHandler);
 router.put('/update/:courseId', auth_middleware_1.verifyToken, updateHandler);
 router.put('/shift/:courseId', auth_middleware_1.verifyToken, shiftHandler);
 router.delete('/delete/:courseId', auth_middleware_1.verifyToken, deleteHandler);
+router.get('/leaderboard/:courseId', auth_middleware_1.verifyToken, leaderboardHandler);
 exports.default = router;
 //# sourceMappingURL=instructor_quiz.routes.js.map

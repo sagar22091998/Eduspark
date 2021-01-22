@@ -79,7 +79,7 @@ const shiftHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 const deleteHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         request_helper_1.default(req);
-        const response = yield controllers.deleteQuestion(req.userId, req.params.courseId, parseInt(req.query.quiz.toString()), parseInt(req.query.quiz.toString()));
+        const response = yield controllers.deleteQuestion(req.userId, req.params.courseId, parseInt(req.query.quiz.toString()), parseInt(req.query.question.toString()));
         return response_helper_1.SUCCESS(res, response, 'Question deleted successfully');
     }
     catch (error) {

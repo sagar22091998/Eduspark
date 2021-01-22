@@ -12,22 +12,6 @@ const enrollSchema = new mongoose_1.Schema({
         required: true,
         ref: 'Course'
     },
-    paymentType: {
-        type: String,
-        trim: true
-    },
-    paymentStatus: {
-        type: String,
-        trim: true
-    },
-    orderId: {
-        type: String,
-        trim: true
-    },
-    paymentTxn: {
-        type: String,
-        trim: true
-    },
     videoCompleted: {
         type: Number,
         required: true,
@@ -42,6 +26,13 @@ const enrollSchema = new mongoose_1.Schema({
     timestamps: true,
     versionKey: false
 });
+enrollSchema.methods.toJSON = function () {
+    const enroll = this;
+    const enrollObj = enroll.toObject();
+    delete enrollObj._id;
+    delete enrollObj.studentId;
+    return enrollObj;
+};
 const Enroll = mongoose_1.model('Enroll', enrollSchema);
 exports.default = Enroll;
 //# sourceMappingURL=enroll.model.js.map

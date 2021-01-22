@@ -2,6 +2,7 @@ import Question from '../models/question.model';
 import IQuestion from '../interfaces/question.interface';
 import { checkInstructor } from '../helpers/instructor_course.helper';
 import Quiz from '../models/quiz.model';
+import IQuiz from '../interfaces/quiz.interface';
 
 export const create = async (
     instructorId: string,
@@ -15,19 +16,19 @@ export const create = async (
     correctAnswer: number
 ): Promise<IQuestion> => {
     await checkInstructor(instructorId, courseId);
-    const quiz = await Quiz.findOne({
+    const quiz: IQuiz | null = await Quiz.findOne({
         courseId,
         quizNumber
     });
     if (!quiz) throw new Error('Quiz not found');
-    const lastQuestion = await Question.findOne({
+    const lastQuestion: IQuestion | null = await Question.findOne({
         quizId: quiz._id
     }).sort('-questionNumber');
     let questionNumber = 1;
     if (lastQuestion) {
         questionNumber = lastQuestion.questionNumber + 1;
     }
-    const questionObj = new Question({
+    const questionObj: IQuestion = new Question({
         quizId: quiz._id,
         questionNumber,
         question,
@@ -47,12 +48,12 @@ export const viewAll = async (
     quizNumber: number
 ): Promise<IQuestion[]> => {
     await checkInstructor(instructorId, courseId);
-    const quiz = await Quiz.findOne({
+    const quiz: IQuiz | null = await Quiz.findOne({
         courseId,
         quizNumber
     });
     if (!quiz) throw new Error('Quiz not found');
-    const questions = await Question.find({
+    const questions: IQuestion[] = await Question.find({
         quizId: quiz._id
     }).sort('questionNumber');
     return questions;
@@ -71,12 +72,12 @@ export const update = async (
     correctAnswer: number
 ): Promise<IQuestion> => {
     await checkInstructor(instructorId, courseId);
-    const quiz = await Quiz.findOne({
+    const quiz: IQuiz | null = await Quiz.findOne({
         courseId,
         quizNumber
     });
     if (!quiz) throw new Error('Quiz not found');
-    const questionObj = await Question.findOne({
+    const questionObj: IQuestion | null = await Question.findOne({
         quizId: quiz._id,
         questionNumber
     });
@@ -101,12 +102,12 @@ export const shift = async (
     second: number
 ): Promise<IQuestion[]> => {
     await checkInstructor(instructorId, courseId);
-    const quiz = await Quiz.findOne({
+    const quiz: IQuiz | null = await Quiz.findOne({
         courseId,
         quizNumber
     });
     if (!quiz) throw new Error('Quiz not found');
-    const questions = await Question.find({
+    const questions: IQuestion[] = await Question.find({
         quizId: quiz._id,
         questionNumber: { $in: [first, second] }
     });
@@ -127,17 +128,17 @@ export const deleteQuestion = async (
     questionNumber: number
 ): Promise<IQuestion> => {
     await checkInstructor(instructorId, courseId);
-    const quiz = await Quiz.findOne({
+    const quiz: IQuiz | null = await Quiz.findOne({
         courseId,
         quizNumber
     });
     if (!quiz) throw new Error('Quiz not found');
-    const questionObj = await Question.findOne({
+    const questionObj: IQuestion | null = await Question.findOne({
         quizId: quiz._id,
         questionNumber
     });
     if (!questionObj) throw new Error('Question not found');
-    const questions = await Question.find({
+    const questions: IQuestion[] = await Question.find({
         quizId: quiz._id,
         questionNumber: { $gte: questionNumber }
     });

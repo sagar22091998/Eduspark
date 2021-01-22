@@ -8,6 +8,7 @@ import {
     SUCCESS,
     INTERNAL_ERROR
 } from '../helpers/response.helper';
+import IQuestion from '../interfaces/question.interface';
 
 const createHandler = async (
     req: Request,
@@ -15,7 +16,7 @@ const createHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.create(
+        const response: IQuestion = await controllers.create(
             req.userId,
             req.params.courseId,
             parseInt(req.query.quiz!.toString()),
@@ -35,7 +36,7 @@ const createHandler = async (
 const listHandler = async (req: Request, res: Response): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.viewAll(
+        const response: IQuestion[] = await controllers.viewAll(
             req.userId,
             req.params.courseId,
             parseInt(req.query.quiz!.toString())
@@ -52,7 +53,7 @@ const updateHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.update(
+        const response: IQuestion = await controllers.update(
             req.userId,
             req.params.courseId,
             parseInt(req.query.quiz!.toString()),
@@ -73,7 +74,7 @@ const updateHandler = async (
 const shiftHandler = async (req: Request, res: Response): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.shift(
+        const response: IQuestion[] = await controllers.shift(
             req.userId,
             req.params.courseId,
             parseInt(req.query.quiz!.toString()),
@@ -92,11 +93,11 @@ const deleteHandler = async (
 ): Promise<Response> => {
     try {
         assertIRequest(req);
-        const response = await controllers.deleteQuestion(
+        const response: IQuestion = await controllers.deleteQuestion(
             req.userId,
             req.params.courseId,
             parseInt(req.query.quiz!.toString()),
-            parseInt(req.query.quiz!.toString())
+            parseInt(req.query.question!.toString())
         );
         return SUCCESS(res, response, 'Question deleted successfully');
     } catch (error) {
