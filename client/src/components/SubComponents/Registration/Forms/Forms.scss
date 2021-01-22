@@ -1,0 +1,91 @@
+@import "../../../../sass/mixins.scss";
+
+.forms{
+  @include flexcenter-h;
+  width: 1200px;
+  height: 450px;
+  background: rgba(0, 0, 0, 0.75);
+
+  &__btn{
+    color: #fff;
+    margin: 0 auto;
+    background: $secondary-color; 
+    padding: 0.5rem 1rem;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    transition: background-color  0.4s;
+    &:hover{
+      background: #fff;
+      color: $secondary-color;
+    }
+  }
+
+  &__left,
+  &__right{
+    @include flexcenter-v;
+    min-width: 150px;
+    flex : 1;
+    transition: flex 1s ease-out;
+  
+    & p, & button{
+      align-self: center;
+      margin-bottom:2rem ;
+    }
+  }
+  
+  &__middle{
+    flex: 2;
+    background: $secondary-color;
+    height: 100%;
+  }
+  .formVisible{
+    visibility: hidden;
+    flex: 0;
+  
+    & p{
+      visibility: hidden;
+    }
+  }
+}
+
+@media(max-width:1024px){
+
+  .forms{
+    @include flexcenter-v;
+    height: 750px;
+    width: 550px;
+  
+    &__left,
+    &__right{  
+      padding: 1rem;  
+      & p , & button{
+        margin: 1rem auto;
+      }
+    }
+    
+    &__middle { width: 100%; }
+  }
+}
+
+
+
+@media(max-width:550px){
+  .forms{
+    @include flexcenter-v;
+    height: calc(80vh - 100px);
+    width: 300px;
+  
+    &__btn { 
+      padding: 0.25rem 0.5rem; 
+      font-size: 0.8rem;
+    }
+
+    &__left,
+    &__right{  
+      padding: 0.5rem;  
+      & p , & button{
+        font-size: 0.8rem;
+        margin: 0.5rem auto;
+      }
+    }
+  }
+}

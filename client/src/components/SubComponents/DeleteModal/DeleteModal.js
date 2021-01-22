@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import { setPopup , setDeleteModal , deleteCourse , deleteVideo } from "../../../actions/index"
+import { setPopup , setDeleteModal , deleteCourse , deleteVideo , deleteQuiz } from "../../../actions/index"
 
 //Material UI
 import { withStyles } from '@material-ui/core/styles';
@@ -65,13 +65,16 @@ class DeleteModal extends Component {
 
   
   handleDelelte = () => {
-    const { deleteVideo , deleteCourse , courseId , deleteType } = this.props;
+    const { deleteVideo , deleteCourse , courseId , deleteType , deleteQuiz } = this.props;
 
     if(deleteType==="COURSE"){
       deleteCourse();
     } 
     else if(deleteType==="VIDEO"){
       deleteVideo(courseId)
+    }
+    else if(deleteType==="QUIZ"){
+      deleteQuiz(courseId)
     }
 
   }
@@ -124,6 +127,7 @@ const mapDispatchToProps = (dispatch) => {
     setDeleteModal : (status) => dispatch(setDeleteModal(status)),
     deleteCourse : () => dispatch(deleteCourse()),
     deleteVideo : (courseId) => dispatch(deleteVideo(courseId)),
+    deleteQuiz : (courseId) => dispatch(deleteQuiz(courseId)),
   }
 }
 

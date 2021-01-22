@@ -1,0 +1,79 @@
+@import "../../../../sass/mixins.scss";
+
+.footer{
+  @include flexcenter-v;
+  background: $dark-color;
+
+  &__main{
+    @include flexcenter-h;
+    justify-content: space-between;
+    width: 100%;
+    background: #ddd;
+    padding:2rem;
+
+    &--links{
+      &--link{
+        text-align: center;
+        background: #ddd;
+        color: $secondary-color;
+        font-size: 1.25rem;
+        padding: 0.5rem;
+        border-bottom: #000 1px dotted ;
+        transition: 0.35s;
+        margin: 0 0.5rem;
+
+        &:visited { color: $secondary-color }
+
+        &:hover{
+          background: $secondary-color;
+          color:#ddd;
+          border-bottom: #000 1px solid ;
+        }
+      }
+    }
+
+    &--socials{
+      color: #000;
+  
+      & a{
+        margin: auto 0.5rem;
+        & i { 
+          transition: 0.5s;
+          color: #000;
+        }
+        & i:hover{ transform: scale(1.5);}
+      }
+    }
+  }
+
+
+  &__sec{
+    font-size: 1.25rem;
+    padding: 2rem;
+  }
+}
+
+@media(max-width:550px){
+  .footer{
+
+    &__main{
+      @include flexcenter-v;
+      padding:0.5rem;
+  
+      &--links{
+        margin: 1rem;
+
+        &--link{
+          font-size: 1.1rem;
+          border-bottom: none ;
+        }
+      }
+    }
+  
+    &__sec{
+      text-align: center;
+      font-size: 1rem;
+      padding: 1rem;
+    }
+  }
+}

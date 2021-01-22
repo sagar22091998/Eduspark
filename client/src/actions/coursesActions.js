@@ -1,4 +1,4 @@
-import { SET_COURSES_FIELDS , SET_COURSES_LIST, SET_ADD_COURSES_MODAL , SET_COURSES_LOADING , SET_DELETE_COURSES_MODAL , SET_SELECTED_COURSE , SET_EDIT_MODAL } from "./actionTypes" 
+import { SET_COURSES_FIELDS , SET_COURSES_LIST, SET_ADD_COURSES_MODAL , SET_COURSES_LOADING , SET_DELETE_MODAL , SET_SELECTED_COURSE , SET_EDIT_MODAL } from "./actionTypes" 
 import { requestHandler } from "../utils/requestHandler"
 import { setPopup } from "./index"
 
@@ -8,7 +8,7 @@ export const setAddModal = (status) => ({ type : SET_ADD_COURSES_MODAL , status 
 
 export const setEditModal = ( status , oldDetails = {}) => ({ type : SET_EDIT_MODAL , status , oldDetails })
 
-export const setDeleteModal = (status) => ({ type : SET_DELETE_COURSES_MODAL , status })
+export const setDeleteModal = (status) => ({ type : SET_DELETE_MODAL , status })
 
 export const setSelectedCourse = (id) => ({ type : SET_SELECTED_COURSE , id })
 

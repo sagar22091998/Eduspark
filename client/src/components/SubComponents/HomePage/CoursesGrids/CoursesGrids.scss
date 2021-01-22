@@ -1,0 +1,43 @@
+@import "../../../../sass/mixins.scss";
+
+.showcasecourse {
+  @include flexcenter-v;
+  background: #eee;
+  
+  &--head{
+    @include heading;
+    font-size: 3rem;
+    margin: 1rem 0;
+  }
+
+  &--grids{
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4,1fr) ;
+  }
+
+  &--btn{
+    color: #fff;
+    background: $primary-color; 
+    padding: 0.5rem 2rem;
+    font-size: 1.25rem;
+    transition: 0.5s;
+    margin: 1rem auto;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    &:hover{ background:$secondary-color; }
+  }
+}
+
+
+@media(max-width: 1024px){
+  .showcasecourse { &--grids { grid-template-columns: repeat(2,1fr); } }
+}
+
+@media(max-width: 550px){
+  .showcasecourse { 
+    &--grids { 
+      padding: 0.5rem;
+      grid-template-columns: repeat(1,1fr); 
+    } 
+  }
+}

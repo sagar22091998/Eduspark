@@ -1,0 +1,117 @@
+@import "../../../../sass/mixins.scss";
+
+.strip {
+  @include flexcenter-v;
+  background: rgb(23,97,160);
+  background: linear-gradient(90deg, rgba(23,97,160,1) 24%, rgba(37,41,46,1) 63%);
+  border: 3px solid #000;
+  
+  &__head{
+    @include flexcenter-h;
+    justify-content: space-between;
+    padding: 1rem;
+    width: 100%;
+    font-size: 2rem;
+
+    &--text{ 
+      color: #fff;
+      cursor: pointer;
+    }
+    
+    &--icons{
+      
+      & svg{
+        cursor: pointer; 
+        margin: 0 0.75rem;
+        font-size: 2.5rem;
+        transition: 0.35s;
+        border: 2px solid #fff;
+        border-radius:50%;
+        padding: 0.25rem;  
+      }
+
+      
+      &--edit:hover { 
+        color :  orange; 
+        border-color: orange;
+      }
+      &--delete:hover { 
+        color :  red; 
+        border-color: red;
+      }
+    }
+  }
+  
+  &:hover &__content{ 
+    height: 150px;
+  }
+  &__content{
+    width: 100%;
+    background: #fff;
+    color: #000;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.25s;
+    display: grid;
+    grid-template-rows: 3fr 1fr ;
+    font-size: 1.2rem;
+    font-weight: 900;
+    
+    &--desc{
+      @include flexcenter-h;
+      text-align: justify;
+      border-bottom: 3px solid $secondary-color;
+      padding: 1rem;
+    }
+    &--price { 
+      padding: 1rem; 
+      text-align: center;
+    }
+  }
+}
+
+
+@media(max-width:1024px){
+  .strip {   
+    &__head{
+      &--icons{
+        &--edit{ 
+          color :  orange; 
+          border-color: orange;
+        }
+        &--delete{ 
+          color :  red; 
+          border-color: red;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width:550px){
+  .strip {
+    border: 1px solid #000;
+    
+    &__head{
+      padding: 0.5rem;
+      font-size: 1.35rem;
+      &--icons{
+        & svg{ 
+          margin:  0 0.35rem;
+          font-size: 1.5rem;
+        }
+      }
+    }
+    
+    &:hover &__content{ 
+      height: 150px;
+    }
+    &__content{ 
+      font-size: 0.9rem;
+      
+      &--desc , &--price{
+        padding: 0.5rem 1rem; 
+      }
+    }
+  }
+}

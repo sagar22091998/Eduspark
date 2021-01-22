@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Forms from "../../SubComponents/Forms/Forms"
+import Forms from "../../SubComponents/Registration/Forms/Forms"
 import "./LoginRegister.scss"
 import { returnToTop } from '../../../utils/utilityFunctions'; 
 

@@ -1,0 +1,61 @@
+@import "../../../../sass/mixins.scss";
+
+.register{
+ 
+  display: grid;
+  grid-template-columns: 1fr;
+  color: $secondary-color;
+  background: #fff;
+  height: 100%;
+
+  &__fields{
+    @include flexcenter-h;
+    border-bottom: 3px solid $secondary-color;
+    justify-content: space-between;
+    padding: 0 8rem;
+    font-size: 1.1rem;
+
+    & input{
+      border: 1px solid #000;
+      padding: 0.2rem;
+      font-size: 1.1rem;
+      outline: none;
+    }
+  }
+
+  &__btn { 
+    @include btn-primary;
+    margin: 2rem auto 0 auto; 
+  }
+}
+
+@media(max-width:550px){
+  .register{
+  
+    &__fields{
+      border-bottom: 1px solid $secondary-color;
+      padding: 0.25rem 2rem;
+      font-size: 0.8rem;
+  
+      & input{
+        border: 1px solid #000;
+        padding: 0.15rem;
+        font-size: 0.8rem;
+      }
+    }
+  
+    &__radio{
+      @include flexcenter-v;
+      padding: 0.25rem;
+      font-size: 0.8rem;
+      & p { margin-bottom : 0.25rem; }
+  
+      &__btns {
+        @include flexcenter-h;
+        padding: 0 0.5rem ;
+  
+        & div input { margin: 0 0.25rem 0 0.5rem;  }
+      }
+    }
+  }  
+}

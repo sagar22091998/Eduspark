@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ProfileDetails from "../../SubComponents/ProfileDetails/ProfileDetails";
+import ProfileDetails from "../../SubComponents/ProfilePage/ProfileDetails/ProfileDetails";
 import "./Profile.scss"
 import profile from "../../../images/profile.png"
 import { returnToTop } from '../../../utils/utilityFunctions'; 

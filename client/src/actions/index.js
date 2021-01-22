@@ -6,4 +6,8 @@ export { getProfile , setProfileFields , editProfileFields , updateProfile , set
 
 export { setCoursesFields , setAddModal , addNewCourse , getCoursesList , deleteCourse , setSelectedCourse , setDeleteModal , updateCourse , setEditModal } from "./coursesActions"
 
+export { setQuizesFields , setQuizAddModal , addNewQuiz , getQuizesList , deleteQuiz , setSelectedQuiz , updateQuiz , setEditQuizModal } from "./quizesActions"
+
 export { setDetailFields , setUploadStaus , getAllVideos , addVideo , setCurrentVideo , deleteVideo , editVideoTitle , setEditTitleModal , changeOrder } from "./coursesDetailsActions"
+
+export { setQuestionFields , getAllQuestions , setCurrentQuestion ,setEditQuestionModal , setAddQuestionModal , addQuestion } from "./quizDetailsActions"

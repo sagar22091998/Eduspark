@@ -1,8 +1,7 @@
 @import "../../../sass/mixins.scss";
 
 .courseinfo{
-  background: url('../../../images/detail1.jpg');
-  background-position: fixed;
+  background: url('../../../images/detail1.jpg') no-repeat center center/cover;
 
   &__overlay{
     background-color: rgba(0, 0, 0, 0.7);
@@ -39,6 +38,17 @@
       }
     }
   }
+
+  &__quiz{
+    @include btn-primary;
+    max-width: 400px;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    border: 1px solid $secondary-color;
+
+    &:hover { border: 1px solid $light-color;}
+  }
 }
 
 
@@ -55,6 +65,7 @@
       }
       &--other{ & p { font-size: 1.25rem; } }
     }
+    &__quiz { max-width: 200px; }
   }
 }
 

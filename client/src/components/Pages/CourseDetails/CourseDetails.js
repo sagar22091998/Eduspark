@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { returnToTop } from '../../../utils/utilityFunctions';
 import "./CourseDetails.scss"
 import { connect } from "react-redux"
-import { withRouter } from "react-router-dom"
+import { withRouter , Link } from "react-router-dom"
 import { getAllVideos } from "../../../actions/index"
-import UploadWidget from "../../SubComponents/UploadWidget/UploadWidget"
-import VideoManager from '../../SubComponents/VideoManager/VideoManager';
+import UploadWidget from "../../SubComponents/InstructorCoursesDetails/UploadWidget/UploadWidget"
+import VideoManager from '../../SubComponents/InstructorCoursesDetails/VideoManager/VideoManager';
 import { Fragment } from 'react';
 import { CircularProgress } from '@material-ui/core';
 
@@ -21,6 +21,8 @@ class CourseDetails extends Component {
   render() {
     const { videosLoading , match , name , description , price , studentEnrolled } = this.props;
 
+    const courseId = match.params.courseID;
+
     return (
       <div className="courseinfo">
         <div className="courseinfo__overlay">
@@ -35,8 +37,9 @@ class CourseDetails extends Component {
                 <p>Student Enrolled : {studentEnrolled}</p>
               </div>
             </div>
-            <VideoManager courseId ={match.params.courseID}/>
-            <UploadWidget courseId ={match.params.courseID}/>
+            <VideoManager courseId ={courseId}/>
+            <UploadWidget courseId ={courseId}/>
+            <Link className="courseinfo__quiz" to={`/course/${courseId}/quizes`}>Add Quizes For This Course</Link>
           </Fragment>
           }
         </div>
