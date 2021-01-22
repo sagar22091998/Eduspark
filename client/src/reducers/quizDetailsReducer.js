@@ -52,22 +52,24 @@ export default (state = intialState , action ) => {
         return {
           ...state,
           editQuestionModal : action.status,
-          oldQuestion : action.editDetails.oldQuestion,
-          oldOption1 : action.editDetails.oldOption1,
-          oldOption2 : action.editDetails.oldOption2,
-          oldOption3 : action.editDetails.oldOption3,
-          oldQption4 : action.editDetails.oldOption4,
-          newQuestion : action.editDetails.newQuestion,
-          newOption1 : action.editDetails.newOption1,
-          newOption2 : action.editDetails.newOption2,
-          newOption3 : action.editDetails.newOption3,
-          newOption4 : action.editDetails.newOption4,
+          oldQuestion : action.editDetails.question,
+          oldOption1 : action.editDetails.options[0],
+          oldOption2 : action.editDetails.options[1],
+          oldOption3 : action.editDetails.options[2],
+          oldOption4 : action.editDetails.options[3],
+          oldCorrectAnswer : String(action.editDetails.correctAnswer),
+          newQuestion : action.editDetails.question,
+          newOption1 : action.editDetails.options[0],
+          newOption2 : action.editDetails.options[1],
+          newOption3 : action.editDetails.options[2],
+          newOption4 : action.editDetails.options[3],
+          newCorrectAnswer : String(action.editDetails.correctAnswer),
         }   
       } 
       else {
         return {
           ...state,
-          editQuizModal : action.status
+          editQuestionModal : action.status
         }   
       }
     case SET_ADD_QUES_MODAL :
@@ -86,7 +88,7 @@ export default (state = intialState , action ) => {
     case SET_CURRENT_QUES :
       return {
         ...state,
-        currentVideo : action.publicId
+        currentQuestion : action.currentQuestion
       }  
     default :
       return state;    

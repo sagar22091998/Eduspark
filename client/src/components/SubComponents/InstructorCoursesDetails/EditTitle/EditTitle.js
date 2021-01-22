@@ -116,7 +116,7 @@ const styles = {
 class EditTitle extends Component {
 
   handleUpdate = () => {  
-    const { newTitle , editVideoTitle , courseId } = this.props;
+    const { newTitle , editVideoTitle , courseId , setPopup } = this.props;
 
     if(isEmpty({ newTitle })){
       setPopup(true,"Title can't be empty","error")

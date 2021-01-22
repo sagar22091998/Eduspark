@@ -9,6 +9,7 @@ import EditQuestionModal from '../../SubComponents/InstructorQuizDetailsPage/Edi
 import { CircularProgress } from '@material-ui/core';
 import DeleteModal from '../../SubComponents/DeleteModal/DeleteModal';
 import AccessAlarmsIcon from '@material-ui/icons/AccessAlarms';
+import Question from '../../SubComponents/InstructorQuizDetailsPage/Question/Question';
 
 class QuizDetails extends Component {
 
@@ -33,8 +34,6 @@ class QuizDetails extends Component {
 
     const { courseID , quizNumber } = match.params;
 
-    const atleastOneQuestion = allQuestionsList.length !== 0;
-
     return (
       <div className="quizinfo">
         <div className="quizinfo__overlay">
@@ -48,18 +47,16 @@ class QuizDetails extends Component {
                 <p className="quizinfo__details--other--time"><AccessAlarmsIcon/>{time} Minutes</p>
               </div>
             </div>
-            <button onClick={() => setAddQuestionModal(true)} className="quizinfo__add">{atleastOneQuestion ? "Add Another Question" : "Add Question" }</button>
-            {atleastOneQuestion === 0 ? 
+            <button onClick={() => setAddQuestionModal(true)} className="quizinfo__add">{ allQuestionsList.length !==0 ? "Add Another Question" : "Add Question" }</button>
+            {allQuestionsList.length !==0 ? 
               <div className="quizinfo__list">
-                
+                {allQuestionsList.map(ques => <Question key = {ques.questionNumber} correctAnswer={ques.correctAnswer} options={[ques.option1,ques.option2,ques.option3,ques.option4]} question={ques.question} questionNumber={ques.questionNumber}/>)}
               </div> :
               <p className="quizinfo__empty">No Questions Added</p>
             }
-            <AddQuestionModal courseId = {courseID} quizNumber={quizNumber}/> 
-            {/* 
+            <AddQuestionModal courseId = {courseID} quizNumber={quizNumber}/>
             <EditQuestionModal courseId = {courseID} quizNumber={quizNumber}/>
-            */}
-            <DeleteModal type="QUESTION" courseId = {courseID} quizNumber={quizNumber}/>
+            <DeleteModal deleteType="QUESTION" courseId = {courseID} quizNumber={quizNumber}/>
           </Fragment>
           }
         </div>

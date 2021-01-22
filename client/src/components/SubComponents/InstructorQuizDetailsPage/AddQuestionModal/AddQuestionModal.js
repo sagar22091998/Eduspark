@@ -14,17 +14,20 @@ import CloseIcon from '@material-ui/icons/Close';
 
 const styles = {
   modal: {
-    margin : "75px auto 0 auto",
+    margin : "150px auto 0 auto",
     outline:"none",
     background: "#25292e",
     borderRadius :"10px",
     position:"relative",
     border : "4px solid #fff",
     width : "500px", 
-    "@media(max-width:550px)":{
-      margin : "150px auto 0 auto",
-      width : "350px"
+    "@media(max-width:1600px)":{
+      margin : "75px auto 0 auto",
     }
+    // ,
+    // "@media(max-width:550px)":{
+    //   width : "300px"
+    // }
   },
   main:{
     display : "flex",
@@ -65,13 +68,13 @@ const styles = {
     "& input,& textarea ,& select":{
       borderRadius:"5px",
       padding:"0.45rem",
-      width:"200px",
+      width:"225px",
       border :"1px solid #000",
       fontSize:"1.1rem"
     },
     "& textarea":{
       resize:"none",
-      height:"100px"
+      height:"75px"
     },
     "@media(max-width:550px)":{
       fontSize:"0.85rem",

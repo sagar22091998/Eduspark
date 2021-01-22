@@ -17,7 +17,7 @@ export const getAllQuestions = (ids) => async ( dispatch ) => {
   
   const token = localStorage.getItem('token');
 
-  const res = await requestHandler(`instructor/quiz/details/${ids.courseId}?quiz=${ids.quizNumber}`, {//5ff7684253aa168524e96a11?quiz=1
+  const res = await requestHandler(`instructor/quiz/details/${ids.courseId}?quiz=${ids.quizNumber}`, {
     method:"GET",
     headers:{ 
       "Content-Type":"application/json",
@@ -75,96 +75,56 @@ export const addQuestion = (questionDetails,ids) => async ( dispatch ) => {
   }
 }
 
-// export const deleteVideo = (courseId) => async ( dispatch , getState ) => {
+export const deleteQuestion = (ids) => async ( dispatch , getState ) => {
   
-//   const token = localStorage.getItem('token');
-//   const { currentVideo , allVideosList } = getState().details;
+  const token = localStorage.getItem('token');
+  const { currentQuestion } = getState().quizdetails;
 
-//   const videoIndex = allVideosList.find(video => video.publicId === currentVideo )
+  const res = await requestHandler(`instructor/question/delete/${ids.courseId}?quiz=${ids.quizNumber}&question=${currentQuestion}`, {
+    method:"DELETE",
+    headers:{ 
+      "Content-Type":"application/json",
+      "Authorization" :`Bearer ${token}`
+    }
+  })
 
-//   const res = await requestHandler(`instructor/video/delete/${courseId}?number=${videoIndex.videoNumber}`, {
-//     method:"DELETE",
-//     headers:{ 
-//       "Content-Type":"application/json",
-//       "Authorization" :`Bearer ${token}`
-//     }
-//   })
+  if(res.status===200){
+    dispatch(setPopup(true,"Question removed","warning"));
+    dispatch(getAllQuestions(ids));
+    dispatch(setDeleteModal(false));
+  } 
+  else {
+    console.log("Question not removed.");
+  }
+}
 
-//   if(res.status===200){
-//     dispatch(setPopup(true,"Video removed","warning"));
-//     dispatch(getAllVideos(courseId));
-//     dispatch(setDeleteModal(false));
-//   } 
-//   else {
-//     console.log("Videos not removed.");
-//   }
-// }
-
-// export const editVideoTitle = (courseId,newTitle) => async ( dispatch , getState ) => {
+export const updateQuestion = (questionDetails,ids) => async ( dispatch , getState ) => {
   
-//   const token = localStorage.getItem('token');
-//   const { currentVideo , allVideosList } = getState().details;
+  const token = localStorage.getItem('token');
+  const { currentQuestion } = getState().quizdetails;
 
-//   const videoIndex = allVideosList.find(video => video.publicId === currentVideo )
+  const res = await requestHandler(`instructor/question/update/${ids.courseId}?quiz=${ids.quizNumber}&question=${currentQuestion}`, {
+    method:"PUT",
+    headers:{ 
+      "Content-Type":"application/json",
+      "Authorization" :`Bearer ${token}`
+    },
+    body: JSON.stringify({
+      question : questionDetails.newQuestion,
+      option1 : questionDetails.newOption1,
+      option2 : questionDetails.newOption2,
+      option3 : questionDetails.newOption3,
+      option4 : questionDetails.newOption4,
+      correctAnswer : questionDetails.newCorrectAnswer
+    })
+  })
 
-//   const res = await requestHandler(`instructor/video/update/${courseId}?number=${videoIndex.videoNumber}`, {
-//     method:"PUT",
-//     headers:{ 
-//       "Content-Type":"application/json",
-//       "Authorization" :`Bearer ${token}`
-//     },
-//     body: JSON.stringify({
-//       topic : newTitle,
-//       publicId : currentVideo
-//     })
-//   })
-
-//   if(res.status===200){
-//     dispatch(setPopup(true,"Video Title Updated","success"));
-//     dispatch(getAllVideos(courseId));
-//     dispatch(setEditTitleModal(false));
-//     dispatch(setDetailFields("newTitle",""));
-//   } 
-//   else {
-//     console.log("Videos not removed.");
-//   }
-// }
-
-// export const changeOrder = (orderType,courseId) => async ( dispatch , getState ) => {
-  
-//   const token = localStorage.getItem('token');
-//   const { currentVideo , allVideosList } = getState().details;
-
-//   const videoIndex = allVideosList.find(video => video.publicId === currentVideo )
-
-//   let reqBody;
-//   if(orderType==="UP"){
-//     reqBody = {
-//       firstVideo : Number(videoIndex.videoNumber),
-//       secondVideo : Number(videoIndex.videoNumber-1)
-//     }
-//   }
-//   else if(orderType==="DOWN") {
-//     reqBody = {
-//       firstVideo : Number(videoIndex.videoNumber),
-//       secondVideo : Number(videoIndex.videoNumber+1)
-//     }
-//   }
-
-//   const res = await requestHandler(`instructor/video/shift/${courseId}`, {
-//     method:"PUT",
-//     headers:{ 
-//       "Content-Type":"application/json",
-//       "Authorization" :`Bearer ${token}`
-//     },
-//     body: JSON.stringify(reqBody)
-//   })
-
-//   if(res.status===200){
-//     dispatch(setPopup(true,"Order changed","warning"));
-//     dispatch(getAllVideos(courseId));
-//   } 
-//   else {
-//     console.log("Order not changed");
-//   }
-// }
+  if(res.status===200){
+    dispatch(setPopup(true,"Question Updated","success"));
+    dispatch(getAllQuestions(ids));
+    dispatch(setEditQuestionModal(false));
+  } 
+  else {
+    console.log("Question not updated.");
+  }
+}

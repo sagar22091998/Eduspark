@@ -9,8 +9,7 @@ const intialState = {
 
   quizesList : "",
   quizesLoading : true,
-  
-  deleteQuizModal : false,
+
   editQuizModal : false,
   
   oldName : "",

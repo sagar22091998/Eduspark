@@ -11,7 +11,7 @@ import CloseIcon from '@material-ui/icons/Close';
 class MobileNavbar extends Component {
 
   render() {
-    const { selectedPage , logoutHandler , isLoggedIn , changeModal , mobileDropdown , setMobileDropdown , addModal , editModal , editTitleModal } = this.props;
+    const { selectedPage , logoutHandler , isLoggedIn , changeModal , mobileDropdown , setMobileDropdown , addModal , editModal , editTitleModal , addQuestionModal , editQuestionModal , addQuizModal , editQuizModal } = this.props;
 
     return (
       <div className="mobnav">
@@ -37,7 +37,7 @@ class MobileNavbar extends Component {
             </Fragment>
           }
         </ul>
-        {!editTitleModal &&  !editModal && !addModal && !changeModal && <MessagePopup />}
+        {!addQuestionModal && !editQuestionModal && !addQuizModal && !editQuizModal && !editTitleModal && !editModal && !changeModal && !addModal && <MessagePopup />}
       </div>
     )
   }
@@ -47,11 +47,15 @@ const mapStatesToProps = (state) => {
   return {
     selectedPage : state.auth.selectedPage,
     isLoggedIn : state.auth.isLoggedIn,
-    editModal : state.courses.editModal ,
-    changeModal : state.profile.changeModal,
     mobileDropdown : state.common.mobileDropdown,
+    editModal : state.courses.editModal, 
+    changeModal : state.profile.changeModal,
     addModal : state.courses.addModal,
-    editTitleModal : state.details.editTitleModal
+    editTitleModal : state.details.editTitleModal,
+    addQuestionModal : state.quizdetails.addQuestionModal,
+    editQuestionModal : state.quizdetails.editQuestionModal,
+    addQuizModal : state.quizes.addQuizModal,
+    editQuizModal : state.quizes.editQuizModal,
   }
 } 
 

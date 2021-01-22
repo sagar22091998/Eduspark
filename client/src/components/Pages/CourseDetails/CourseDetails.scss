@@ -65,7 +65,6 @@
       }
       &--other{ & p { font-size: 1.25rem; } }
     }
-    &__quiz { max-width: 200px; }
   }
 }
 
@@ -80,5 +79,6 @@
       &--desc { font-size: 0.85rem; }
       &--other { & p{font-size: 0.85rem;} }
     }
+    &__quiz { max-width: 200px; }
   }  
 }

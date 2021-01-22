@@ -10,4 +10,4 @@ export { setQuizesFields , setQuizAddModal , addNewQuiz , getQuizesList , delete
 
 export { setDetailFields , setUploadStaus , getAllVideos , addVideo , setCurrentVideo , deleteVideo , editVideoTitle , setEditTitleModal , changeOrder } from "./coursesDetailsActions"
 
-export { setQuestionFields , getAllQuestions , setCurrentQuestion ,setEditQuestionModal , setAddQuestionModal , addQuestion } from "./quizDetailsActions"
+export { setQuestionFields , getAllQuestions , setCurrentQuestion ,setEditQuestionModal , setAddQuestionModal , addQuestion , deleteQuestion , updateQuestion } from "./quizDetailsActions"
