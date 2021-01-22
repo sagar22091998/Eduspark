@@ -97,7 +97,7 @@ const deleteHandler = async (
             req.userId,
             req.params.courseId,
             parseInt(req.query.quiz!.toString()),
-            parseInt(req.query.quiz!.toString())
+            parseInt(req.query.question!.toString())
         );
         return SUCCESS(res, response, 'Question deleted successfully');
     } catch (error) {

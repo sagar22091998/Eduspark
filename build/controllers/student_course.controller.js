@@ -84,7 +84,7 @@ const verification = (orderId) => __awaiter(void 0, void 0, void 0, function* ()
     });
     const alreadyEnrolled = yield enroll_model_1.default.findOne({
         studentId: payment === null || payment === void 0 ? void 0 : payment.studentId,
-        courseId: payment === null || payment === void 0 ? void 0 : payment.courseId,
+        courseId: payment === null || payment === void 0 ? void 0 : payment.courseId
     });
     if (alreadyEnrolled)
         throw new Error('Already enrolled in the course');
