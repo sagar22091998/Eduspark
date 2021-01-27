@@ -46,6 +46,17 @@ const listHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         return response_helper_1.BAD_REQUEST(res, err.message);
     }
 });
+const loggedInListHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        request_helper_1.default(req);
+        const page = parseInt(req.query.page.toString()) || 0;
+        const response = yield controllers.loginViewAll(page, req.userId);
+        return response_helper_1.SUCCESS(res, response, 'Course details shown');
+    }
+    catch (err) {
+        return response_helper_1.BAD_REQUEST(res, err.message);
+    }
+});
 const loginDetailsHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         request_helper_1.default(req);
@@ -67,6 +78,7 @@ const detailsHandler = (req, res) => __awaiter(void 0, void 0, void 0, function*
 });
 const router = express_1.Router();
 router.get('/list', listHandler);
+router.get('/login-list', auth_middleware_1.verifyToken, loggedInListHandler);
 router.get('/login-details/:courseId', auth_middleware_1.verifyToken, loginDetailsHandler);
 router.get('/details/:courseId', detailsHandler);
 exports.default = router;
