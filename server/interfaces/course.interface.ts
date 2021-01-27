@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import { Document, Types } from 'mongoose';
 
 export default interface ICourse extends Document {
@@ -10,4 +11,11 @@ export default interface ICourse extends Document {
     isPublic: number;
     createdAt: Date;
     updatedAt: Date;
+}
+
+export interface ICourseList {
+    _id: ObjectId;
+    instructorId?: ObjectId;
+    isInstructor: number;
+    isPurchased: number;
 }
