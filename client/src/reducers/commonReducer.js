@@ -1,11 +1,13 @@
-import { SET_MESSAGE , SET_MOBILE_NAVBAR } from "../actions/actionTypes"
+import { SET_ALL_PUBLIC_COURSES, SET_MESSAGE , SET_MOBILE_NAVBAR } from "../actions/actionTypes"
 
 const intialState = {
   statusPopup : false , 
   popupText : "" ,
   popupType : "" ,
 
-  mobileDropdown : false
+  mobileDropdown : false,
+
+  allCourses : "Empty"
 }
 
 export default (state = intialState , action ) => { 
@@ -22,6 +24,11 @@ export default (state = intialState , action ) => {
       return {
         ...state,
         mobileDropdown : action.status
+      }
+    case SET_ALL_PUBLIC_COURSES :
+      return {
+        ...state,
+        allCourses : action.allCourses
       }
     default :
       return state;    

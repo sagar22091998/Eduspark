@@ -2,7 +2,7 @@
 
 .courseinfo{
   background: url('../../../images/detail1.jpg') no-repeat center center/cover;
-
+  position: relative;
   &__overlay{
     background-color: rgba(0, 0, 0, 0.7);
     padding: 1rem;
@@ -14,6 +14,12 @@
     min-height: 100vh;
 
     & svg { color: #fff;}
+  }
+
+  &__public{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
   }
 
   &__details{
@@ -70,6 +76,14 @@
 
 @media(max-width:550px){
   .courseinfo{  
+    position: static;
+    &__public{
+      position: static;
+      @include flexcenter-h;
+      margin: 1rem auto;
+    }
+  
+
     &__details{
       &--head{
         font-size: 1.35rem;

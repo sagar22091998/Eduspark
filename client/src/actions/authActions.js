@@ -1,6 +1,6 @@
 import { SET_SELECTED_PAGE , SET_AUTH_FIELDS , SET_LOGINSTATUS , SET_PROFILE } from "./actionTypes" 
 import { requestHandler } from "../utils/requestHandler"
-import { setPopup } from "./index"
+import { setPopup , getAllCoursesList } from "./index"
 export const setSelectedPage = (page) => ({ type : SET_SELECTED_PAGE , page })
 
 export const setAuthFields = (name,value) => ({ type : SET_AUTH_FIELDS , name , value })
@@ -21,6 +21,7 @@ export const logoutHandler = () => async ( dispatch ) => {
 
   if(res.status===200){
     dispatch(setLoginStatus(false));
+    dispatch(getAllCoursesList());
     localStorage.removeItem('token');
     localStorage.removeItem('expiryDate');
   }
@@ -56,6 +57,7 @@ export const loginHandler = ( credentials ) => async ( dispatch ) => {
       dispatch(logoutHandler());
     }, remainingMilliseconds);
 
+    dispatch(getAllCoursesList())
     dispatch(({ 
       type : SET_PROFILE , 
       name : userData.data.profile.name,
@@ -101,6 +103,7 @@ export const registerHandler = ( userDetails ) => async ( dispatch ) => {
       dispatch(logoutHandler());
     }, remainingMilliseconds);
 
+    dispatch(getAllCoursesList())
     dispatch(({ 
       type : SET_PROFILE , 
       name : regData.data.profile.name,

@@ -68,6 +68,8 @@
           border-bottom: none ;
         }
       }
+      
+      &--socials{ & a { & i { font-size: 1.5rem;} } }
     }
   
     &__sec{

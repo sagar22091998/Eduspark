@@ -24,7 +24,7 @@ class Navbar extends Component{
             <Fragment>
               <Link to="/profile"><li className={selectedPage==="profile" ? "activePage" : ""}>Profile</li></Link>
               <Link to="/mycourses"><li className={selectedPage==="mycourses" ? "activePage" : ""} >My Courses</li></Link>
-              <li>Subscriptions</li>
+              <Link to="/mysubscriptions"><li className={selectedPage==="mysubscriptions" ? "activePage" : ""} >Subscriptions</li></Link>
               <li onClick={logoutHandler}>Logout</li>
             </Fragment>
             }

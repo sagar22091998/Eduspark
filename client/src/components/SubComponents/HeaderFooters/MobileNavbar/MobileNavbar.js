@@ -33,7 +33,7 @@ class MobileNavbar extends Component {
                 logoutHandler()
               }}>Logout</li>
               <Link to="/mycourses" onClick={() => { setMobileDropdown(false)}}><li className={selectedPage==="mycourses" ? "activePage" : ""} >My Courses</li></Link>
-              <li onClick={() => { setMobileDropdown(false)}}>Subscriptions</li>
+              <Link to="/mysubscriptions" onClick={() => { setMobileDropdown(false)}}><li className={selectedPage==="mysubscriptions" ? "activePage" : ""} >Subscriptions</li></Link>
             </Fragment>
           }
         </ul>

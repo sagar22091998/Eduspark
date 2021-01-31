@@ -52,3 +52,58 @@
     }
   }
 }
+
+@media (max-width:1024px){
+  .question{
+    max-width: 600px;
+    font-size: 1.1rem;
+  
+    &__main{
+      &--text { font-size: 1.25rem; }
+      
+      &--icon{  
+        & svg { font-size: 2.25rem; }
+        &--edit{ color: orange; }
+        &--delete{ color: red; }
+      }
+    }
+  
+    &__options { padding: 0.5rem; }
+  }
+}
+
+@media (max-width:1024px){
+  .question{
+    margin: 1.5rem auto;
+    max-width: 300px;
+    font-size: 0.85rem;
+  
+    &__main{
+      padding: 0.45rem;
+  
+      &--text { font-size: 1rem; }
+      &--icon{
+        margin-left: 0.5rem;
+        & svg{
+          margin: 0 0.15rem;
+          padding: 0.15rem;
+          font-size: 1.65rem;
+        }
+      }
+    }
+  
+    &__options{
+      padding: 0.25rem 0.5rem;
+
+      &--option{
+        margin: 0.25rem 0;
+        
+        & svg{
+          padding: 0.15rem;
+          margin: 0.25rem 0.25rem 0.25rem 1rem;
+          font-size: 1.25rem;
+        }
+      }
+    }
+  }
+}

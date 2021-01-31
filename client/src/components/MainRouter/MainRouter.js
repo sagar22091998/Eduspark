@@ -1,7 +1,7 @@
 import React, { Component , Fragment } from 'react';
 import { Redirect, Route , Switch , withRouter } from "react-router-dom";
 import { connect } from "react-redux"
-import { setSelectedPage , logoutHandler , setLoginStatus , getProfile } from "../../actions/index"
+import { setSelectedPage , logoutHandler , setLoginStatus , getProfile , getAllCoursesList } from "../../actions/index"
 import MediaQuery from 'react-responsive'
 import Home from "../Pages/Home/Home";
 import LoginRegister from "../Pages/LoginRegister/LoginRegister"
@@ -14,12 +14,14 @@ import MyCourses from '../Pages/MyCourses/MyCourses';
 import CourseDetails from '../Pages/CourseDetails/CourseDetails';
 import MyQuizes from '../Pages/MyQuizes/MyQuizes';
 import QuizDetails from '../Pages/QuizDetails/QuizDetails';
+import MySubscriptions from '../Pages/MySubscriptions/MySubscriptions';
+import SubscriptionDetails from '../Pages/SubscriptionDetails/SubscriptionDetails';
 
 class MainRouter extends Component {
 
   componentDidMount(){
     
-    const { setSelectedPage , history , logoutHandler , setLoginStatus , getProfile } = this.props;
+    const { setSelectedPage , history , logoutHandler , setLoginStatus , getProfile , getAllCoursesList } = this.props;
 
     //For Navbar Links
     const selectedPage = history.location.pathname.split("/")[1];
@@ -31,6 +33,9 @@ class MainRouter extends Component {
     });
 
     // Login / Logout
+    
+    // Not Logged in list
+    getAllCoursesList()
     
     const token = localStorage.getItem('token');
     const expiryDate = localStorage.getItem('expiryDate');
@@ -46,6 +51,9 @@ class MainRouter extends Component {
     const remainingMilliseconds = new Date(expiryDate).getTime() - new Date().getTime();
     setLoginStatus(true);
     getProfile();
+
+    //Logged In List
+    getAllCoursesList()
 
     setTimeout(() => {
       logoutHandler();
@@ -77,6 +85,8 @@ class MainRouter extends Component {
             {isLoggedIn && <Route exact path="/course/:courseID/quizes/:quizNumber" component={ QuizDetails }/>}
             {isLoggedIn && <Route exact path="/course/:courseID/quizes" component={ MyQuizes }/>}
             {isLoggedIn && <Route exact path="/course/:courseID" component={ CourseDetails }/>}
+            {isLoggedIn && <Route path="/mysubscriptions" component={ MySubscriptions }/>}
+            {isLoggedIn && <Route path="/subscription/:courseID" component={ SubscriptionDetails }/>}
             <Redirect to="/" />
           </Switch>
           <Footer/>
@@ -96,7 +106,8 @@ const mapDispatchToProps = (dispatch) => {
     setSelectedPage : (page) => dispatch(setSelectedPage(page)),
     setLoginStatus : (status) => dispatch(setLoginStatus(status)),
     logoutHandler : () => dispatch(logoutHandler()),
-    getProfile : () => dispatch(getProfile())
+    getProfile : () => dispatch(getProfile()),
+    getAllCoursesList : () => dispatch(getAllCoursesList())
   }
 }
 
