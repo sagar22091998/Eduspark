@@ -1,4 +1,4 @@
-import { SET_DETAIL_FIELDS , SET_UPLOAD_STATUS , SET_VIDEO_LIST , SET_VIDEOS_LOADING , SET_CURRENT_VIDEO , SET_EDIT_TITLE_MODAL } from "../actions/actionTypes"
+import { SET_DETAIL_FIELDS , SET_UPLOAD_STATUS , SET_VIDEO_LIST , SET_VIDEOS_LOADING , SET_CURRENT_VIDEO , SET_EDIT_TITLE_MODAL, SET_PUBLIC } from "../actions/actionTypes"
 
 const intialState = {
   // Course Details
@@ -18,7 +18,8 @@ const intialState = {
   description:"",
   price:"",
   name:"",
-  studentEnrolled:""
+  studentEnrolled:"",
+  isPublic : ""
 }
 
 export default (state = intialState , action ) => { 
@@ -48,6 +49,11 @@ export default (state = intialState , action ) => {
         ...state,
         videosLoading : action.status
       }  
+    case SET_PUBLIC :
+      return {
+        ...state,
+        isPublic : action.isPublic
+      }  
     case SET_EDIT_TITLE_MODAL :
       return {
         ...state,
@@ -63,7 +69,8 @@ export default (state = intialState , action ) => {
         description:action.description,
         price:action.price,
         name:action.name,
-        studentEnrolled:action.enrolled
+        studentEnrolled:action.enrolled,
+        isPublic:action.isPublic
       }  
     case SET_CURRENT_VIDEO :
       return {

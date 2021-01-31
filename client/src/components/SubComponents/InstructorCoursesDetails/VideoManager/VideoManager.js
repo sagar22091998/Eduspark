@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setPopup , setEditTitleModal , setDeleteModal } from "../../../../actions/index"
-import { Video , Transformation } from "cloudinary-react"
 import "./VideoManager.scss"
 import { Fragment } from 'react'
 import VideoListItem from '../VideoListitem/VideoListItem'
 import DeleteModal from '../../DeleteModal/DeleteModal'
 import EditTitle from '../EditTitle/EditTitle'
-import MediaQuery  from 'react-responsive'
+import ReactPlayer from 'react-player'
 
 class VideoManager extends Component {
 
@@ -26,22 +25,13 @@ class VideoManager extends Component {
         { allVideosList && allVideosList.length!==0 ?
           <Fragment>
             <div className="videos__player">
-                <Video 
-                  key={currentVideo}
-                  controls
-                  cloudName={process.env.REACT_APP_CLOUDINARY_DATABASE}
-                  publicId={currentVideo}
-                >
-                  <MediaQuery minWidth={769}>
-                    <Transformation width="768" height="432" />
-                  </MediaQuery>
-                  <MediaQuery maxWidth={768} minWidth={551}>
-                    <Transformation width="560" height="315" />
-                  </MediaQuery>
-                  <MediaQuery maxWidth={550}>
-                    <Transformation width="256" height="144" />
-                  </MediaQuery>
-                </Video>
+              <ReactPlayer
+                className="videos__player--main"
+                url={currentVideo} 
+                controls = {true}
+                width='100%'
+                height='100%'
+              />
             </div>
             <div className="videos__list">
               {allVideosList.map(item => <VideoListItem courseId = {courseId} key = {item.videoNumber} selectedVideo={currentVideo===item.publicId} videoNumber={item.videoNumber} videoTitle = {item.topic} publicId={item.publicId} lastItem={allVideosList.length===item.videoNumber}/> )}

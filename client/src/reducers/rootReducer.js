@@ -6,6 +6,7 @@ import coursesReducer from "./coursesReducer.js"
 import coursesDetailsReducer from "./coursesDetailsReducer.js"
 import quizesReducer from "./quizesReducer.js"
 import quizDetailsReducer from "./quizDetailsReducer"
+import studentReducer from "./studentReducer"
 
 const rootReducer = combineReducers({
   auth : authReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   courses : coursesReducer,
   quizes : quizesReducer,
   details : coursesDetailsReducer,
-  quizdetails : quizDetailsReducer
+  quizdetails : quizDetailsReducer,
+  student : studentReducer,
 })
 
 export default rootReducer;

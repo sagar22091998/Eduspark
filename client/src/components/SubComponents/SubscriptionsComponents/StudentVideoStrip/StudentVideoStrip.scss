@@ -1,0 +1,46 @@
+@import "../../../../sass/mixins.scss";
+
+.studentvideoitem{
+  display: flex;
+  border:3px solid $primary-color;
+  background: $secondary-color;
+  width: 100%;
+  cursor: pointer;
+  padding: 1rem;
+  font-size: 2rem;
+  color: #fff;
+
+  & svg{
+    margin-right: 1rem;
+    font-size: 2rem;
+  }
+}
+
+.selectedStudentVideo{
+  border:3px solid lime;
+}
+
+.lockedVideo{
+  background: #000;
+}
+
+@media(max-width:1450px){
+  .studentvideoitem{
+    padding: 0.75rem;
+    font-size: 1.5rem;
+  
+    & svg{
+      margin-right: 0.5rem;
+      font-size: 1.25rem;
+    }
+  }  
+}
+
+@media(max-width:550px){
+  .studentvideoitem{
+    padding: 0.5rem;
+    font-size: 1rem;
+  
+    & svg { font-size:0.9rem; }
+  }
+}

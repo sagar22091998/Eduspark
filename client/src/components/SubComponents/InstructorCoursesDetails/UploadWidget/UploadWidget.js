@@ -52,8 +52,10 @@ class UploadWidget extends Component {
       }
     },
     (error , result) => { 
-      if(result.event === 'success')
-        setUploadStaus(true,result.info.public_id);
+
+      if(result.event === 'success'){
+        setUploadStaus(true,result.info.secure_url);
+      }
       });
     });
   }

@@ -1,0 +1,89 @@
+@import "../../../../sass/mixins.scss";
+
+.studentquiz{
+  margin: 2rem auto;
+  border: 5px solid $primary-color;
+  background:$light-color;
+  height: 600px;
+  max-width: 1000px;
+  
+  &--head{
+    @include heading;
+    padding: 0.5rem;
+    height: 90px;
+    width: 100%;
+    text-align: center;
+    border-bottom: 5px solid $primary-color;
+    color: #000;
+    text-shadow: 2px 2px $secondary-color;
+    font-size: 3rem;
+  }
+  
+  &--loading{
+    @include flexcenter-h;
+    margin: 5rem 0;
+    & svg { color: #000;}
+  }
+
+  &--empty{
+    border: 3px solid #fff;
+    border-radius: 20px;
+    padding: 1rem;
+    background :#000;
+    color: #fff;
+    max-width: 400px;
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 7.5rem auto;
+  }
+
+  &--list{
+    height: 500px;
+    overflow-y: scroll;
+    & a{
+      @include btn-primary;
+      margin: 0;
+      padding: 1rem; 
+      border: 1px solid $light-color;
+    }
+  }
+}
+
+
+@media(max-width:1024px){
+  .courses{ &__container{ &--empty{ margin: 11.5rem 0; } } }
+}
+
+@media(max-width:550px){
+  .courses{
+    &__container{
+      min-height: calc(100vh - 50px);
+      
+      &--head{
+        @include heading;
+        font-size: 2.5rem;
+        margin:1rem 0;
+      }
+      
+      &--add{
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem ;
+      }
+  
+      &--list {
+        width: 90%;
+        
+        &--head{ 
+          font-size: 1.75rem; 
+          
+          & svg{ font-size: 1.5rem;}
+        } 
+      }
+
+      &--empty{
+        font-size: 1rem;
+        margin: 9rem 0;
+      }
+    }
+  }
+}

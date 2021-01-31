@@ -1,13 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component , Fragment} from 'react'
 import { returnToTop } from '../../../utils/utilityFunctions';
 import "./CourseDetails.scss"
 import { connect } from "react-redux"
 import { withRouter , Link } from "react-router-dom"
-import { getAllVideos } from "../../../actions/index"
+import { getAllVideos  , changeCourseVisibility } from "../../../actions/index"
 import UploadWidget from "../../SubComponents/InstructorCoursesDetails/UploadWidget/UploadWidget"
 import VideoManager from '../../SubComponents/InstructorCoursesDetails/VideoManager/VideoManager';
-import { Fragment } from 'react';
 import { CircularProgress } from '@material-ui/core';
+
+import { Switch } from "pretty-checkbox-react"
+import '@djthoms/pretty-checkbox';
 
 class CourseDetails extends Component {
 
@@ -19,7 +21,7 @@ class CourseDetails extends Component {
   }
 
   render() {
-    const { videosLoading , match , name , description , price , studentEnrolled } = this.props;
+    const { videosLoading , match , name , description , price , studentEnrolled , isPublic , changeCourseVisibility } = this.props;
 
     const courseId = match.params.courseID;
 
@@ -35,6 +37,9 @@ class CourseDetails extends Component {
               <div className="courseinfo__details--other">
                 <p>Price : ₹{price}</p>
                 <p>Student Enrolled : {studentEnrolled}</p>
+              </div>
+              <div className="courseinfo__public">
+                <Switch color="success" onClick={() => changeCourseVisibility(courseId) } shape="fill" checked = { isPublic === 1 }>Make Course Public</Switch>
               </div>
             </div>
             <VideoManager courseId ={courseId}/>
@@ -54,13 +59,15 @@ const mapStatesToProps = (state) => {
     name : state.details.name,
     description : state.details.description,
     price : state.details.price,
-    studentEnrolled : state.details.studentEnrolled
+    studentEnrolled : state.details.studentEnrolled,
+    isPublic : state.details.isPublic,
   }
 } 
 
 const mapDispatchToProps = (dispatch) => { 
   return {
-    getAllVideos : (id) => dispatch(getAllVideos(id))
+    getAllVideos : (id) => dispatch(getAllVideos(id)),
+    changeCourseVisibility: (id) => dispatch(changeCourseVisibility(id))
   }
 }
 

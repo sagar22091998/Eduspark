@@ -56,7 +56,7 @@ class VideoListItem extends Component {
       <div className={selectedVideo ? "videoitem selectedVideo" : "videoitem" } onClick={this.handleVideo}>
         <p className="videoitem__title">{videoTitle}</p>
         <div className="videoitem__update">
-          <div></div><EditIcon onClick={this.handleEdit} className="videoitem__update--edit"/> 
+          <EditIcon onClick={this.handleEdit} className="videoitem__update--edit"/> 
           <DeleteIcon onClick={this.handleDelete} className="videoitem__update--delete"/>
           <div className="videoitem__update--order">
             {String(videoNumber) !== "1" ? <ArrowDropUpIcon className = "videoitem__update--order--up" onClick={this.handleOrderUp}/> : <ArrowDropUpIcon className = "videoitem__update--order--disabled"/>}

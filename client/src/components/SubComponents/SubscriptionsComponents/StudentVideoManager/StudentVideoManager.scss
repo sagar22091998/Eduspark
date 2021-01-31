@@ -1,0 +1,103 @@
+@import "../../../../sass/mixins.scss";
+
+.studentvideo {
+  padding: 2rem;
+  &--loading{
+    @include flexcenter-h;
+    margin: 5rem;
+    
+    & svg { color: #fff;}
+  }
+  
+  
+  &--empty{
+    border: 3px solid #fff;
+    border-radius: 20px;
+    padding: 1rem;
+    background :#000;
+    color: #fff;
+    max-width: 500px;
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 7.5rem auto;
+  }
+
+  &__main{
+    height: 650px;
+    display: grid;
+    grid-template-columns: 2fr 1.25fr;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    
+    &--wrapper{
+      position: relative;
+      padding-top: 56.25%;
+      background: #000;
+      border-radius: 5px;
+      
+      &--player{
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+    
+    &--list{
+      background: $primary-color;
+      border: 2px solid #000;
+      overflow-y: scroll;
+    }
+  }
+}
+
+@media(max-width:1600px){
+  .studentvideo{
+
+    &__main{
+      height: 500px;
+      grid-template-columns: 2.25fr 1.25fr;
+    }
+  }
+}
+
+@media(max-width:1450px){
+  .studentvideo{
+    padding: 1rem;
+  
+    &__main { height: 475px; }
+  }
+}
+
+@media(max-width:1024px){
+  .studentvideo{
+    padding: 17.5rem 2rem;
+    
+    &__main { height: 400px;}
+  }
+
+}
+
+@media(max-width:768px){
+  .studentvideo{
+    padding: 10rem 1.25rem;
+  }
+}
+
+@media(max-width:550px){
+  .studentvideo {
+    padding: 0.5rem;
+  
+    &__main{
+      height: 600px;
+      grid-template-columns: 1fr;
+    }
+
+    &--loading { margin: 5rem 0; }
+
+    &--empty{
+      padding: 0.75rem;
+      font-size: 0.9rem;
+      margin: 9rem auto;
+      max-width: 300px;
+    }
+  }
+}

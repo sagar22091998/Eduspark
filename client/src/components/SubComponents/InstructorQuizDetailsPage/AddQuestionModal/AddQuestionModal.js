@@ -23,11 +23,10 @@ const styles = {
     width : "500px", 
     "@media(max-width:1600px)":{
       margin : "75px auto 0 auto",
+    },
+    "@media(max-width:550px)":{
+      width : "300px"
     }
-    // ,
-    // "@media(max-width:550px)":{
-    //   width : "300px"
-    // }
   },
   main:{
     display : "flex",
@@ -53,6 +52,7 @@ const styles = {
     "@media(max-width:550px)":{
       textShadow: "0px 0px",  
       fontSize:"1.25rem",
+      margin:"0.5rem 0", 
     }
   },
   fields:{
@@ -78,10 +78,10 @@ const styles = {
     },
     "@media(max-width:550px)":{
       fontSize:"0.85rem",
-      padding : "1rem",
+      padding : "0.5rem",
 
       "& input,& textarea ,& select":{
-        padding:"0.5rem",
+        padding:"0.35rem",
         fontSize:"0.85rem",
         width:"125px"
       }
@@ -106,7 +106,7 @@ const styles = {
 
     "@media(max-width:550px)":{
       padding:"0.5rem",  
-      margin: "1rem 0",
+      margin: "0.5rem 0",
       fontSize: "0.85rem"
     }
   }

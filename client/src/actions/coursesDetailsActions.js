@@ -1,4 +1,4 @@
-import { SET_CURRENT_VIDEO, SET_DETAIL_FIELDS, SET_UPLOAD_STATUS , SET_VIDEOS_LOADING, SET_VIDEO_LIST , SET_EDIT_TITLE_MODAL } from "./actionTypes" 
+import { SET_CURRENT_VIDEO, SET_DETAIL_FIELDS, SET_UPLOAD_STATUS , SET_VIDEOS_LOADING, SET_VIDEO_LIST , SET_EDIT_TITLE_MODAL , SET_PUBLIC } from "./actionTypes" 
 import { requestHandler } from "../utils/requestHandler"
 import { setPopup , setDeleteModal } from "./index"
 import { returnToTop } from "../utils/utilityFunctions"
@@ -34,9 +34,9 @@ export const getAllVideos = (id) => async ( dispatch ) => {
       });
       dispatch(setCurrentVideo(videoData.data.course.videos[0].publicId));
     }
-    
+
     returnToTop();
-    dispatch(({ type : SET_VIDEO_LIST , list : videoData.data.course.videos , description : videoData.data.course.description , price : videoData.data.course.price , name : videoData.data.course.name , enrolled : videoData.data.studentsEnrolled }));
+    dispatch(({ type : SET_VIDEO_LIST , list : videoData.data.course.videos , description : videoData.data.course.description , price : videoData.data.course.price , name : videoData.data.course.name , enrolled : videoData.data.studentsEnrolled , isPublic : videoData.data.course.isPublic }));
     
     if(videoData.data.course.videos[0])
       dispatch(setCurrentVideo(videoData.data.course.videos[0].publicId));
@@ -73,6 +73,31 @@ export const addVideo = (videoDetails,id) => async ( dispatch ) => {
   } 
   else {
     console.log("Videos not added.");
+  }
+}
+
+export const changeCourseVisibility = (id) => async ( dispatch , getState ) => {
+  
+  const token = localStorage.getItem('token');
+  const { isPublic } = getState().details;
+
+  const res = await requestHandler(`instructor/course/change-visibility/${id}`, {
+    method:"PUT",
+    headers:{ 
+      "Content-Type":"application/json",
+      "Authorization" :`Bearer ${token}`
+    },
+    body: JSON.stringify({
+      isPublic : isPublic === 1 ? 0 : 1
+    })
+  })
+
+  if(res.status===200){
+    dispatch(setPopup(true,`Course ${isPublic === 1?"is only visible to you now.":"is public now."}`,"success"));
+    dispatch(({ type : SET_PUBLIC , isPublic : isPublic === 1 ? 0 : 1 }));
+  } 
+  else {
+    console.log("Public request failed.");
   }
 }
 

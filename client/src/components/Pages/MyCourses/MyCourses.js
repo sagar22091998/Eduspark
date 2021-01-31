@@ -64,7 +64,7 @@ const mapDispatchToProps = (dispatch) => {
     setAddModal : (status) => dispatch(setAddModal(status)),
     setEditModal : (status,oldDetails) => dispatch(setEditModal(status,oldDetails)),
     setDeleteModal : (status) => dispatch(setDeleteModal(status)),
-    getCoursesList : () => dispatch(getCoursesList())    
+    getCoursesList : () => dispatch(getCoursesList()) 
   }
 }
 
