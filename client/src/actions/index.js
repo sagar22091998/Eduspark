@@ -12,4 +12,4 @@ export { setDetailFields , setUploadStaus , getAllVideos , addVideo , setCurrent
 
 export { setQuestionFields , getAllQuestions , setCurrentQuestion ,setEditQuestionModal , setAddQuestionModal , addQuestion , deleteQuestion , updateQuestion } from "./quizDetailsActions"
 
-export { getSubscriptionsList , toggleVideoQuiz , getSubscriptionDetail , getSubscriptionQuizes , updateProgress , setUnlockNext , setStudentCurrentVideo } from "./studentActions"
+export { getSubscriptionsList , toggleVideoQuiz , getSubscriptionDetail , getSubscriptionQuizes , updateProgress , setUnlockNext , setStudentCurrentVideo , setStartQuizModal , startAttempt , getQuizLeaderboard , setSelectedOptions , submitAttempt } from "./studentActions"

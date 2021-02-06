@@ -1,4 +1,4 @@
-import { SET_SUBSCRIPTION_LIST , SET_ALLSUBSCRIPTIONS_LOADING , TOGGLE_VIDEOQUIZ , SET_SUBSCRIPTION_LOADING , SET_SUBSCRIPTION_DETAIL , SET_SUBS_QUIZ_LOADING , SET_SUBS_QUIZ_LIST , SET_UNLOCK_NEXT , SET_SUBS_CURRENT_VIDEO } from "../actions/actionTypes"
+import { SET_SUBSCRIPTION_LIST , SET_ALLSUBSCRIPTIONS_LOADING , TOGGLE_VIDEOQUIZ , SET_SUBSCRIPTION_LOADING , SET_SUBSCRIPTION_DETAIL , SET_SUBS_QUIZ_LOADING , SET_SUBS_QUIZ_LIST , SET_UNLOCK_NEXT , SET_SUBS_CURRENT_VIDEO , SET_SUBS_QUIZDETAIL_LOADING , SET_SUBS_QUIZ_DETAIL , SET_START_QUIZ_MODAL , SET_LEADERBOARD , SET_LEADERBOARD_LOADING , SET_SELECTED_OPTIONS } from "../actions/actionTypes"
 
 const intialState = {
   subscriptionsList : "",
@@ -11,17 +11,60 @@ const intialState = {
   lastCompletedVideo : "",
   unlockNext : true,
 
+  quizesLoading : true,
   quizList : "",
-  quizesLoading : true
+  
+  startQuizModal : false,
+  startQuizNumber : "",
+  quizIsAttempted : false, 
+  
+  leaderboard : "",
+  leaderboardLoading : true,
+
+  quizDetailLoading : true,
+  quizAttemptDetail : "",
+  selectedOptions : []
 }
 
 export default (state = intialState , action ) => { 
 
   switch(action.type){
+    case SET_SUBS_QUIZ_DETAIL :
+      return {
+        ...state,
+        quizAttemptDetail : action.detail
+      }  
+    case SET_START_QUIZ_MODAL :
+      return {
+        ...state,
+        startQuizModal : action.status,
+        startQuizNumber : action.quizNumber,
+        quizIsAttempted : action.isAttempted
+      }  
     case SET_SUBSCRIPTION_LIST :
       return {
         ...state,
         subscriptionsList : action.list
+      }  
+    case SET_SUBS_QUIZDETAIL_LOADING :
+      return {
+        ...state,
+        quizDetailLoading : action.status
+      }  
+    case SET_LEADERBOARD :
+      return {
+        ...state,
+        leaderboard : action.board
+      }  
+    case SET_SELECTED_OPTIONS :
+      return {
+        ...state,
+        selectedOptions : action.selectedOptions
+      }  
+    case SET_LEADERBOARD_LOADING :
+      return {
+        ...state,
+        leaderboardLoading : action.status
       }  
     case SET_ALLSUBSCRIPTIONS_LOADING :
       return {

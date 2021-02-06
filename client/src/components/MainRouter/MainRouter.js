@@ -16,6 +16,8 @@ import MyQuizes from '../Pages/MyQuizes/MyQuizes';
 import QuizDetails from '../Pages/QuizDetails/QuizDetails';
 import MySubscriptions from '../Pages/MySubscriptions/MySubscriptions';
 import SubscriptionDetails from '../Pages/SubscriptionDetails/SubscriptionDetails';
+import QuizLeaderboard from '../Pages/QuizLeaderboard/QuizLeaderboard';
+import QuizLive from '../Pages/QuizLive/QuizLive';
 
 class MainRouter extends Component {
 
@@ -86,6 +88,8 @@ class MainRouter extends Component {
             {isLoggedIn && <Route exact path="/course/:courseID/quizes" component={ MyQuizes }/>}
             {isLoggedIn && <Route exact path="/course/:courseID" component={ CourseDetails }/>}
             {isLoggedIn && <Route path="/mysubscriptions" component={ MySubscriptions }/>}
+            {isLoggedIn && <Route path="/subscription/:courseID/leaderboards/:quizNumber" component={ QuizLeaderboard }/>}
+            {isLoggedIn && <Route path="/subscription/:courseID/quizattempt/:quizNumber" component={ QuizLive }/>}
             {isLoggedIn && <Route path="/subscription/:courseID" component={ SubscriptionDetails }/>}
             <Redirect to="/" />
           </Switch>

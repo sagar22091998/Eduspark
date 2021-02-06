@@ -1,0 +1,219 @@
+@import "../../../sass/mixins.scss";
+
+.quizlive{
+  background: url('../../../images/repeat3.png');
+  position: relative;
+
+  &__overlay{
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 1rem;
+    min-height: calc(100vh - 100px);
+  }
+  
+  &__countdown{
+    @include flexcenter-h;
+    font-size: 2rem;
+    top: 100px;
+    right: 0;
+    position: fixed;
+    width: 200px;
+    background: $light-color;
+    padding: 0.5rem;
+  }
+
+  &__loading{
+    @include flexcenter-h;
+    min-height: 100vh;
+
+    & svg { color: #fff;}
+  }
+
+  &__details{
+    color: #fff;
+    &--head{
+      @include heading;
+      font-size: 4rem;
+      text-align: center;
+    }
+
+    &--other{
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      margin: 1rem 0;
+      font-size: 2rem;
+
+      &--time{
+        margin-left: 1rem;
+        display: flex;
+        justify-content: flex-end;
+        
+        & svg{
+          font-size: 1.75rem;
+          margin-right: 0.5rem;
+        }
+      }
+    }
+
+    &--instructions{
+      font-size: 1.75rem;
+
+      & p{
+        margin: 0.5rem 0; 
+      
+        & svg{
+          margin-right: 1rem;
+          font-size: 1.25rem;
+        }
+      }
+    }
+  }
+
+  &__question{
+    border: 3px solid #000;
+    margin: 2rem auto;
+    max-width: 1000px;
+
+    background: $light-color;
+    font-size: 1.25rem;
+    display: flex;
+    flex-direction: column;
+
+    &--ques{
+      padding: 1rem;
+      color: #fff;
+      background: $secondary-color;
+    }
+  
+    &--option{
+      padding: 0.25rem 1rem;
+      font-family: 'Josefin Sans', sans-serif;
+    }
+  }
+
+  &__submit{
+    @include btn-primary;
+    padding: 0.85rem 1.7rem;
+    font-size: 1.75rem ;
+    border: 1px solid $secondary-color;
+    margin: 0 auto 2rem auto;
+    &:hover { border: 1px solid $light-color;}
+  }
+
+  &__empty{
+    border: 3px solid $secondary-color;
+    border-radius: 20px;
+    padding: 1rem;
+    background :$light-color;
+    text-align: center;
+    font-size: 1.5rem;
+    max-width: 400px;
+    margin: 7.5rem auto;
+  }
+}
+
+@media(max-width:1024px){
+  .quizlive{
+    background: url('../../../images/repeat3.png');
+    
+    &__countdown{
+      font-size: 1.5rem;
+      width: 150px;
+    }
+
+    &__details{
+            
+      &--head{ font-size: 3rem;}
+  
+      &--other{
+        font-size: 1.5rem;
+  
+        &--time { & svg { font-size: 1.25rem; }
+        }
+      }
+
+      &--instructions{
+        font-size: 1.5rem;
+  
+        & p{
+          margin: 0.5rem 0; 
+        
+          & svg{ font-size: 1.1rem;}
+        }
+      }
+    }
+  
+    &__question{
+      margin: 1.5rem auto;
+      max-width: 700px;
+  
+      font-size: 1.25rem;
+    }
+
+    &__empty { margin: 11.5rem auto; }
+  }  
+}
+
+@media(max-width:550px){
+  .quizlive{
+   
+    &__overlay { padding: 10px; }
+  
+    &__countdown{
+      top: 50px;
+      font-size: 1rem;
+      width: 100px;
+    }
+
+    &__details{
+      &--head { font-size: 1.5rem; }
+  
+      &--other{
+        @include flexcenter-v;
+        margin: 1rem 0;
+        font-size: 1rem;
+        text-align: center ;
+  
+        &--time{
+          margin: 0.75rem 0;
+          & svg{
+            font-size: 0.9rem;
+            margin-right: 0.25rem;
+          }
+        }
+      }
+      &--instructions{
+        font-size: 1rem;
+  
+        & p{
+          margin: 0.25rem 0; 
+        
+          & svg{
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  
+    &__question{
+      margin: 1rem auto;
+      max-width: 300px;
+  
+      background: $light-color;
+      font-size: 0.85rem;
+      
+      &--ques{ padding: 0.5rem;}
+      
+      &--option{
+        padding: 0.25rem;
+        & span { font-size: 0.85rem;}
+      }
+    }
+
+    &__empty{
+      font-size: 1rem;
+      margin: 9rem auto;
+      max-width: 200px;
+    }
+  }  
+}

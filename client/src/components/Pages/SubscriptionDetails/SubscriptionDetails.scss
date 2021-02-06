@@ -1,9 +1,11 @@
 @import "../../../sass/mixins.scss";
 
 .subsdetail{
-  // background: url('../../../images/student2.jpg') no-repeat center center/cover;
-  background: url('../../../images/student2.jpg') no-repeat center center/cover;
+  background: url('../../../images/student2.jpg');
+  background-position: 0px 0px; 
   background-attachment: fixed;
+
+
 
   &__overlay{
     background-color: rgba(0, 0, 0, 0.6);
