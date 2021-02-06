@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getSubscriptionQuizes } from "../../../../actions/index"
+import { getSubscriptionQuizes , setStartQuizModal } from "../../../../actions/index"
 import "./QuizList.scss"
 import { CircularProgress } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
+import QuizBeginPopup from '../QuizBeginPopup/QuizBeginPopup';
 
 class QuizList extends Component {
 
@@ -12,8 +12,18 @@ class QuizList extends Component {
     this.props.getSubscriptionQuizes(this.props.courseId)
   }
 
+  componentWillUnmount(){
+    this.props.setStartQuizModal(false);
+  }
+
+  handleQuiz = (quizNumber,isAttempted) => {
+    const { setStartQuizModal } = this.props;
+
+    setStartQuizModal(true,quizNumber,isAttempted);
+  }
+
   render() {
-    const { quizesLoading , quizList } = this.props;
+    const { quizesLoading , quizList , courseId } = this.props;
 
     return (
       <div className="studentquiz">
@@ -24,9 +34,10 @@ class QuizList extends Component {
           <p className="studentquiz--empty">No Quizes for this course.</p>
             :
           <div className="studentquiz--list">
-            {quizList.map( quiz => <Link key={quiz.quiz.quizNumber}><span>{quiz.quiz.topic}</span><p><AccessAlarmIcon/>{quiz.quiz.totalTime}</p></Link>)}
+            {quizList.map( quiz => <li className="studentquiz--list--item" key={quiz.quiz.quizNumber} onClick={() => this.handleQuiz(quiz.quiz.quizNumber,Boolean(quiz.score))}><span className = "studentquiz--list--item--title">{quiz.quiz.topic}</span><p className = "studentquiz--list--item--time" ><AccessAlarmIcon/>{quiz.quiz.totalTime} Minutes</p></li>)}
           </div>)
         }
+        <QuizBeginPopup courseId={courseId}/>
       </div>
     )
   }
@@ -41,7 +52,8 @@ const mapStatesToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => { 
   return {
-    getSubscriptionQuizes : (courseId) => dispatch(getSubscriptionQuizes(courseId))
+    getSubscriptionQuizes : (courseId) => dispatch(getSubscriptionQuizes(courseId)),
+    setStartQuizModal : (status,quizNumber,isAttempted) => dispatch(setStartQuizModal( status,quizNumber,isAttempted))
   }
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
-import { toggleVideoQuiz , getSubscriptionDetail } from "../../../actions/index"
+import { toggleVideoQuiz , getSubscriptionsList } from "../../../actions/index"
 import { returnToTop } from '../../../utils/utilityFunctions'
 import QuizList from '../../SubComponents/SubscriptionsComponents/QuizList/QuizList'
 import StudentVideoManager from '../../SubComponents/SubscriptionsComponents/StudentVideoManager/StudentVideoManager'
@@ -11,15 +11,26 @@ class SubscriptionDetails extends Component {
 
   componentDidMount(){
     returnToTop();
+    this.props.getSubscriptionsList();
+  }
+
+  componentWillUnmount(){
+    this.props.toggleVideoQuiz(true);
   }
 
   render() {
-    const { isVideoPlayer , toggleVideoQuiz } = this.props
+    const { isVideoPlayer , toggleVideoQuiz , subscriptionsList , subscriptionsLoading } = this.props
+
+    let title = "...";
+    if(!subscriptionsLoading){
+      const titleData =  subscriptionsList.find(sub => sub.courseId._id === this.props.match.params.courseID)
+      title = titleData.courseId.name;
+    }
 
     return (
       <div className="subsdetail">
         <div className="subsdetail__overlay">
-          <h2 className="subsdetail__heading">TITLE</h2>
+          <h2 className="subsdetail__heading">{title}</h2>
           <div className="subsdetail__buttons">
             <button onClick={()=>toggleVideoQuiz(true)}><span>VIDEOS</span></button>
             <button onClick={()=>toggleVideoQuiz(false)}><span>QUIZ</span></button>
@@ -34,14 +45,16 @@ class SubscriptionDetails extends Component {
 }
 const mapStatesToProps = (state) => { 
   return {
-    isVideoPlayer : state.student.isVideoPlayer
+    isVideoPlayer : state.student.isVideoPlayer,
+    subscriptionsList : state.student.subscriptionsList,
+    subscriptionsLoading : state.student.subscriptionsLoading
   }
 } 
 
 const mapDispatchToProps = (dispatch) => { 
   return {
     toggleVideoQuiz : (status) => dispatch(toggleVideoQuiz(status)),
-    getSubscriptionDetail : (courseId) => dispatch(getSubscriptionDetail(courseId))
+    getSubscriptionsList : () => dispatch(getSubscriptionsList())
   }
 }
 
